@@ -1,5 +1,6 @@
 from common import (
     build_record,
+    classify_topic,
     clean_paragraph_list,
     extract_author_generic,
     extract_publish_time_generic,
@@ -8,7 +9,6 @@ from common import (
     get_soup,
     save_json,
 )
-
 
 BASE_CATEGORY_URL = "https://www.medicalnewstoday.com/categories/heart-disease"
 MAX_PAGES = 10
@@ -93,33 +93,6 @@ def collect_article_links(max_pages: int = MAX_PAGES) -> list[str]:
     return all_links
 
 
-def classify_topic(title: str, content: str) -> str:
-    text = f"{title} {content}".lower()
-
-    women_terms = ["women", "woman", "female", "menopause", "maternal", "pregnancy"]
-    heart_terms = [
-        "heart disease",
-        "heart attack",
-        "cardiovascular",
-        "cardiac",
-        "coronary",
-        "stroke",
-        "blood pressure",
-        "hypertension",
-        "cholesterol",
-        "artery",
-    ]
-
-    has_women = any(term in text for term in women_terms)
-    has_heart = any(term in text for term in heart_terms)
-
-    if has_women and has_heart:
-        return "women_heart_health"
-    if has_heart:
-        return "general_heart_health"
-    return "general_health"
-
-
 def extract_content_and_summary(soup, title: str) -> tuple[str, str]:
     junk_phrases = [
         "medical news today has strict sourcing guidelines",
@@ -170,6 +143,10 @@ def build_article_record(article_url: str, item_id: str) -> dict:
     )
 
 
+def is_valid_record(record: dict) -> bool:
+    return bool(record["title"].strip() and record["content"].strip() and record["summary"].strip())
+
+
 def main() -> None:
     links = collect_article_links(MAX_PAGES)
     print(f"\nFound {len(links)} total filtered links")
@@ -186,7 +163,17 @@ def main() -> None:
 
     for index, link in enumerate(links[:20], start=1):
         print(f"\nChecking article {index}: {link}")
-        article = build_article_record(link, f"mnt_{index:03d}")
+
+        try:
+            article = build_article_record(link, f"mnt_{index:03d}")
+        except Exception as error:
+            print(f"Error reading article: {error}")
+            continue
+
+        if not is_valid_record(article):
+            print("Skipping invalid article record")
+            continue
+
         print("Title:", article["title"])
         print("Author:", article["author"])
         print("Publish time:", article["publish_time"])

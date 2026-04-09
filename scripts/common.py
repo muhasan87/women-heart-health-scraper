@@ -12,7 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data" / "json"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -106,16 +105,13 @@ def extract_title_generic(
     selectors = ["h1", "meta[property='og:title']", "title"]
 
     for selector in selectors:
+        tag = soup.select_one(selector)
+        if not tag:
+            continue
+
         if selector.startswith("meta"):
-            tag = soup.select_one(selector)
-            if tag and tag.get("content"):
-                title = normalise_text(tag["content"])
-            else:
-                continue
+            title = normalise_text(tag.get("content", ""))
         else:
-            tag = soup.select_one(selector)
-            if not tag:
-                continue
             title = normalise_text(tag.get_text(" ", strip=True))
 
         if site_suffixes:
@@ -147,9 +143,7 @@ def extract_author_generic(soup: BeautifulSoup) -> str:
 
     for tag in soup.find_all(["span", "p", "a", "div"]):
         text = normalise_text(tag.get_text(" ", strip=True))
-        lower = text.lower()
-
-        if lower.startswith("by "):
+        if text.lower().startswith("by "):
             return text[3:].strip()
 
     return ""
@@ -218,6 +212,34 @@ def extract_summary_from_paragraphs(paragraphs: list[str], title: str = "") -> s
             return p
 
     return paragraphs[0] if paragraphs else ""
+
+
+def classify_topic(title: str, content: str) -> str:
+    text = f"{title} {content}".lower()
+
+    women_terms = ["women", "woman", "female", "menopause", "maternal", "pregnancy"]
+    heart_terms = [
+        "heart disease",
+        "heart attack",
+        "cardiovascular",
+        "cardiac",
+        "coronary",
+        "stroke",
+        "blood pressure",
+        "hypertension",
+        "cholesterol",
+        "artery",
+        "atherosclerosis",
+    ]
+
+    has_women = any(term in text for term in women_terms)
+    has_heart = any(term in text for term in heart_terms)
+
+    if has_women and has_heart:
+        return "women_heart_health"
+    if has_heart:
+        return "general_heart_health"
+    return "general_health"
 
 
 def build_record(
