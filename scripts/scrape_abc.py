@@ -1,28 +1,16 @@
-import json
-from datetime import datetime
-from pathlib import Path
-
-import requests
-from bs4 import BeautifulSoup
-
+from common import (
+    build_record,
+    classify_topic,
+    clean_paragraph_list,
+    extract_author_generic,
+    extract_publish_time_generic,
+    extract_summary_from_paragraphs,
+    extract_title_generic,
+    get_soup,
+    save_json,
+)
 
 LISTING_URL = "https://www.abc.net.au/news/health"
-BASE_DIR = Path(__file__).resolve().parent.parent
-OUTPUT_DIR = BASE_DIR / "data" / "json"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def get_soup(url: str) -> BeautifulSoup:
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/124.0.0.0 Safari/537.36"
-        )
-    }
-    response = requests.get(url, headers=headers, timeout=20)
-    response.raise_for_status()
-    return BeautifulSoup(response.text, "lxml")
 
 
 def collect_article_links() -> list[str]:
@@ -50,52 +38,31 @@ def collect_article_links() -> list[str]:
     return links
 
 
-def is_heart_health_related(title: str, content: str) -> bool:
-    text = f"{title} {content}".lower()
-
-    keywords = [
-        "heart",
-        "cardiovascular",
-        "cardiac",
-        "heart attack",
-        "stroke",
-        "cholesterol",
-        "blood pressure",
-        "coronary",
-        "artery",
+def extract_content_and_summary(soup, title: str) -> tuple[str, str]:
+    junk_phrases = [
+        "find any issues using dark mode",
+        "please let us know",
+        "do you have a story to share",
+        "email",
+        "read more",
+        "skip to",
+        "listen",
+        "posted",
+        "share this article",
+        "loading",
     ]
 
-    return any(keyword in text for keyword in keywords)
+    paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p")]
+    cleaned = clean_paragraph_list(paragraphs, junk_phrases=junk_phrases, min_length=40)
+
+    content = "\n".join(cleaned[:15])
+    summary = extract_summary_from_paragraphs(cleaned, title)
+
+    return content, summary
 
 
-def extract_article(article_url: str, item_id: str) -> dict:
+def build_article_record(article_url: str, item_id: str) -> dict:
     soup = get_soup(article_url)
-
-    title_tag = soup.find("h1")
-    title = title_tag.get_text(strip=True) if title_tag else ""
-
-    author = ""
-    for tag in soup.find_all(["a", "span", "p"]):
-        text = tag.get_text(" ", strip=True)
-        if text.lower().startswith("by "):
-            author = text[3:].strip()
-            break
-
-    publish_time = ""
-    time_tag = soup.find("time")
-    if time_tag:
-        publish_time = time_tag.get("datetime", "") or time_tag.get_text(strip=True)
-
-    paragraphs = soup.find_all("p")
-    content_parts = []
-
-    for p in paragraphs:
-        text = p.get_text(" ", strip=True)
-        if len(text) > 40:
-            content_parts.append(text)
-
-    content = "\n".join(content_parts[:20])
-    summary = content_parts[0] if content_parts else ""
 
     #classification
     is_heart = is_heart_health_related(title or "", content or "")
@@ -157,9 +124,15 @@ def main() -> None:
 
     matched_article = None
 
-    for index, link in enumerate(links[:15], start=1):
+    for index, link in enumerate(links[:20], start=1):
         print(f"\nChecking article {index}: {link}")
-        article = extract_article(link, f"abc_{index:03d}")
+
+        try:
+            article = build_article_record(link, f"abc_{index:03d}")
+        except Exception as error:
+            print(f"Error reading article: {error}")
+            continue
+
         print("Title:", article["title"])
 
         if is_heart_health_related(article["title"] or "", article["content"] or ""):
@@ -168,11 +141,12 @@ def main() -> None:
 
     if matched_article:
         save_json(matched_article, "abc_heart_sample.json")
-        print("\nSaved heart-related article to data/json/abc_heart_sample.json")
+        print("\nSaved article to data/json/abc_heart_sample.json")
         print("Title:", matched_article["title"])
         print("URL:", matched_article["url"])
+        print("Topic:", matched_article["topic"])
     else:
-        print("\nNo heart-related article found in first 15 ABC links.")
+        print("\nNo women heart health article found in first 20 ABC links.")
 
 
 if __name__ == "__main__":
