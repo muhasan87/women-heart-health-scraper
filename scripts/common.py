@@ -135,13 +135,17 @@ def extract_author_generic(soup: BeautifulSoup) -> str:
         ],
     )
     if meta_author:
+        if meta_author.startswith("http"): #grabs text rather than author's link
+            meta_author = meta_author.split("/")[-2].replace("-", " ").title()
         return meta_author
 
     jsonld_author = extract_author_from_jsonld(soup)
     if jsonld_author:
+        if jsonld_author.startswith("http"):
+            jsonld_author = jsonld_author.split("/")[-2].replace("-", " ").title()
         return jsonld_author
 
-    for tag in soup.find_all(["span", "p", "a", "div"]):
+    for tag in soup.find_all(["span", "p", "div"]):
         text = normalise_text(tag.get_text(" ", strip=True))
         if text.lower().startswith("by "):
             return text[3:].strip()
