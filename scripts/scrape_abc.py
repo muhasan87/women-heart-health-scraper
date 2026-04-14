@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from common import (
-    # build_record,
+    build_record,
     classify_topic,
     clean_paragraph_list,
     extract_author_generic,
@@ -10,15 +10,15 @@ from common import (
     extract_summary_from_paragraphs,
     extract_title_generic,
     get_soup,
-    #save_json,
+    save_json,
     now_iso
 )
 
 LISTING_URL = "https://www.abc.net.au/news/topic/heart-disease"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-OUTPUT_DIR = BASE_DIR / "data" / "json"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+#OUTPUT_DIR = BASE_DIR / "data" / "json"
+#OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 def collect_article_links() -> list[str]:
     soup = get_soup(LISTING_URL)
@@ -60,14 +60,14 @@ def extract_content_and_summary(soup, title: str) -> tuple[str, str]:
     ]
 
     paragraphs = [p.get_text(" ", strip=True) for p in soup.find_all("p")]
-    cleaned = clean_paragraph_list(paragraphs, junk_phrases=junk_phrases, min_length=40)
+    cleaned = clean_paragraph_list(paragraphs, junk_phrases=junk_phrases)
 
-    content = "\n".join(cleaned[:15]) if cleaned else None
+    content = "\n".join(cleaned[:15]) if cleaned else ""
     summary = extract_summary_from_paragraphs(cleaned, title)
 
     return content, summary
 
-def is_heart_related(title: str, content: str) -> bool:
+#def is_heart_related(title: str, content: str) -> bool:
     text = f"{title} {content}".lower() #needs to be integrated into common.py eventually
     heart_keywords = [
         "heart", "cardio", "cardiovascular", "stroke", 
@@ -97,14 +97,13 @@ def build_article_record(article_url: str, item_id: str) -> dict:
     author = extract_author_generic(soup)
     publish_time = extract_publish_time_generic(soup)
     content, summary = extract_content_and_summary(soup, title or "")
-    source_class = "factual"
 
     record = {
         "id": item_id,
         "source": "ABC News",
         "source_category": "news",
         "source_type": "media",
-        "source_classification": source_class,
+        "source_classification": "factual",
         "url": article_url,
         "title": title,
         "content": content,
@@ -130,7 +129,7 @@ def build_article_record(article_url: str, item_id: str) -> dict:
 
 
 
-def save_json(record: dict, filename: str) -> None:
+#def save_json(record: dict, filename: str) -> None:
     output_path = OUTPUT_DIR / filename
     with open(output_path, "w", encoding="utf-8") as file:
         json.dump(record, file, indent=2, ensure_ascii=False)
@@ -139,6 +138,12 @@ def save_json(record: dict, filename: str) -> None:
 def main() -> None:
     links = collect_article_links()
     print(f"Found {len(links)} possible article links")
+    
+    records = []
+    total_examined = 0
+    general_count = 0
+    heart_count = 0
+    women_heart_count = 0
 
     if not links:
         print("No article links found.")
@@ -150,7 +155,8 @@ def main() -> None:
 
     matched_article = None
 
-    for index, link in enumerate(links[:100], start=1):
+    for index, link in enumerate(links[:200], start=1):
+        total_examined += 1
         print(f"\nChecking article {index}: {link}")
 
         try:
@@ -158,21 +164,40 @@ def main() -> None:
         except Exception as error:
             print(f"Error reading article: {error}")
             continue
-
+        
         print("Title:", article["title"])
+        
+        topic = classify_topic(article["title"] or "", article["content"] or "")
+        if topic == "general_health":
+            general_count += 1
+        elif topic == "heart_health":
+            heart_count += 1
+        elif topic == "women_heart_health":
+            women_heart_count += 1
+            records.append(article)
 
-        if is_heart_related(article["title"] or "", article["content"] or ""):
-            matched_article = article
-            break
+    if records:
+        save_json(records, "abcnews_heart_test")
+        print(f"\n Saved {len(records)} articles to JSON")
 
-    if matched_article:
-        save_json(matched_article, "abc_heart_sample.json")
-        print("\nSaved article to data/json/abc_heart_sample.json")
-        print("Title:", matched_article["title"])
-        print("URL:", matched_article["url"])
+    #if matched_article:
+        #save_json(matched_article, "abc_heart_sample.json")
+        #print("\nSaved article to data/json/abc_heart_sample.json")
+        #print("Title:", matched_article["title"])
+        #print("URL:", matched_article["url"])
         #print("Topic:", matched_article["topic"])
     else:
-        print("\nNo women heart health articles found in first 100 ABC links.")
+        print("\nNo women heart health articles found in first 200 ABC links.")
+    
+    #notes:
+    # - currently only scrapes 22 articles (front page), need to use APIs to scrape more
+    
+    # print summary
+    print("\nScraping Summary:")
+    print(f"Total examined: {total_examined}")
+    print(f"General health: {general_count}")
+    print(f"Heart health: {heart_count}")
+    print(f"Women's heart health: {women_heart_count}")
 
 
 if __name__ == "__main__":
