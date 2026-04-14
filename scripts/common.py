@@ -31,14 +31,18 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def clean_whitespace(text: str) -> str:
+#def clean_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-def normalise_text(text: str) -> str:
+#def normalise_text(text: str) -> str:
     return clean_whitespace(text).replace("\xa0", " ")
 
+def normalise_text(text: str) -> str:
+    return re.sub(r"\s+", " ", text).replace("\xa0", " ").strip()
 
+
+# extraction
 def extract_meta_content(soup: BeautifulSoup, attrs_list: list[dict[str, str]]) -> str:
     for attrs in attrs_list:
         tag = soup.find("meta", attrs=attrs)
@@ -250,8 +254,9 @@ def build_record(
     *,
     item_id: str,
     source: str,
-    platform: str,
+    source_category: str,
     source_type: str,
+    source_classification: str,
     url: str,
     title: str,
     content: str,
@@ -259,43 +264,42 @@ def build_record(
     author: str,
     author_type: str,
     publish_time: str,
-    topic: str,
+    #topic: str,
     media_type: str = "text",
-    media_url: str = "",
     content_type: str = "article",
     language: str = "en",
 ) -> dict:
     return {
         "id": item_id,
         "source": source,
-        "platform": platform,
+        "source_category": source_category,
         "source_type": source_type,
+        "source_classification": source_classification,
         "url": url,
         "title": title,
         "content": content,
         "summary": summary,
-        "author": author,
-        "author_type": author_type,
-        "publish_time": publish_time,
+        "author": author or None,
+        "author_type": author_type or None,
+        "publish_time": publish_time or None,
         "scrape_time": now_iso(),
         "tags": [],
         "hashtags": [],
-        "mentions": [],
+        #"mentions": [],
         "engagement": {
             "likes": None,
             "comments": None,
             "shares": None,
-            "views": None,
+            #"views": None,
         },
         "media_type": media_type,
-        "media_url": media_url,
-        "topic": topic,
+        #"topic": topic,
         "content_type": content_type,
         "language": language,
     }
 
 
-def save_json(record: dict, filename: str) -> None:
+def save_json(records: list[dict], filename: str) -> None:
     output_path = DATA_DIR / filename
     with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(record, f, indent=2, ensure_ascii=False)
+        json.dump(records, f, indent=2, ensure_ascii=False)
