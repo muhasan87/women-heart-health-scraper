@@ -1,4 +1,6 @@
 import json
+import matplotlib.pyplot as plt #need to add to requirements.txt
+from datetime import datetime, timezone
 from pathlib import Path
 
 from common import (
@@ -11,7 +13,8 @@ from common import (
     extract_title_generic,
     get_soup,
     save_json,
-    now_iso
+    now_iso,
+    CHART_DIR
 )
 
 LISTING_URL = "https://www.abc.net.au/news/topic/heart-disease"
@@ -198,7 +201,28 @@ def main() -> None:
     print(f"General health: {general_count}")
     print(f"Heart health: {heart_count}")
     print(f"Women's heart health: {women_heart_count}")
-
+    
+    
+    # visualisation
+    labels = ["general_health", "heart_health", "women_heart_health"]
+    values = [general_count, heart_count, women_heart_count]
+    
+    plt.figure()
+    plt.bar(labels, values)
+    
+    plt.title("ABC News Article Summary")
+    plt.xlabel("Category")
+    plt.ylabel("Number of Articles")
+    
+    plt.xticks(rotation=20)
+    plt.tight_layout()
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+    chart_path = CHART_DIR / "abc_classification_summary_{timestamp}.png"
+    plt.savefig(chart_path)
+    plt.close()
+    
+    print(f"Chart saved to: {chart_path}")
 
 if __name__ == "__main__":
     main()
