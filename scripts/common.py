@@ -251,7 +251,7 @@ def classify_topic(title: str, content: str) -> str:
     if has_women and has_heart:
         return "women_heart_health"
     if has_heart:
-        return "general_heart_health"
+        return "heart_health"
     return "general_health"
 
 
