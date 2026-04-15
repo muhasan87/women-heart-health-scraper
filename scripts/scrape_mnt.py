@@ -16,35 +16,37 @@ from common import (
     now_iso,
     CHART_DIR
 )
-
-LISTING_URL = "https://www.medicalnewstoday.com/womens-health" #initially: https://www.medicalnewstoday.com/categories/heart-disease
-# other contenders:
-    #https://www.medicalnewstoday.com/cardiovascular-health
+LISTING_URL = ["https://www.medicalnewstoday.com/cardiovascular-health",
+               "https://www.medicalnewstoday.com/womens-health",
+               "https://www.medicalnewstoday.com/categories/heart-disease"]
     # could consider scraping from multiple categories
 BASE_DIR = Path(__file__).resolve().parent.parent
 #MAX_PAGES = 10
 
 def collect_article_links() -> list[str]:
-    soup = get_soup(LISTING_URL)
+    #soup = get_soup(LISTING_URL)
     links = []
+    for url in LISTING_URL:
+        print(f"Scanning: {url}")
+        soup = get_soup(url)
+        
+        for a_tag in soup.find_all("a", href=True):
+            href = a_tag["href"]
 
-    for a_tag in soup.find_all("a", href=True):
-        href = a_tag["href"]
+            if href.startswith("/"):
+                href = f"https://www.medicalnewstoday.com{href}"
 
-        if href.startswith("/"):
-            href = f"https://www.medicalnewstoday.com/{href}"
+            if not href.startswith("https://www.medicalnewstoday.com/articles/"):
+                continue
 
-        if not href.startswith("https://www.medicalnewstoday.com/articles/"):
-            continue
+            if "#" in href:
+                continue
 
-        if "#" in href:
-            continue
+            #if "/news/20" not in href:
+                #continue
 
-        #if "/news/20" not in href:
-            #continue
-
-        if href not in links:
-            links.append(href)
+            if href not in links:
+                links.append(href)
 
     return links
 
@@ -238,7 +240,7 @@ def main() -> None:
 
     #matched_article = None
 
-    for index, link in enumerate(links[:200], start=1):
+    for index, link in enumerate(links[:300], start=1):
         total_examined += 1
         print(f"\nChecking article {index}: {link}")
 
