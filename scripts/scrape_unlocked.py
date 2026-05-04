@@ -24,15 +24,31 @@ BASE_DOMAIN = "https://healthunlocked.com"
 
 COMMUNITIES = [
     {
-        "name": "British Heart Foundation Community",
-        "url": "https://healthunlocked.com/bhf",
-        "id_prefix": "hu_bhf",
-    },
-    {
         "name": "Heart Failure Support",
         "url": "https://healthunlocked.com/arrhythmia-alliance-heart-failure",
         "id_prefix": "hu_hf",
     },
+    {
+        "name": "Atrial Fibrillation Support",
+        "url": "https://healthunlocked.com/afassociation",
+        "id_prefix": "hu_afs",
+    },
+    {
+        "name": "Women's Health",
+        "url": "https://healthunlocked.com/womenshealth",
+        "id_prefix": "hu_wh",
+    },
+    {
+        "name": "Menopause and Perimenopause Support",
+        "url": "https://healthunlocked.com/menopause-perimenopause-support",
+        "id_prefix": "hu_mps",
+    },
+    {
+        "name": "Cholesterol Support",
+        "url": "https://healthunlocked.com/cholesterol-support",
+        "id_prefix": "hu_cs",
+    }
+    
 ]
 
 MAX_SCROLLS = 6
