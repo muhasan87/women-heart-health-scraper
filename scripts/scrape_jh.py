@@ -3,6 +3,7 @@ import re
 import time
 import matplotlib.pyplot as plt
 from datetime import datetime, timezone
+import numpy as np
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -16,6 +17,7 @@ from common import (
     clean_paragraph_list,
     extract_summary_from_paragraphs,
     extract_title_generic,
+    extract_tags,
     normalise_text,
     save_json,
     now_iso,
@@ -277,6 +279,9 @@ def build_article_record(
 
     publish_time = extract_date(soup)
     content, summary = extract_content_and_summary(soup, title or "")
+    
+    text_for_tags = f"{title or ''} {content or ''}"
+    tags = extract_tags(text_for_tags)
 
     return {
         "id": item_id,
@@ -292,7 +297,7 @@ def build_article_record(
         "author_type": author_type,
         "publish_time": publish_time or None,
         "scrape_time": now_iso(),
-        "tags": [],
+        "tags": tags,
         "hashtags": [],
         "engagement": {
             "likes": None,
@@ -307,11 +312,19 @@ def build_article_record(
 
 def main() -> None:
     records = []
-    general_count = 0
-    heart_count = 0
-    women_heart_count = 0
+    stats = {
+        "news": {"general": 0, "heart": 0, "women_heart": 0},
+        "stories": {"general": 0, "heart": 0, "women_heart": 0},
+    }
+    
+    topics = ["general", "heart", "women_heart"]
 
     driver = get_driver()
+    topic_map = {
+        "general_health": "general",
+        "heart_health": "heart",
+        "women_heart_health": "women_heart",
+    }
 
     try:
         for section in SECTIONS:
@@ -344,14 +357,10 @@ def main() -> None:
 
                 print(f"  Title: {article['title']}")
 
+                section_name = section["name"]
                 topic = classify_topic(article["title"] or "", article["content"] or "")
-
-                if topic == "general_health":
-                    general_count += 1
-                elif topic == "heart_health":
-                    heart_count += 1
-                elif topic == "women_heart_health":
-                    women_heart_count += 1
+                stats[section_name][topic_map[topic]] += 1
+                if topic == "women_heart_health":
                     records.append(article)
 
     finally:
@@ -364,20 +373,33 @@ def main() -> None:
         print("\nNo women's heart health articles found.")
 
     print("\nScraping Summary:")
-    print(f"Total examined: {general_count + heart_count + women_heart_count}")
-    print(f"General health: {general_count}")
-    print(f"Heart health: {heart_count}")
-    print(f"Women's heart health: {women_heart_count}")
 
-    labels = ["general_health", "heart_health", "women_heart_health"]
-    values = [general_count, heart_count, women_heart_count]
+    for section_name, counts in stats.items():
+        total = sum(counts.values())
+        if total == 0:
+            continue
+
+        print(f"\n{section_name.upper()}")
+        for k, v in counts.items():
+            pct = (v / total) * 100
+            print(f"  {k}: {v} ({pct:.1f}%)")
+
+    news_vals = [stats["news"][t] for t in topics]
+    stories_vals = [stats["stories"][t] for t in topics]
+
+    x = np.arange(len(topics))
 
     plt.figure()
-    plt.bar(labels, values)
-    plt.title("Jean Hailes Article Summary")
-    plt.xlabel("Category")
+
+    plt.bar(x, news_vals, label="News")
+    plt.bar(x, stories_vals, bottom=news_vals, label="Stories")
+
+    plt.xticks(x, ["General Health", "Heart Health", "Women's Heart Health"])
+    plt.title("Jean Hailes Topic Distribution")
+    plt.xlabel("Topic")
     plt.ylabel("Number of Articles")
-    plt.xticks(rotation=20)
+    plt.legend()
+
     plt.tight_layout()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
@@ -385,6 +407,14 @@ def main() -> None:
     plt.savefig(chart_path)
     plt.close()
     print(f"Chart saved to: {chart_path}")
+    
+    total_all = sum(sum(s.values()) for s in stats.values())
+
+    overall_womens_heart = sum(stats[s]["women_heart"] for s in stats)
+
+    print("\n=== Overall Coverage ===")
+    print(f"Total articles: {total_all}")
+    print(f"Women's heart health: {overall_womens_heart} ({(overall_womens_heart/total_all)*100:.1f}%)")
 
 
 if __name__ == "__main__":
