@@ -1,6 +1,7 @@
 import time
 import matplotlib.pyplot as plt
 from datetime import datetime
+import os
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -17,6 +18,7 @@ from common import (
     extract_publish_time_generic,
     extract_summary_from_paragraphs,
     extract_title_generic,
+    extract_tags,
     get_soup,
     save_json,
     now_iso,
@@ -31,6 +33,8 @@ MAX_ARTICLES = 200
 
 def collect_article_links() -> list[str]:
     options = Options()
+    os.makedirs("./selenium_cache", exist_ok=True)
+    os.environ["SE_CACHE_PATH"] = "./selenium_cache"
     options.add_argument("--headless=new")
     options.add_argument("--window-size=1400,2200")
 
@@ -66,11 +70,6 @@ def collect_article_links() -> list[str]:
                 if "#" in href or href == LISTING_URL:
                     continue
 
-                path = href.replace(BASE_DOMAIN, "").rstrip("/")
-                parts = [p for p in path.split("/") if p]
-                if len(parts) < 2:
-                    continue
-
                 if href not in links:
                     links.append(href)
                     found_on_page += 1
@@ -88,6 +87,7 @@ def collect_article_links() -> list[str]:
                         ),
                     ))
                 )
+
                 driver.execute_script(
                     "arguments[0].scrollIntoView({block: 'center'});", next_button
                 )
@@ -146,6 +146,10 @@ def build_article_record(article_url: str, item_id: str) -> dict:
     publish_time = extract_publish_time_generic(soup)
     content, summary = extract_content_and_summary(soup, title or "")
 
+    # ✅ TAGS ADDED HERE
+    text_for_tags = f"{title or ''} {content or ''}"
+    tags = extract_tags(text_for_tags)
+
     return {
         "id": item_id,
         "source": "Heart Foundation",
@@ -160,7 +164,10 @@ def build_article_record(article_url: str, item_id: str) -> dict:
         "author_type": "organisation" if author else None,
         "publish_time": publish_time or None,
         "scrape_time": now_iso(),
-        "tags": [],
+
+        # ✅ UPDATED FIELD
+        "tags": tags,
+
         "hashtags": [],
         "mentions": [],
         "engagement": {
@@ -214,11 +221,14 @@ def main() -> None:
     else:
         print("\nNo women's heart health articles found.")
 
+    total_examined = general_count + heart_count + women_heart_count
+
     print("\nScraping Summary:")
-    print(f"Total examined: {general_count + heart_count + women_heart_count}")
+    print(f"Total examined: {total_examined}")
     print(f"General health: {general_count}")
     print(f"Heart health: {heart_count}")
     print(f"Women's heart health: {women_heart_count}")
+    print(f"Women's heart health %: {(women_heart_count / total_examined * 100) if total_examined else 0:.1f}%")
 
     labels = ["general_health", "heart_health", "women_heart_health"]
     values = [general_count, heart_count, women_heart_count]
@@ -235,6 +245,7 @@ def main() -> None:
     chart_path = CHART_DIR / f"heartfoundation_summary_{timestamp}.png"
     plt.savefig(chart_path)
     plt.close()
+
     print(f"Chart saved to: {chart_path}")
 
 
