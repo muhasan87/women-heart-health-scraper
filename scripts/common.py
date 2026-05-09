@@ -229,24 +229,39 @@ def classify_topic(title: str, content: str) -> str:
     text = f"{title} {content}".lower()
 
     heart_terms = [
-        "heart disease", "heart attack", "cardiovascular",
-        "cardiac", "coronary", "stroke",
-        "blood pressure", "hypertension", "cholesterol",
-        "artery", "atherosclerosis", "palpitations",
-        "tachycardia", "arrhythmia", "chest pain",
-        "shortness of breath", "fainting",
-        "heart"
+        r"\bheart disease\b",
+        r"\bheart attack\b",
+        r"\bmyocardial infarction\b",
+        r"\bcardiovascular\b",
+        r"\bcardiac\b",
+        r"\bcoronary\b",
+        r"\bcoronary artery disease\b",
+        r"\bstroke\b",
+        r"\bhypertension\b",
+        r"\bblood pressure\b",
+        r"\bcholesterol\b",
+        r"\batherosclerosis\b",
+        r"\barrhythmia\b",
+        r"\btachycardia\b",
+        r"\bpalpitations\b",
+        r"\bheart failure\b",
+        r"\bischemia\b",
+        r"\bCVD\b"
     ]
-
-    heart_score = sum(term in text for term in heart_terms)
 
     women_terms = [
-        "women", "woman", "female",
-        "menopause", "maternal", "pregnancy",
-        "postpartum", "preeclampsia"
+        r"\bwomen\b",
+        r"\bwoman\b",
+        r"\bfemale\b",
+        r"\bmenopause\b",
+        r"\bpregnancy\b",
+        r"\bpostpartum\b",
+        r"\bpreeclampsia\b",
+        r"\bmaternal\b",
     ]
-
-    women_score = sum(term in text for term in women_terms)
+    
+    heart_score = sum(bool(re.search(term, text)) for term in heart_terms)
+    women_score = sum(bool(re.search(term, text)) for term in women_terms)
 
     if heart_score == 0:
         return "general_health"
