@@ -225,8 +225,36 @@ def extract_summary_from_paragraphs(paragraphs: list[str], title: str = "") -> s
 
     return paragraphs[0] if paragraphs else ""
 
-
 def classify_topic(title: str, content: str) -> str:
+    text = f"{title} {content}".lower()
+
+    heart_terms = [
+        "heart disease", "heart attack", "cardiovascular",
+        "cardiac", "coronary", "stroke",
+        "blood pressure", "hypertension", "cholesterol",
+        "artery", "atherosclerosis", "palpitations",
+        "tachycardia", "arrhythmia", "chest pain",
+        "shortness of breath", "fainting",
+        "heart"
+    ]
+
+    heart_score = sum(term in text for term in heart_terms)
+
+    women_terms = [
+        "women", "woman", "female",
+        "menopause", "maternal", "pregnancy",
+        "postpartum", "preeclampsia"
+    ]
+
+    women_score = sum(term in text for term in women_terms)
+
+    if heart_score == 0:
+        return "general_health"
+    if women_score > 0 and heart_score > 0:
+        return "women_heart_health"
+    return "heart_health"
+
+#def classify_topic(title: str, content: str) -> str:
     text = f"{title} {content}".lower()
 
     women_terms = ["women", "woman", "female", "menopause", "maternal", "pregnancy"]
@@ -254,6 +282,33 @@ def classify_topic(title: str, content: str) -> str:
         return "heart_health"
     return "general_health"
 
+#for keyword analysis
+def extract_tags(text: str) -> list[str]:
+    text = text.lower()
+
+    tag_map = {
+        "heart_attack": ["heart attack", "myocardial infarction"],
+        "heart_disease": ["heart disease"],
+        "stroke": ["stroke"],
+        "hypertension": ["blood pressure", "hypertension"],
+        "cholesterol": ["cholesterol"],
+        "arrhythmia": ["arrhythmia", "palpitations", "tachycardia"],
+        "chest_pain": ["chest pain"],
+        "cardiovascular": ["cardiovascular", "cardiac", "coronary", "artery", "atherosclerosis"],
+
+        # women-specific angles
+        "menopause": ["menopause", "postmenopausal"],
+        "pregnancy": ["pregnancy", "pregnant", "preeclampsia", "gestational"],
+        "female_risk_factors": ["female", "women", "woman"],
+    }
+
+    tags = []
+
+    for tag, keywords in tag_map.items():
+        if any(k in text for k in keywords):
+            tags.append(tag)
+
+    return tags
 
 def build_record(
     *,
