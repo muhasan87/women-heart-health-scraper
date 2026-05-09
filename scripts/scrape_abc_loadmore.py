@@ -1,4 +1,5 @@
 import time
+import os
 import matplotlib.pyplot as plt
 from datetime import datetime
 from pathlib import Path
@@ -21,6 +22,7 @@ from common import (
     extract_publish_time_generic,
     extract_summary_from_paragraphs,
     extract_title_generic,
+    extract_tags,
     get_soup,
     save_json,
     now_iso,
@@ -30,15 +32,16 @@ from common import (
 BASE_URL = "https://www.abc.net.au/news/health"
 
 MAX_LOAD_MORE_ROUNDS = 10
-MAX_ARTICLES = 150
+MAX_ARTICLES = 300
 
-ABCTEST_CHART_DIR = CHART_DIR / "abctest_charts"
+ABCTEST_CHART_DIR = CHART_DIR / "abc_charts"
 ABCTEST_CHART_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def get_listing_soup_with_load_more() -> BeautifulSoup:
     options = Options()
-    # comment this out if you want to watch it work
+    os.makedirs("./selenium_cache", exist_ok=True)
+    os.environ["SE_CACHE_PATH"] = "./selenium_cache"
     options.add_argument("--headless=new")
     options.add_argument("--window-size=1400,2200")
 
@@ -53,17 +56,12 @@ def get_listing_soup_with_load_more() -> BeautifulSoup:
 
         while rounds < MAX_LOAD_MORE_ROUNDS:
             try:
-                # tries a few common button patterns
                 load_more = wait.until(
                     EC.element_to_be_clickable(
                         (
                             By.XPATH,
-                            (
-                                "//button[contains(translate(., "
-                                "'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'load more')]"
-                                " | //a[contains(translate(., "
-                                "'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'load more')]"
-                            ),
+                            "//button[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'load more')]"
+                            " | //a[contains(translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'load more')]"
                         )
                     )
                 )
@@ -86,8 +84,7 @@ def get_listing_soup_with_load_more() -> BeautifulSoup:
                 print("No more load more button found.")
                 break
 
-        html = driver.page_source
-        return BeautifulSoup(html, "lxml")
+        return BeautifulSoup(driver.page_source, "lxml")
 
     finally:
         driver.quit()
@@ -148,7 +145,9 @@ def build_article_record(article_url: str, item_id: str) -> dict:
     author = extract_author_generic(soup)
     publish_time = extract_publish_time_generic(soup)
     content, summary = extract_content_and_summary(soup, title or "")
-    topic = classify_topic(title or "", content or "")
+
+    text_for_tags = f"{title or ''} {content or ''}"
+    tags = extract_tags(text_for_tags)
 
     return {
         "id": item_id,
@@ -164,8 +163,7 @@ def build_article_record(article_url: str, item_id: str) -> dict:
         "author_type": "individual" if author else None,
         "publish_time": publish_time or None,
         "scrape_time": now_iso(),
-        "topic": topic,
-        "tags": [],
+        "tags": tags,
         "hashtags": [],
         "mentions": [],
         "engagement": {
@@ -188,52 +186,68 @@ def main() -> None:
         return
 
     records = []
-    general_count = 0
-    heart_count = 0
-    women_heart_count = 0
+
+    stats = {
+        "general": 0,
+        "heart": 0,
+        "women_heart": 0,
+    }
+
+    topic_map = {
+        "general_health": "general",
+        "heart_health": "heart",
+        "women_heart_health": "women_heart",
+    }
 
     for index, link in enumerate(links[:MAX_ARTICLES], start=1):
         print(f"\nChecking article {index}: {link}")
 
         try:
-            article = build_article_record(link, f"abctest_{index:03d}")
+            article = build_article_record(link, f"abc_{index:03d}")
         except Exception as error:
             print(f"Error reading article: {error}")
             continue
 
-        topic = article["topic"]
+        topic_raw = classify_topic(article["title"] or "", article["content"] or "")
+        topic = topic_map.get(topic_raw)
 
-        if topic == "general_health":
-            general_count += 1
-        elif topic == "heart_health":
-            heart_count += 1
-        elif topic == "women_heart_health":
-            women_heart_count += 1
+        if topic:
+            stats[topic] += 1
 
-        records.append(article)
+        if topic == "women_heart":
+            records.append(article)
 
     if records:
-        save_json(records, "ABC_loadmore.json")
-        print(f"\nSaved {len(records)} articles to ABC_loadmore.json")
+        save_json(records, "abc_news.json")
+        print(f"\nSaved {len(records)} women heart health articles to abc_news.json")
 
     print("\nScraping Summary:")
     print(f"Total saved: {len(records)}")
-    print(f"General health: {general_count}")
-    print(f"Heart health: {heart_count}")
-    print(f"Women's heart health: {women_heart_count}")
+
+    total = sum(stats.values())
+
+    for k, v in stats.items():
+        pct = (v / total) * 100 if total else 0
+        print(f"{k.replace('_', ' ').title()}: {v} ({pct:.1f}%)")
 
     labels = ["general_health", "heart_health", "women_heart_health"]
-    values = [general_count, heart_count, women_heart_count]
+    values = [
+        stats["general"],
+        stats["heart"],
+        stats["women_heart"],
+    ]
 
     plt.figure()
     plt.bar(labels, values)
-    plt.title("ABC Test Article Summary")
+    plt.title("ABC News Health Article Distribution")
     plt.xlabel("Category")
     plt.ylabel("Number of Articles")
     plt.xticks(rotation=20)
     plt.tight_layout()
 
-    chart_path = CHART_DIR / "ABC_loadmore.png"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+    chart_path = CHART_DIR / f"abc_news_summary_{timestamp}.png"
+
     plt.savefig(chart_path)
     plt.close()
 
