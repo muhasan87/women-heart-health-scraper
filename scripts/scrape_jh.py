@@ -154,7 +154,7 @@ def collect_article_links(listing_url: str, link_path: str) -> list[str]:
                 print("  Load more button not clickable — stopping.")
                 break
 
-        soup = BeautifulSoup(driver.page_source, "html.parser")
+        soup = BeautifulSoup(driver.page_source, "lxml")
 
         for a_tag in soup.find_all("a", href=True):
             href = a_tag["href"].strip()
@@ -247,7 +247,7 @@ def build_article_record(
     except TimeoutException:
         pass
 
-    soup = BeautifulSoup(driver.page_source, "html.parser")
+    soup = BeautifulSoup(driver.page_source, "lxml")
 
     title_tag = soup.find("h1", class_=lambda c: c and "title-t" in c)
     if title_tag:
