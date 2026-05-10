@@ -16,6 +16,9 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 CHART_DIR = BASE_DIR / "data" / "charts"
 CHART_DIR.mkdir(parents=True, exist_ok=True)
 
+STATS_DIR = BASE_DIR / "data" / "json" / "stats"
+STATS_DIR.mkdir(parents=True, exist_ok=True)
+
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -33,14 +36,6 @@ def get_soup(url: str) -> BeautifulSoup:
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
-
-
-#def clean_whitespace(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip()
-
-
-#def normalise_text(text: str) -> str:
-    return clean_whitespace(text).replace("\xa0", " ")
 
 def normalise_text(text: str) -> str:
     return re.sub(r"\s+", " ", text).replace("\xa0", " ").strip()
@@ -302,19 +297,27 @@ def extract_tags(text: str) -> list[str]:
     text = text.lower()
 
     tag_map = {
+        #heart conditions
         "heart_attack": ["heart attack", "myocardial infarction"],
-        "heart_disease": ["heart disease"],
+        "heart_disease": ["heart disease", "cardiovascular disease", "CVD", "coronary artery disease"],
         "stroke": ["stroke"],
-        "hypertension": ["blood pressure", "hypertension"],
-        "cholesterol": ["cholesterol"],
-        "arrhythmia": ["arrhythmia", "palpitations", "tachycardia"],
-        "chest_pain": ["chest pain"],
+        "hypertension": ["blood pressure", "hypertension", "high blood pressure"],
+        "cholesterol": ["cholesterol", "ldl", "hdl"],
+        "arrhythmia": ["arrhythmia", "palpitations", "tachycardia", "atrial fibrillation"],
         "cardiovascular": ["cardiovascular", "cardiac", "coronary", "artery", "atherosclerosis"],
+        
+        #symptoms
+        "chest_pain": ["chest pain", "shortness of breath", "fatigue", "dizziness"],
 
-        # women-specific angles
-        "menopause": ["menopause", "postmenopausal"],
-        "pregnancy": ["pregnancy", "pregnant", "preeclampsia", "gestational"],
-        "female_risk_factors": ["female", "women", "woman"],
+        # women-specific
+        "menopause": ["menopause", "postmenopausal", "perimenopause"],
+        "pregnancy": ["pregnancy", "pregnant", "preeclampsia", "gestational", "postpartum"],
+        "female_risk_factors": ["female", "women", "woman", "maternal"],
+        
+        #lifestyle
+        "exercise": ["exercise", "physical activity", "fitness"],
+        "diet": ["diet", "nutrition", "obesity"],
+        "mental_health": ["stress", "anxiety", "depression", "anxious", "depressed", "stressed"]
     }
 
     tags = []
@@ -323,7 +326,26 @@ def extract_tags(text: str) -> list[str]:
         if any(k in text for k in keywords):
             tags.append(tag)
 
-    return tags
+    return sorted(set(tags))
+
+POSITIVE_WORDS = {"support", "improve", "healthy", "recovery", "prevention"
+                  "awareness", "survive", "treatment", "hope", "education"}
+
+NEGATIVE_WORDS = {"death", "risk", "disease", "attack", "failure", "stroke",
+                  "crisis", "anxiety", "depression", "pain"}
+
+def analyse_sentiment(text: str) -> str:
+    text = text.lower()
+    positive = sum(word in text for word in POSITIVE_WORDS)
+    negative = sum(word in text for word in NEGATIVE_WORDS)
+    
+    if positive > negative:
+        return "positive"
+
+    if negative > positive:
+        return "negative"
+    
+    return "neutral"
 
 def build_record(
     *,
@@ -373,8 +395,102 @@ def build_record(
         "language": language,
     }
 
+def create_stats(source_name: str) -> dict:
+    return {
+        "source": source_name,
+        
+        "total_examined": 0,
+        
+        "by_topic": {
+            "general_health": 0,
+            "heart_health": 0,
+            "women_heart_health": 0
+        },
+        
+        "by_tags": {},
+        
+        "by_sentiment": {
+            "positive": 0,
+            "neutral": 0,
+            "negative": 0
+        },
+        
+        "by_classification": {
+            "factual": 0,
+            "opinion/anecdotal": 0,
+            "mixed": 0
+        },
+        
+        "date_range": {
+            "earliest": None,
+            "latest": None
+        }
+    }
+
+def add_section(stats: dict, section_name: str):
+    stats.setdefault("by_section", {})
+    
+    stats["by_section"][section_name] = {
+        "general_health": 0,
+        "heart_health": 0,
+        "women_heart_health": 0
+    }
+
+def update_stats(
+    stats: dict,
+    topic: str,
+    tags: list[str],
+    sentiment: str | None = None,
+    source_classification: str | None = None,
+    section: str | None = None,
+    publish_time: str | None = None,
+):
+    stats["total_examined"] += 1
+
+    # topic
+    stats["by_topic"][topic] += 1
+
+    # section
+    if section:
+        stats.setdefault("by_section", {})
+        stats["by_section"].setdefault(section, {
+            "general_health": 0,
+            "heart_health": 0,
+            "women_heart_health": 0,
+        })
+
+        stats["by_section"][section][topic] += 1
+
+    # tags
+    for tag in tags:
+        stats["by_tags"][tag] = stats["by_tags"].get(tag, 0) + 1
+
+    # sentiment
+    if sentiment:
+        stats["by_sentiment"][sentiment] += 1
+
+    # source classification
+    if source_classification:
+        stats["by_classification"][source_classification] += 1
+    
+    # date range
+    # date range
+    if publish_time:
+        earliest = stats["date_range"]["earliest"]
+        latest = stats["date_range"]["latest"]
+
+        if earliest is None or publish_time < earliest:
+            stats["date_range"]["earliest"] = publish_time
+
+        if latest is None or publish_time > latest:
+            stats["date_range"]["latest"] = publish_time
 
 def save_json(records: list[dict], filename: str) -> None:
     output_path = DATA_DIR / filename
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(records, f, indent=2, ensure_ascii=False)
+
+def save_stats(stats: dict, filename: str) -> None:
+    output_path = STATS_DIR / filename
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(stats, f, indent=2, ensure_ascii=False)
