@@ -372,35 +372,108 @@ def print_summary(results):
         f"women={women_count}"
     )
 
+    print_section("HEART VS WOMEN TAG COMPARISON")
+
+    heart_tag_totals = results["heart_tag_totals"]
+    women_tag_totals = results["women_tag_totals"]
+
+    heart_tag_sum = sum(
+        heart_tag_totals.values()
+    )
+
+    women_tag_sum = sum(
+        women_tag_totals.values()
+    )
+
+    all_compare_tags = set(
+        heart_tag_totals.keys()
+    ).union(
+        women_tag_totals.keys()
+    )
+
+    sorted_tags = sorted(
+        all_compare_tags,
+        key=lambda tag: women_tag_totals.get(tag, 0),
+        reverse=True,
+    )[:15]
+
+    for tag in sorted_tags:
+
+        heart_count = heart_tag_totals.get(tag, 0)
+        women_count = women_tag_totals.get(tag, 0)
+
+        heart_pct = (
+            heart_count / heart_tag_sum * 100
+            if heart_tag_sum else 0
+        )
+
+        women_pct = (
+            women_count / women_tag_sum * 100
+            if women_tag_sum else 0
+        )
+
+        print(
+            f"{tag}: "
+            f"heart={heart_count} ({heart_pct:.1f}%), "
+            f"women={women_count} ({women_pct:.1f}%)"
+        )
+
     print_section(
         "HEART VS WOMEN SENTIMENT"
     )
+
     heart_sentiment_totals = results[
         "heart_sentiment_totals"
     ]
+
+    women_sentiment_totals = results[
+        "women_sentiment_totals"
+    ]
+
+    heart_sentiment_sum = sum(
+        heart_sentiment_totals.values()
+    )
+
+    women_sentiment_sum = sum(
+        women_sentiment_totals.values()
+    )
+
     all_sentiments = set(
         heart_sentiment_totals.keys()
     ).union(
         women_sentiment_totals.keys()
     )
 
-    for sentiment in all_sentiments:
+    for sentiment in sorted(all_sentiments):
+
         heart_count = (
             heart_sentiment_totals.get(
                 sentiment,
                 0
             )
         )
+
         women_count = (
             women_sentiment_totals.get(
                 sentiment,
                 0
             )
         )
+
+        heart_pct = (
+            heart_count / heart_sentiment_sum * 100
+            if heart_sentiment_sum else 0
+        )
+
+        women_pct = (
+            women_count / women_sentiment_sum * 100
+            if women_sentiment_sum else 0
+        )
+
         print(
             f"{sentiment}: "
-            f"heart={heart_count}, "
-            f"women={women_count}"
+            f"heart={heart_count} ({heart_pct:.1f}%), "
+            f"women={women_count} ({women_pct:.1f}%)"
         )
 
 #charts
