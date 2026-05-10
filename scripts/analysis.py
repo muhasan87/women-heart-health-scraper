@@ -37,7 +37,9 @@ def aggregate(all_stats):
     classification_totals = defaultdict(int)
     topic_matrix = defaultdict(lambda: defaultdict(int))
     sentiment_matrix = defaultdict(lambda: defaultdict(int))
+    heart_tag_totals = defaultdict(int)
     women_tag_totals = defaultdict(int)
+    heart_sentiment_totals = defaultdict(int)
     women_sentiment_totals = defaultdict(int)
     women_total = 0
     date_ranges = []
@@ -78,11 +80,36 @@ def aggregate(all_stats):
         for cls, count in by_classification.items():
             classification_totals[cls] += count
 
-        #women
-        for tag, count in women_subset.get("by_tags", {}).items():
+        # heart health subset
+        heart_subset = entry.get(
+            "heart_subset",
+            {}
+        )
+        for tag, count in heart_subset.get(
+            "by_tags",
+            {}
+        ).items():
+            heart_tag_totals[tag] += count
+
+        for sentiment, count in heart_subset.get(
+            "by_sentiment",
+            {}
+        ).items():
+            heart_sentiment_totals[sentiment] += count
+
+        # women's heart health subset
+        for tag, count in women_subset.get(
+            "by_tags",
+            {}
+        ).items():
+
             women_tag_totals[tag] += count
-        
-        for sentiment, count in women_subset.get("by_sentiment", {}).items():
+
+        for sentiment, count in women_subset.get(
+            "by_sentiment",
+            {}
+        ).items():
+
             women_sentiment_totals[sentiment] += count
         
         #date range
@@ -105,6 +132,8 @@ def aggregate(all_stats):
         "classification_totals": classification_totals,
         "topic_matrix": topic_matrix,
         "sentiment_matrix": sentiment_matrix,
+        "heart_tag_totals": heart_tag_totals,
+        "heart_sentiment_totals": heart_sentiment_totals,
         "women_total": women_total,
         "women_tag_totals": women_tag_totals,
         "women_sentiment_totals": women_sentiment_totals,
@@ -323,6 +352,56 @@ def print_summary(results):
             if women_sentiment_sum else 0
         )
         print(f"{sentiment}: {count} ({pct:.1f}%)")
+    
+    print_section("HEART VS WOMEN TAG COMPARISON")
+
+    heart_tag_totals = results["heart_tag_totals"]
+
+    top_compare_tags = sorted(
+        women_tag_totals.items(),
+        key=lambda x: x[1],
+        reverse=True,
+    )[:10]
+
+    for tag, women_count in top_compare_tags:
+        heart_count = heart_tag_totals.get(tag, 0)
+
+    print(
+        f"{tag}: "
+        f"heart={heart_count}, "
+        f"women={women_count}"
+    )
+
+    print_section(
+        "HEART VS WOMEN SENTIMENT"
+    )
+    heart_sentiment_totals = results[
+        "heart_sentiment_totals"
+    ]
+    all_sentiments = set(
+        heart_sentiment_totals.keys()
+    ).union(
+        women_sentiment_totals.keys()
+    )
+
+    for sentiment in all_sentiments:
+        heart_count = (
+            heart_sentiment_totals.get(
+                sentiment,
+                0
+            )
+        )
+        women_count = (
+            women_sentiment_totals.get(
+                sentiment,
+                0
+            )
+        )
+        print(
+            f"{sentiment}: "
+            f"heart={heart_count}, "
+            f"women={women_count}"
+        )
 
 #charts
 def create_topic_chart(topic_totals):
@@ -667,6 +746,236 @@ def create_sentiment_tag_heatmap(
 
     print(f"Saved chart: {path}")
 
+def create_tag_comparison_chart(
+    heart_tag_totals,
+    women_tag_totals
+):
+
+    top_tags = [
+        tag for tag, _ in sorted(
+            women_tag_totals.items(),
+            key=lambda x: x[1],
+            reverse=True,
+        )[:10]
+    ]
+
+    heart_values = [
+        heart_tag_totals.get(tag, 0)
+        for tag in top_tags
+    ]
+
+    women_values = [
+        women_tag_totals.get(tag, 0)
+        for tag in top_tags
+    ]
+
+    x = np.arange(len(top_tags))
+    width = 0.35
+
+    plt.figure(figsize=(12, 6))
+
+    plt.bar(
+        x - width / 2,
+        heart_values,
+        width,
+        label="Heart Health"
+    )
+
+    plt.bar(
+        x + width / 2,
+        women_values,
+        width,
+        label="Women's Heart Health"
+    )
+
+    plt.xticks(
+        x,
+        top_tags,
+        rotation=45,
+        ha="right"
+    )
+
+    plt.ylabel("Count")
+
+    plt.title(
+        "Heart vs Women's Heart Health Tags"
+    )
+
+    plt.legend()
+
+    plt.tight_layout()
+
+    path = (
+        CHART_DIR /
+        "heart_vs_women_tags.png"
+    )
+
+    plt.savefig(path)
+    plt.close()
+
+    print(f"Saved chart: {path}")
+
+def create_sentiment_comparison_chart(
+    heart_sentiment_totals,
+    women_sentiment_totals
+):
+
+    sentiments = [
+        "positive",
+        "neutral",
+        "negative"
+    ]
+
+    heart_values = [
+        heart_sentiment_totals.get(
+            s,
+            0
+        )
+        for s in sentiments
+    ]
+
+    women_values = [
+        women_sentiment_totals.get(
+            s,
+            0
+        )
+        for s in sentiments
+    ]
+
+    x = np.arange(len(sentiments))
+    width = 0.35
+
+    plt.figure(figsize=(8, 5))
+
+    plt.bar(
+        x - width / 2,
+        heart_values,
+        width,
+        label="Heart Health"
+    )
+
+    plt.bar(
+        x + width / 2,
+        women_values,
+        width,
+        label="Women's Heart Health"
+    )
+
+    plt.xticks(x, sentiments)
+
+    plt.ylabel("Count")
+
+    plt.title(
+        "Heart vs Women's Heart Health Sentiment"
+    )
+
+    plt.legend()
+
+    plt.tight_layout()
+
+    path = (
+        CHART_DIR /
+        "heart_vs_women_sentiment.png"
+    )
+
+    plt.savefig(path)
+    plt.close()
+
+    print(f"Saved chart: {path}")
+
+def create_women_tag_heatmap(all_stats):
+
+    sources = []
+    source_tag_data = {}
+
+    top_tags = set()
+
+    for entry in all_stats:
+
+        source = entry.get(
+            "source",
+            "Unknown"
+        )
+
+        women_subset = entry.get(
+            "women_subset",
+            {}
+        )
+
+        tags = women_subset.get(
+            "by_tags",
+            {}
+        )
+
+        if not tags:
+            continue
+
+        sources.append(source)
+
+        source_tag_data[source] = tags
+
+        for tag in tags:
+            top_tags.add(tag)
+
+    top_tags = list(top_tags)[:10]
+
+    matrix = []
+
+    for source in sources:
+
+        row = []
+
+        for tag in top_tags:
+
+            row.append(
+                source_tag_data[source].get(
+                    tag,
+                    0
+                )
+            )
+
+        matrix.append(row)
+
+    matrix = np.array(matrix)
+
+    plt.figure(figsize=(12, 7))
+
+    plt.imshow(
+        matrix,
+        aspect="auto",
+        cmap="Reds"
+    )
+
+    plt.colorbar(label="Count")
+
+    plt.xticks(
+        range(len(top_tags)),
+        top_tags,
+        rotation=45,
+        ha="right"
+    )
+
+    plt.yticks(
+        range(len(sources)),
+        sources
+    )
+
+    plt.title(
+        "Source × Women's Heart Health Tags"
+    )
+
+    plt.tight_layout()
+
+    path = (
+        CHART_DIR /
+        "women_tag_heatmap.png"
+    )
+
+    plt.savefig(path)
+    plt.close()
+
+    print(f"Saved chart: {path}")
+
 def main():
     all_stats = load_files()
 
@@ -712,6 +1021,20 @@ def main():
     create_sentiment_tag_heatmap(
         results["women_tag_totals"],
         results["women_sentiment_totals"]
+    )
+    
+    create_tag_comparison_chart(
+        results["heart_tag_totals"],
+        results["women_tag_totals"]
+    )
+
+    create_sentiment_comparison_chart(
+        results["heart_sentiment_totals"],
+        results["women_sentiment_totals"]
+    )
+
+    create_women_tag_heatmap(
+        all_stats
     )
 
     print("\nAnalysis complete.")

@@ -420,6 +420,15 @@ def create_stats(source_name: str) -> dict:
             "opinion/anecdotal": 0,
             "mixed": 0
         },
+        "heart_subset": {
+            "count": 0,
+            "by_tags": {},
+            "by_sentiment": {
+                "positive": 0,
+                "neutral": 0,
+                "negative": 0,
+            }
+        },
         
         "women_subset": {
             "count": 0,
@@ -482,6 +491,15 @@ def update_stats(
     # source classification
     if source_classification:
         stats["by_classification"][source_classification] += 1
+    
+    if topic == "heart_health":
+        stats["heart_subset"]["count"] += 1
+        for tag in tags:
+            stats["heart_subset"]["by_tags"][tag] = (
+                stats["heart_subset"]["by_tags"].get(tag, 0) + 1
+            )
+        if sentiment:
+            stats["heart_subset"]["by_sentiment"][sentiment] += 1
     
     # filter by womens heart health
     if topic == "women_heart_health":

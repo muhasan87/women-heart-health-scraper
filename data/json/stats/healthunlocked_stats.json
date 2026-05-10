@@ -1,36 +1,57 @@
 {
   "source": "Health Unlocked",
-  "total_examined": 300,
+  "total_examined": 298,
   "by_topic": {
-    "general_health": 205,
-    "heart_health": 92,
+    "general_health": 210,
+    "heart_health": 85,
     "women_heart_health": 3
   },
   "by_tags": {
-    "arrhythmia": 48,
+    "arrhythmia": 46,
     "heart_disease": 3,
-    "stroke": 3,
+    "stroke": 1,
     "cardiovascular": 19,
-    "diet": 12,
-    "exercise": 11,
+    "diet": 11,
+    "exercise": 9,
     "heart_attack": 4,
-    "chest_pain": 6,
-    "mental_health": 40,
-    "female_risk_factors": 9,
-    "hypertension": 12,
+    "chest_pain": 3,
+    "mental_health": 34,
+    "female_risk_factors": 10,
+    "hypertension": 8,
     "pregnancy": 1,
     "menopause": 37,
-    "cholesterol": 38
+    "cholesterol": 37
   },
   "by_sentiment": {
-    "positive": 51,
-    "neutral": 190,
-    "negative": 59
+    "positive": 52,
+    "neutral": 193,
+    "negative": 53
   },
   "by_classification": {
-    "factual": 300,
+    "factual": 298,
     "opinion/anecdotal": 0,
     "mixed": 0
+  },
+  "heart_subset": {
+    "count": 85,
+    "by_tags": {
+      "arrhythmia": 43,
+      "heart_disease": 3,
+      "stroke": 1,
+      "cardiovascular": 19,
+      "diet": 8,
+      "exercise": 5,
+      "heart_attack": 4,
+      "chest_pain": 1,
+      "mental_health": 6,
+      "hypertension": 8,
+      "cholesterol": 30
+    },
+    "by_sentiment": {
+      "positive": 30,
+      "neutral": 37,
+      "negative": 18
+    }
   },
   "women_subset": {
     "count": 3,
@@ -47,8 +68,8 @@
     }
   },
   "date_range": {
-    "earliest": "2025-03-23T19:09:26.000Z",
-    "latest": "2026-05-10T08:21:03.000Z"
+    "earliest": "2016-03-15T10:05:11.000Z",
+    "latest": "2026-05-10T23:03:08.000Z"
   },
   "by_section": {
     "Heart Failure Support": {
@@ -57,8 +78,8 @@
       "women_heart_health": 0
     },
     "Atrial Fibrillation Support": {
-      "general_health": 50,
-      "heart_health": 10,
+      "general_health": 54,
+      "heart_health": 6,
       "women_heart_health": 0
     },
     "Women's Health": {
@@ -72,8 +93,8 @@
       "women_heart_health": 0
     },
     "Cholesterol Support": {
-      "general_health": 23,
-      "heart_health": 34,
+      "general_health": 24,
+      "heart_health": 31,
       "women_heart_health": 3
     }
   }

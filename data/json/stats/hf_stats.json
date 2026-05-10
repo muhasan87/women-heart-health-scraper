@@ -31,6 +31,27 @@
     "opinion/anecdotal": 0,
     "mixed": 0
   },
+  "heart_subset": {
+    "count": 98,
+    "by_tags": {
+      "cardiovascular": 68,
+      "heart_disease": 87,
+      "heart_attack": 42,
+      "stroke": 32,
+      "diet": 19,
+      "cholesterol": 19,
+      "hypertension": 25,
+      "exercise": 25,
+      "mental_health": 6,
+      "chest_pain": 1,
+      "arrhythmia": 6
+    },
+    "by_sentiment": {
+      "positive": 24,
+      "neutral": 26,
+      "negative": 48
+    }
+  },
   "women_subset": {
     "count": 16,
     "by_tags": {

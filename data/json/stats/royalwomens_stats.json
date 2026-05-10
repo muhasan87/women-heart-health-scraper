@@ -32,6 +32,15 @@
     "opinion/anecdotal": 0,
     "mixed": 0
   },
+  "heart_subset": {
+    "count": 0,
+    "by_tags": {},
+    "by_sentiment": {
+      "positive": 0,
+      "neutral": 0,
+      "negative": 0
+    }
+  },
   "women_subset": {
     "count": 6,
     "by_tags": {

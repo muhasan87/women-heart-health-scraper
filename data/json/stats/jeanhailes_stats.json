@@ -32,6 +32,21 @@
     "opinion/anecdotal": 60,
     "mixed": 0
   },
+  "heart_subset": {
+    "count": 3,
+    "by_tags": {
+      "arrhythmia": 1,
+      "mental_health": 2,
+      "diet": 2,
+      "heart_disease": 2,
+      "cardiovascular": 1
+    },
+    "by_sentiment": {
+      "positive": 0,
+      "neutral": 0,
+      "negative": 3
+    }
+  },
   "women_subset": {
     "count": 47,
     "by_tags": {
