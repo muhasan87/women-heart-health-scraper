@@ -14,6 +14,10 @@ from common import (
     save_json,
     save_stats,
     now_iso,
+    create_stats,
+    add_section,
+    analyse_sentiment,
+    update_stats,
     CHART_DIR,
 )
 
@@ -80,10 +84,6 @@ def extract_mentions(caption: str) -> list[str]:
 
 
 def clean_caption(caption: str) -> str:
-    """
-    Remove hashtag and mention blocks that typically appear at the end of
-    Instagram captions, keeping the readable body text.
-    """
     if not caption:
         return ""
 
@@ -102,7 +102,6 @@ def clean_caption(caption: str) -> str:
 
 
 def extract_summary(content: str) -> str:
-    """First sentence of the cleaned caption."""
     if not content:
         return ""
     # Split on sentence-ending punctuation
@@ -118,11 +117,6 @@ def infer_media_type(post: instaloader.Post) -> str:
     }
     return type_map.get(post.typename, "image")
 
-
-# ---------------------------------------------------------------------------
-# Record builder
-# ---------------------------------------------------------------------------
-
 def build_post_record(
     post: instaloader.Post,
     item_id: str,
@@ -135,7 +129,6 @@ def build_post_record(
     content  = clean_caption(raw_caption)
     summary  = extract_summary(content)
 
-    # Use first line of caption as a pseudo-title (Instagram has no titles)
     first_line = content.split(".")[0].strip() if content else ""
     title      = first_line[:120] if first_line else None
 
@@ -174,22 +167,10 @@ def build_post_record(
         "language": "en",
     }
 
-
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
-
 def main() -> None:
     records: list[dict] = []
-    stats: dict[str, dict[str, int]] = {
-        s["name"]: {"general": 0, "heart": 0, "women_heart": 0}
-        for s in SECTIONS
-    }
-    topic_map = {
-        "general_health":     "general",
-        "heart_health":       "heart",
-        "women_heart_health": "women_heart",
-    }
+    stats = create_stats("Women's Heart Alliance")
+    topics = ["general_health", "heart_health", "women_heart_health"]
 
     loader = get_loader()
 
@@ -230,54 +211,47 @@ def main() -> None:
 
             print(f"  Caption preview: {(record['content'] or '')[:80]}...")
 
-            topic = classify_topic(record["title"] or "", record["content"] or "")
-            stats[section_name][topic_map[topic]] += 1
+            topic = classify_topic(post["title"] or "", post["content"] or "")
+            tags = extract_tags(f"{post['title'] or ''} {post['content'] or ''}")
+            sentiment = analyse_sentiment(post["content"] or "")
+            update_stats(
+                stats,
+                topic=topic,
+                tags=tags,
+                sentiment=sentiment,
+                source_classification=post["source_classification"],
+                publish_time=post["publish_time"]
+            )
 
             if topic == "women_heart_health":
                 records.append(record)
 
-            # Instaloader has built-in rate limiting, but an extra small
-            # delay helps avoid triggering Instagram's request throttling.
             time.sleep(1.5)
 
-    # ------------------------------------------------------------------
-    # Persist results
-    # ------------------------------------------------------------------
     if records:
         save_json(records, "womensheartalliance.json")
         print(f"\nSaved {len(records)} posts to womensheartalliance.json")
     else:
         print("\nNo women's heart health posts found.")
 
-    save_stats({"source": "Women's Heart Alliance", "sections": stats},
-               "womensheartalliance_stats.json")
+    save_stats(stats, "ig_wha_stats.json")
 
-    # ------------------------------------------------------------------
-    # Summary table
-    # ------------------------------------------------------------------
-    topics = ["general", "heart", "women_heart"]
     print("\nScraping Summary:")
-    for section_name, counts in stats.items():
-        total = sum(counts.values())
-        if total == 0:
-            continue
-        print(f"\n{section_name.upper()}")
-        for k, v in counts.items():
-            pct = (v / total) * 100
-            print(f"  {k}: {v} ({pct:.1f}%)")
+    total = sum(stats["by_topic"].values())
+    if total > 0:
+        for topic, count in stats["by_topic"].items():
+            pct = (count / total) * 100
+            print(f"{topic}: {count} ({pct:.1f}%)")
 
-    # ------------------------------------------------------------------
-    # Chart
-    # ------------------------------------------------------------------
-    ig_vals = [stats["instagram_posts"][t] for t in topics]
-    x = np.arange(len(topics))
+    labels = ["General Health", "Heart Health", "Women's Heart Health"]
+    values = [stats["by_topic"][t] for t in topics]
 
     plt.figure()
-    plt.bar(x, ig_vals, color=["#4C9BE8", "#E07B54", "#6DBF7E"])
-    plt.xticks(x, ["General Health", "Heart Health", "Women's Heart Health"])
-    plt.title("Women's Heart Alliance — Instagram Topic Distribution")
+    plt.bar(labels, values)
+    plt.xticks(["General Health", "Heart Health", "Women's Heart Health"])
+    plt.title("Instagram @womensheartalliance Topic Distribution")
     plt.xlabel("Topic")
-    plt.ylabel("Number of Posts")
+    plt.ylabel("Number of Articles")
     plt.tight_layout()
 
     timestamp  = datetime.now().strftime("%Y%m%d_%H%M")
@@ -286,18 +260,12 @@ def main() -> None:
     plt.close()
     print(f"Chart saved to: {chart_path}")
 
-    # ------------------------------------------------------------------
-    # Overall coverage
-    # ------------------------------------------------------------------
-    total_all            = sum(sum(s.values()) for s in stats.values())
-    overall_womens_heart = sum(stats[s]["women_heart"] for s in stats)
-
+    total_all = stats["total_examined"]
+    overall_womens_heart = stats["by_topic"]["women_heart_health"]
+    
     print("\n=== Overall Coverage ===")
-    print(f"Total posts: {total_all}")
-    if total_all:
-        pct = (overall_womens_heart / total_all) * 100
-        print(f"Women's heart health: {overall_womens_heart} ({pct:.1f}%)")
-
+    print(f"Total articles: {total_all}")
+    print(f"Women's heart health: {overall_womens_heart} ({(overall_womens_heart/total_all)*100:.1f}%)")
 
 if __name__ == "__main__":
     main()
