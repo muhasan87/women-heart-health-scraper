@@ -246,6 +246,7 @@ def main() -> None:
     plt.title("Heart Foundation Topic Distribution")
     plt.xlabel("Topic")
     plt.ylabel("Number of Articles")
+    plt.legend()
     plt.tight_layout()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
