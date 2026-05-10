@@ -1,0 +1,39 @@
+{
+  "source": "Royal Womens Hospital",
+  "total_examined": 79,
+  "by_topic": {
+    "general_health": 73,
+    "heart_health": 0,
+    "women_heart_health": 6
+  },
+  "by_tags": {
+    "diet": 4,
+    "female_risk_factors": 79,
+    "pregnancy": 36,
+    "mental_health": 13,
+    "cardiovascular": 3,
+    "cholesterol": 1,
+    "heart_attack": 2,
+    "heart_disease": 1,
+    "hypertension": 3,
+    "menopause": 7,
+    "stroke": 2,
+    "chest_pain": 1,
+    "arrhythmia": 1,
+    "exercise": 1
+  },
+  "by_sentiment": {
+    "positive": 52,
+    "neutral": 15,
+    "negative": 12
+  },
+  "by_classification": {
+    "factual": 79,
+    "opinion/anecdotal": 0,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": null,
+    "latest": null
+  }
+}

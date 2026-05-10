@@ -1,10 +1,3 @@
-"""
-scrape_royalwomens.py
-Scrapes news and health information from The Royal Women's Hospital (Melbourne).
-URL: https://www.thewomens.org.au/news (paginated) +
-     https://www.thewomens.org.au/health-information
-"""
-
 import matplotlib.pyplot as plt
 from datetime import datetime
 
@@ -18,6 +11,12 @@ from common import (
     get_soup,
     save_json,
     now_iso,
+    extract_tags,
+    save_stats,
+    create_stats,
+    add_section,
+    analyse_sentiment,
+    update_stats,
     CHART_DIR,
 )
 
@@ -25,7 +24,7 @@ LISTING_URL = "https://www.thewomens.org.au/news"
 HEALTH_INFO_URL = "https://www.thewomens.org.au/health-information"
 BASE_DOMAIN = "https://www.thewomens.org.au"
 MAX_PAGES = 10
-MAX_ARTICLES = 200
+MAX_ARTICLES = 300
 
 
 def build_page_url(page: int) -> str:
@@ -172,6 +171,8 @@ def build_article_record(article_url: str, item_id: str) -> dict:
     author = extract_author_generic(soup)
     publish_time = extract_publish_time_generic(soup)
     content, summary = extract_content_and_summary(soup, title or "")
+    content_for_tags = f"{title or ''} {content or ''}"
+    tags = extract_tags(content_for_tags)
 
     content_type = "article" if "/news/" in article_url else "guide"
 
@@ -189,7 +190,7 @@ def build_article_record(article_url: str, item_id: str) -> dict:
         "author_type": "organisation" if author else None,
         "publish_time": publish_time or None,
         "scrape_time": now_iso(),
-        "tags": [],
+        "tags": tags,
         "hashtags": [],
         "mentions": [],
         "engagement": {
@@ -212,9 +213,10 @@ def main() -> None:
         return
 
     records = []
-    general_count = 0
-    heart_count = 0
-    women_heart_count = 0
+    stats = create_stats("Royal Womens Hospital")
+    topics = ["general_health", "heart_health", "women_heart_health"]
+
+    #total_examined = 0
 
     for index, link in enumerate(links[:MAX_ARTICLES], start=1):
         print(f"\nChecking article {index}: {link}")
@@ -224,17 +226,29 @@ def main() -> None:
         except Exception as error:
             print(f"Error reading article: {error}")
             continue
-
+        
         print("Title:", article["title"])
-
         topic = classify_topic(article["title"] or "", article["content"] or "")
+        tags = extract_tags(f"{article['title'] or ''} {article['content'] or ''}")
+        sentiment = analyse_sentiment(article["content"] or "")
+        update_stats(
+            stats,
+            topic=topic,
+            tags=tags,
+            sentiment=sentiment,
+            source_classification=article["source_classification"],
+            publish_time=article["publish_time"]
+        )
+        #total_examined += 1
+        #topic = classify_topic(article["title"] or "", article["content"] or "")
 
-        if topic == "general_health":
-            general_count += 1
-        elif topic == "heart_health":
-            heart_count += 1
-        elif topic == "women_heart_health":
-            women_heart_count += 1
+        #if topic == "general_health":
+            #stats["general_health"] += 1
+        #elif topic == "heart_health":
+            #stats["heart_health"] += 1
+        #elif topic == "women_heart_health":
+            #stats["women_heart_health"] += 1
+        if topic == "women_heart_health":
             records.append(article)
 
     if records:
@@ -243,21 +257,24 @@ def main() -> None:
     else:
         print("\nNo women's heart health articles found.")
 
+    save_stats(stats, "royalwomens_stats.json")
+    
     print("\nScraping Summary:")
-    print(f"Total examined: {general_count + heart_count + women_heart_count}")
-    print(f"General health: {general_count}")
-    print(f"Heart health: {heart_count}")
-    print(f"Women's heart health: {women_heart_count}")
-
-    labels = ["general_health", "heart_health", "women_heart_health"]
-    values = [general_count, heart_count, women_heart_count]
+    total = sum(stats["by_topic"].values())
+    if total > 0:
+        for topic, count in stats["by_topic"].items():
+            pct = (count / total) * 100
+            print(f"{topic}: {count} ({pct:.1f}%)")
+    
+    labels = ["General Health", "Heart Health", "Women's Heart Health"]
+    values = [stats["by_topic"][t] for t in topics]
 
     plt.figure()
     plt.bar(labels, values)
-    plt.title("Royal Women's Hospital Article Summary")
-    plt.xlabel("Category")
+    plt.xticks(["General Health", "Heart Health", "Women's Heart Health"])
+    plt.title("Royal Women's Hospital Topic Distribution")
+    plt.xlabel("Topic")
     plt.ylabel("Number of Articles")
-    plt.xticks(rotation=20)
     plt.tight_layout()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
@@ -265,7 +282,13 @@ def main() -> None:
     plt.savefig(chart_path)
     plt.close()
     print(f"Chart saved to: {chart_path}")
+    
+    total_all = stats["total_examined"]
+    overall_womens_heart = stats["by_topic"]["women_heart_health"]
 
+    print("\n=== Overall Coverage ===")
+    print(f"Total articles: {total_all}")
+    print(f"Women's heart health: {overall_womens_heart} ({(overall_womens_heart/total_all)*100:.1f}%)")
 
 if __name__ == "__main__":
     main()
