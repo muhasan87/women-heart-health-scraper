@@ -1,0 +1,35 @@
+{
+  "source": "Reddit r/WomensHealth",
+  "total_examined": 88,
+  "by_topic": {
+    "general_health": 85,
+    "heart_health": 0,
+    "women_heart_health": 3
+  },
+  "by_tags": {
+    "chest_pain": 6,
+    "cholesterol": 1,
+    "mental_health": 14,
+    "female_risk_factors": 11,
+    "arrhythmia": 1,
+    "exercise": 4,
+    "pregnancy": 6,
+    "menopause": 2,
+    "hypertension": 2,
+    "diet": 2
+  },
+  "by_sentiment": {
+    "positive": 10,
+    "neutral": 53,
+    "negative": 25
+  },
+  "by_classification": {
+    "factual": 0,
+    "opinion/anecdotal": 88,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": "2026-05-08T13:01:53+00:00",
+    "latest": "2026-05-10T06:42:22+00:00"
+  }
+}
