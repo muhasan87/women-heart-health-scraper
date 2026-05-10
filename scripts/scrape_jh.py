@@ -4,6 +4,7 @@ import time
 import matplotlib.pyplot as plt
 from datetime import datetime, timezone
 import numpy as np
+from collections import defaultdict
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -19,8 +20,13 @@ from common import (
     extract_title_generic,
     extract_tags,
     normalise_text,
+    save_stats,
     save_json,
     now_iso,
+    create_stats,
+    add_section,
+    analyse_sentiment,
+    update_stats,
     CHART_DIR,
 )
 
@@ -312,19 +318,25 @@ def build_article_record(
 
 def main() -> None:
     records = []
-    stats = {
-        "news": {"general": 0, "heart": 0, "women_heart": 0},
-        "stories": {"general": 0, "heart": 0, "women_heart": 0},
-    }
+    stats = create_stats("Jean Hailes")
+    add_section(stats, "news")
+    add_section(stats, "stories")
+    ####
+    #stats = {
+        #"news": {"general_health": 0, "heart_health": 0, "women_heart_health": 0},
+        #"stories": {"general_health": 0, "heart_health": 0, "women_heart_health": 0},
+    #}
     
-    topics = ["general", "heart", "women_heart"]
+    topics = ["general_health", "heart_health", "women_heart_health"]
+    #tag_totals = defaultdict(int)
 
     driver = get_driver()
-    topic_map = {
-        "general_health": "general",
-        "heart_health": "heart",
-        "women_heart_health": "women_heart",
-    }
+    ####
+    #topic_map = {
+        #"general_health": "general_health",
+        #"heart_health": "heart_health",
+        #"women_heart_health": "women_heart_health",
+    #}
 
     try:
         for section in SECTIONS:
@@ -351,15 +363,33 @@ def main() -> None:
                         section["content_type"],
                         section["source_classification"],
                     )
+                    ####
+                    #content_for_tags = f"{article['title'] or ''} {article['content'] or ''}"
+                    #tags = extract_tags(content_for_tags)
+
+                    #for tag in tags:
+                        #tag_totals[tag] += 1
                 except Exception as error:
                     print(f"  Error reading article: {error}")
                     continue
 
                 print(f"  Title: {article['title']}")
 
+                ####
                 section_name = section["name"]
                 topic = classify_topic(article["title"] or "", article["content"] or "")
-                stats[section_name][topic_map[topic]] += 1
+                tags = extract_tags(f"{article['title'] or ''} {article['content'] or ''}")
+                sentiment = analyse_sentiment(article["content"] or "")
+                update_stats(
+                    stats,
+                    topic=topic,
+                    tags=tags,
+                    sentiment=sentiment,
+                    source_classification=section["source_classification"],
+                    section=section_name,
+                    publish_time=article["publish_time"]
+                )
+                #stats[section_name][topic_map[topic]] += 1
                 if topic == "women_heart_health":
                     records.append(article)
 
@@ -371,10 +401,28 @@ def main() -> None:
         print(f"\nSaved {len(records)} articles to jeanhailes.json")
     else:
         print("\nNo women's heart health articles found.")
+    
+    ####
+    save_stats(stats, "jeanhailes_stats.json")
+    
+    #save_stats(
+        #{
+            #"source": "Jean Hailes",
+            #"total_examined": sum(sum(s.values()) for s in stats.values()),
+            #"by_section": stats,
+            #"by_topic": {
+                #"general_health": sum(stats[s]["general_health"] for s in stats),
+                #"heart_health": sum(stats[s]["heart_health"] for s in stats),
+                #"women_heart_health": sum(stats[s]["women_heart_health"] for s in stats),
+            #},
+            #"by_tags": dict(tag_totals)
+        #},
+        #"jeanhailes_stats.json",
+    #)
 
     print("\nScraping Summary:")
-
-    for section_name, counts in stats.items():
+    ####
+    for section_name, counts in stats["by_section"].items():
         total = sum(counts.values())
         if total == 0:
             continue
@@ -384,8 +432,8 @@ def main() -> None:
             pct = (v / total) * 100
             print(f"  {k}: {v} ({pct:.1f}%)")
 
-    news_vals = [stats["news"][t] for t in topics]
-    stories_vals = [stats["stories"][t] for t in topics]
+    news_vals = [stats["by_section"]["news"][t] for t in topics]
+    stories_vals = [stats["by_section"]["stories"][t] for t in topics]
 
     x = np.arange(len(topics))
 
@@ -408,9 +456,9 @@ def main() -> None:
     plt.close()
     print(f"Chart saved to: {chart_path}")
     
-    total_all = sum(sum(s.values()) for s in stats.values())
-
-    overall_womens_heart = sum(stats[s]["women_heart"] for s in stats)
+    ####
+    total_all = stats["total_examined"]
+    overall_womens_heart = stats["by_topic"]["women_heart_health"]
 
     print("\n=== Overall Coverage ===")
     print(f"Total articles: {total_all}")
