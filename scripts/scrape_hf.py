@@ -19,6 +19,12 @@ from common import (
     extract_summary_from_paragraphs,
     extract_title_generic,
     extract_tags,
+    save_stats,
+    save_json,
+    create_stats,
+    add_section,
+    analyse_sentiment,
+    update_stats,
     get_soup,
     save_json,
     now_iso,
@@ -146,7 +152,6 @@ def build_article_record(article_url: str, item_id: str) -> dict:
     publish_time = extract_publish_time_generic(soup)
     content, summary = extract_content_and_summary(soup, title or "")
 
-    # ✅ TAGS ADDED HERE
     text_for_tags = f"{title or ''} {content or ''}"
     tags = extract_tags(text_for_tags)
 
@@ -164,12 +169,8 @@ def build_article_record(article_url: str, item_id: str) -> dict:
         "author_type": "organisation" if author else None,
         "publish_time": publish_time or None,
         "scrape_time": now_iso(),
-
-        # ✅ UPDATED FIELD
         "tags": tags,
-
         "hashtags": [],
-        "mentions": [],
         "engagement": {
             "likes": None,
             "comments": None,
@@ -190,9 +191,8 @@ def main() -> None:
         return
 
     records = []
-    general_count = 0
-    heart_count = 0
-    women_heart_count = 0
+    stats = create_stats("Heart Foundation")
+    topics = ["general_health", "heart_health", "women_heart_health"]
 
     for index, link in enumerate(links[:MAX_ARTICLES], start=1):
         print(f"\nChecking article {index}: {link}")
@@ -205,14 +205,20 @@ def main() -> None:
 
         print("Title:", article["title"])
 
+        #topic = classify_topic(article["title"] or "", article["content"] or "")
         topic = classify_topic(article["title"] or "", article["content"] or "")
-
-        if topic == "general_health":
-            general_count += 1
-        elif topic == "heart_health":
-            heart_count += 1
-        elif topic == "women_heart_health":
-            women_heart_count += 1
+        tags = extract_tags(f"{article['title'] or ''} {article['content'] or ''}")
+        sentiment = analyse_sentiment(article["content"] or "")
+        update_stats(
+            stats,
+            topic=topic,
+            tags=tags,
+            sentiment=sentiment,
+            source_classification=article["source_classification"],
+            publish_time=article["publish_time"]
+        )
+        
+        if topic == "women_heart_health":
             records.append(article)
 
     if records:
@@ -221,24 +227,25 @@ def main() -> None:
     else:
         print("\nNo women's heart health articles found.")
 
-    total_examined = general_count + heart_count + women_heart_count
+    save_stats(stats, "hf_stats.json")
+    #total_examined = general_count + heart_count + women_heart_count
 
     print("\nScraping Summary:")
-    print(f"Total examined: {total_examined}")
-    print(f"General health: {general_count}")
-    print(f"Heart health: {heart_count}")
-    print(f"Women's heart health: {women_heart_count}")
-    print(f"Women's heart health %: {(women_heart_count / total_examined * 100) if total_examined else 0:.1f}%")
+    total = sum(stats["by_topic"].values())
+    if total > 0:
+        for topic, count in stats["by_topic"].items():
+            pct = (count / total) * 100
+            print(f"{topic}: {count} ({pct:.1f}%)")
 
-    labels = ["general_health", "heart_health", "women_heart_health"]
-    values = [general_count, heart_count, women_heart_count]
+    labels = ["General Health", "Heart Health", "Women's Heart Health"]
+    values = [stats["by_topic"][t] for t in topics]
 
     plt.figure()
     plt.bar(labels, values)
-    plt.title("Heart Foundation Article Summary")
-    plt.xlabel("Category")
+    plt.xticks(["General Health", "Heart Health", "Women's Heart Health"])
+    plt.title("Heart Foundation Topic Distribution")
+    plt.xlabel("Topic")
     plt.ylabel("Number of Articles")
-    plt.xticks(rotation=20)
     plt.tight_layout()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
@@ -247,6 +254,13 @@ def main() -> None:
     plt.close()
 
     print(f"Chart saved to: {chart_path}")
+    
+    total_all = stats["total_examined"]
+    overall_womens_heart = stats["by_topic"]["women_heart_health"]
+    
+    print("\n=== Overall Coverage ===")
+    print(f"Total articles: {total_all}")
+    print(f"Women's heart health: {overall_womens_heart} ({(overall_womens_heart/total_all)*100:.1f}%)")
 
 
 if __name__ == "__main__":

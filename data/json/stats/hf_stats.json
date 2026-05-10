@@ -1,0 +1,38 @@
+{
+  "source": "Heart Foundation",
+  "total_examined": 118,
+  "by_topic": {
+    "general_health": 4,
+    "heart_health": 98,
+    "women_heart_health": 16
+  },
+  "by_tags": {
+    "cardiovascular": 80,
+    "heart_disease": 103,
+    "heart_attack": 47,
+    "stroke": 39,
+    "diet": 23,
+    "cholesterol": 22,
+    "hypertension": 27,
+    "exercise": 28,
+    "female_risk_factors": 16,
+    "mental_health": 7,
+    "menopause": 1,
+    "chest_pain": 2,
+    "arrhythmia": 6
+  },
+  "by_sentiment": {
+    "positive": 37,
+    "neutral": 26,
+    "negative": 55
+  },
+  "by_classification": {
+    "factual": 118,
+    "opinion/anecdotal": 0,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": null,
+    "latest": null
+  }
+}

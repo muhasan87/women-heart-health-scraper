@@ -12,13 +12,12 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:35:54.450129+00:00",
+    "scrape_time": "2026-05-10T06:31:31.134311+00:00",
     "tags": [
-      "heart_disease",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -41,14 +40,14 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:35:54.972117+00:00",
+    "scrape_time": "2026-05-10T06:31:31.868823+00:00",
     "tags": [
-      "heart_disease",
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease",
+      "mental_health"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -71,18 +70,17 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:35:57.618735+00:00",
+    "scrape_time": "2026-05-10T06:31:34.841397+00:00",
     "tags": [
-      "heart_disease",
-      "stroke",
-      "hypertension",
-      "cholesterol",
       "cardiovascular",
+      "cholesterol",
+      "female_risk_factors",
+      "heart_disease",
+      "hypertension",
       "menopause",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -105,14 +103,13 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:10.635586+00:00",
+    "scrape_time": "2026-05-10T06:31:49.715175+00:00",
     "tags": [
-      "heart_disease",
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -135,16 +132,15 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:12.984744+00:00",
+    "scrape_time": "2026-05-10T06:31:50.789703+00:00",
     "tags": [
-      "heart_attack",
-      "heart_disease",
-      "chest_pain",
       "cardiovascular",
-      "female_risk_factors"
+      "chest_pain",
+      "female_risk_factors",
+      "heart_attack",
+      "heart_disease"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -167,15 +163,14 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:14.961101+00:00",
+    "scrape_time": "2026-05-10T06:31:51.886250+00:00",
     "tags": [
-      "heart_attack",
-      "heart_disease",
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_attack",
+      "heart_disease"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -198,15 +193,14 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:16.261895+00:00",
+    "scrape_time": "2026-05-10T06:31:52.870780+00:00",
     "tags": [
-      "heart_disease",
-      "stroke",
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease",
+      "stroke"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -229,15 +223,14 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:17.144953+00:00",
+    "scrape_time": "2026-05-10T06:31:54.102433+00:00",
     "tags": [
-      "heart_attack",
-      "heart_disease",
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_attack",
+      "heart_disease"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -260,14 +253,13 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:19.059992+00:00",
+    "scrape_time": "2026-05-10T06:31:57.550168+00:00",
     "tags": [
-      "heart_disease",
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -290,15 +282,14 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:22.671745+00:00",
+    "scrape_time": "2026-05-10T06:32:01.240983+00:00",
     "tags": [
-      "heart_disease",
-      "stroke",
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease",
+      "stroke"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -321,15 +312,14 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:26.814602+00:00",
+    "scrape_time": "2026-05-10T06:32:06.158387+00:00",
     "tags": [
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -352,14 +342,14 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:28.965976+00:00",
+    "scrape_time": "2026-05-10T06:32:08.875932+00:00",
     "tags": [
+      "exercise",
+      "female_risk_factors",
       "heart_disease",
-      "stroke",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -382,16 +372,16 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:33.463851+00:00",
+    "scrape_time": "2026-05-10T06:32:14.860049+00:00",
     "tags": [
-      "heart_disease",
-      "hypertension",
-      "cholesterol",
       "cardiovascular",
-      "female_risk_factors"
+      "cholesterol",
+      "exercise",
+      "female_risk_factors",
+      "heart_disease",
+      "hypertension"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -414,15 +404,16 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:42.618433+00:00",
+    "scrape_time": "2026-05-10T06:32:25.493127+00:00",
     "tags": [
-      "heart_disease",
-      "stroke",
       "cardiovascular",
-      "female_risk_factors"
+      "diet",
+      "exercise",
+      "female_risk_factors",
+      "heart_disease",
+      "stroke"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -445,17 +436,16 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:52.406261+00:00",
+    "scrape_time": "2026-05-10T06:32:34.779068+00:00",
     "tags": [
+      "cardiovascular",
+      "cholesterol",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "cholesterol",
-      "cardiovascular",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
@@ -478,13 +468,12 @@
     "author": null,
     "author_type": null,
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:36:53.331150+00:00",
+    "scrape_time": "2026-05-10T06:32:36.361096+00:00",
     "tags": [
-      "heart_disease",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease"
     ],
     "hashtags": [],
-    "mentions": [],
     "engagement": {
       "likes": null,
       "comments": null,
