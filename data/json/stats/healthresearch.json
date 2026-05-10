@@ -1,0 +1,51 @@
+{
+  "source": "Heart Research Australia",
+  "total_examined": 45,
+  "by_topic": {
+    "general_health": 15,
+    "heart_health": 26,
+    "women_heart_health": 4
+  },
+  "by_tags": {
+    "cardiovascular": 21,
+    "chest_pain": 5,
+    "exercise": 9,
+    "heart_attack": 15,
+    "mental_health": 7,
+    "heart_disease": 13,
+    "stroke": 6,
+    "cholesterol": 3,
+    "diet": 4,
+    "hypertension": 5,
+    "arrhythmia": 5,
+    "female_risk_factors": 4,
+    "menopause": 2,
+    "pregnancy": 2
+  },
+  "by_sentiment": {
+    "positive": 3,
+    "neutral": 31,
+    "negative": 11
+  },
+  "by_classification": {
+    "factual": 45,
+    "opinion/anecdotal": 0,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": "2018-05-31T12:05:32+00:00",
+    "latest": "2026-02-12T03:56:13+00:00"
+  },
+  "by_section": {
+    "informative": {
+      "general_health": 1,
+      "heart_health": 16,
+      "women_heart_health": 3
+    },
+    "research": {
+      "general_health": 14,
+      "heart_health": 10,
+      "women_heart_health": 1
+    }
+  }
+}
