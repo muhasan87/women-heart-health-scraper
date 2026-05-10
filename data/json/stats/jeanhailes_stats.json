@@ -1,0 +1,51 @@
+{
+  "source": "Jean Hailes",
+  "total_examined": 285,
+  "by_topic": {
+    "general_health": 235,
+    "heart_health": 3,
+    "women_heart_health": 47
+  },
+  "by_tags": {
+    "female_risk_factors": 240,
+    "mental_health": 102,
+    "menopause": 118,
+    "pregnancy": 61,
+    "exercise": 50,
+    "diet": 57,
+    "cholesterol": 11,
+    "cardiovascular": 24,
+    "chest_pain": 23,
+    "heart_attack": 15,
+    "heart_disease": 37,
+    "hypertension": 17,
+    "stroke": 14,
+    "arrhythmia": 6
+  },
+  "by_sentiment": {
+    "positive": 121,
+    "neutral": 74,
+    "negative": 90
+  },
+  "by_classification": {
+    "factual": 225,
+    "opinion/anecdotal": 60,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": "2016-03-15T00:00:00.000Z",
+    "latest": "2026-05-06T00:00:00.000Z"
+  },
+  "by_section": {
+    "news": {
+      "general_health": 180,
+      "heart_health": 3,
+      "women_heart_health": 42
+    },
+    "stories": {
+      "general_health": 55,
+      "heart_health": 0,
+      "women_heart_health": 5
+    }
+  }
+}

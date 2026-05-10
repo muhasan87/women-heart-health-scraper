@@ -1,33 +1,5 @@
 [
   {
-    "id": "jh_news_019",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/national-survey-reveals-many-women-believe-common-myths-about-what-causes-miscarriage/",
-    "title": "National survey reveals many women believe common myths about what causes miscarriage",
-    "content": "The survey, conducted by Jean Hailes for Women’s Health in partnership with the Pink Elephants Support Network and Early Pregnancy Loss Coalition , found that many women still believe common myths about miscarriage.\nSignificant proportions of women incorrectly thought that lifting something heavy (61%), using birth control in the past (27%), having sex during pregnancy (8%) or eating spicy food (7%) could cause miscarriage. Most women (95%) correctly identified chromosomal abnormalities in the fetus as a common cause of early pregnancy loss. Similarly, most women (78%) recognised that smoking can increase the risk.\n“It is heartbreaking that some, and perhaps many, women are carrying misplaced guilt on top of the grief,” said Dr Sarah White, CEO of Jean Hailes for Women’s Health.\n“There are two really important reasons for action to dispel myths around early pregnancy loss. Firstly, we don’t want guilt or blame to add to what is already a devastating experience for families. Secondly, we want women to be able to make health and life decisions that are based on accurate knowledge and not fear.”\nThe survey also revealed almost 4 in 10 women in Australia who have been pregnant have experienced at least one miscarriage before 20 weeks’ gestation. Despite early pregnancy loss being a common experience, many women are not given adequate information or referred to support services after their loss.\n“At Pink Elephants we see too many women blaming themselves for their miscarriage, the false narratives and myths that surround pregnancy loss dangerously disenfranchise our community’s bereavement experience,” said Sam Payne, CEO of Pink Elephants Support Network.\n“These important insights will help us to challenge the myths and finally remove them from the experience because women need to hear it’s not your fault that you lost your baby to miscarriage.”\nIsabelle Oderberg, founder of the Early Pregnancy Loss Coalition, agreed that urgent action is needed.\n“This data shows miscarriage is clearly far higher than the long-held, outdated, guesstimate of one in three or one in four,” she said.\n“Early pregnancy loss is a significant public health issue, with systemic support and education persisting at shameful levels that are far lower than what is needed for families; we need greater investment in research, services and education.”\nRead Australian women’s perceptions about the causes of early pregnancy loss report\nRead Early Pregnancy Loss in Australian women report",
-    "summary": "New findings from the 2025 National Women’s Health Survey reveal widespread misconceptions about the causes of early pregnancy loss (or miscarriage), potentially exposing women to misplaced guilt.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2025-10-16T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:21:38.424695+00:00",
-    "tags": [
-      "pregnancy",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
     "id": "jh_news_023",
     "source": "Jean Hailes",
     "source_category": "website",
@@ -40,43 +12,16 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2025-08-31T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:21:46.478376+00:00",
+    "scrape_time": "2026-05-10T04:45:10.760117+00:00",
     "tags": [
+      "cardiovascular",
+      "chest_pain",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
       "hypertension",
-      "chest_pain",
-      "cardiovascular",
       "menopause",
-      "pregnancy",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_026",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/new-medical-illustrations-put-diversity-and-accessibility-at-the-heart-of-womens-health/",
-    "title": "New medical illustrations put diversity and accessibility at the heart of women’s health",
-    "content": "The project, launched in 2025, includes medical diagrams and accompanying illustrations of women from a range of ethnic backgrounds. It’s just one of the ways we’re making our health content more inclusive, culturally sensitive and easy to understand.\nAlex Clark, who manages the Jean Hailes design team, said the illustrations were created to meet the needs of a broader audience.\n“In the past, we used stock imagery or project-specific illustrations that looked inconsistent across our materials,” said Alex. “We wanted to change this to a cohesive style that used plain language and was easy for everyone to understand.”\n“A key focus of the project was ensuring the illustrations felt hand-drawn and natural – and that they represented diverse body shapes and ages,” explains Alex.\nTo ensure the illustrations are culturally appropriate, we worked closely with Ethnolink – Australia’s leading multicultural translation service – to engage with Arabic, Vietnamese and Punjabi communities. The feedback from these consultation sessions led to refinements in the illustrations.\n“Community members asked for more variety in skin colours, body shapes and even details like hairstyles and makeup,” Alex said. “In the Lebanese community, for instance, women helped us adjust the way the hijab was illustrated to better reflect their traditions.”\nWe also wanted to avoid highly medicalised imagery that can be intimidating or alienating. Unlike traditional clinical diagrams, our new illustrations show complete bodies rather than isolated body parts – helping our audience better understand anatomy and health in context.\n“We learned through consultations that floating body parts can be confusing or even confronting,” Alex explained. “For example, some people thought a diagram of the uterus placed inside the body resembled other shapes entirely. It showed us how important it is to test assumptions and listen to communities.”\nThe project is also built to evolve. The illustrations are editable, so words can be changed – such as switching ‘uterus’ to ‘womb’ – depending on community preferences. As we continue to expand our work with different cultural groups, further consultation and updates are planned.\nThe new illustrations are now live across our website and resources, helping to build women’s confidence and knowledge around their health and health care.",
-    "summary": "Jean Hailes for Women’s Health has launched a new series of medical illustrations, designed to better reflect the diversity of women in Australia and make health information more accessible to all.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2025-07-23T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:21:50.731958+00:00",
-    "tags": [
-      "female_risk_factors"
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -101,38 +46,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2025-02-12T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:22:00.364019+00:00",
+    "scrape_time": "2026-05-10T04:45:23.800600+00:00",
     "tags": [
       "cardiovascular",
-      "menopause",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_037",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/sisterhood-foundation-partnership-gamechanger-for-womens-health/",
-    "title": "Sisterhood Foundation partnership “gamechanger” for women’s health",
-    "content": "The Sisterhood Foundation has raised more than $10 million over 13 years, with its purpose being to hear, acknowledge and address the unique health issues impacting women by building capability in frontline charities, including Jean Hailes for Women’s Health.\nDr. Sarah White says the partnership and capability grant from the Sisterhood Foundation will be a gamechanger for all women who want access to practical, usable health information tailored to their unique circumstances.\n“We could not be more excited to partner with the Sisterhood Foundation and thus be able to take an enormous step forward in ensuring all women, and particularly women from culturally and linguistically diverse communities, can find and use knowledge to meet their unique health needs at every stage of life,” said Dr White.\n“This partnership will allow us to do even more to deliver on our purpose of empowering women to enjoy their best health and wellbeing at every life stage, through gathering and synthesizing insights from individual women, communities, clinicians and the population at large, to shaping and mobilising knowledge for women, health care professionals and policymakers to use.”\nJean Hailes for Women’s Health joins Smiling Mind, Her Heart and Share the Dignity as one of the Sisterhood Foundation’s new Charity Partners.\n“The Sisterhood Foundation has a proud history of supporting Australian women and their families,” said Emily Amos, Chair of the Sisterhood Foundation and Managing Director of Wesfarmers Health.\n“This exciting next chapter will further strengthen the Sisterhood’s impact and empower our new and existing Charity Partners to keep growing and supporting women and girls across the country”.\nStay tuned to find out more about this exciting partnership.",
-    "summary": "Jean Hailes for Women’s Health is thrilled to announce an exciting new partnership with the Sisterhood Foundation, as part of their new focus on the health and wellbeing issues faced by Australian women and girls.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2024-11-26T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:22:09.375811+00:00",
-    "tags": [
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease",
+      "menopause"
     ],
     "hashtags": [],
     "engagement": {
@@ -157,39 +76,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2024-10-18T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:22:16.553171+00:00",
+    "scrape_time": "2026-05-10T04:45:38.410460+00:00",
     "tags": [
       "cardiovascular",
+      "female_risk_factors",
+      "heart_disease",
       "menopause",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_044",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/experts-answer-your-menopause-questions-in-video/",
-    "title": "Experts answer your menopause questions in video",
-    "content": "The questions cover brain fog , sleep , musculoskeletal aches and pains , heart health and weight gain .\nWe’d like to thank our menopause experts for their time and insights. We also extend our thanks to the hundreds of women from every state and territory of Australia who submitted their questions to make this project possible.",
-    "summary": "In October 2024, the International Menopause Society World Congress on Menopause was hosted in Australia. As part of our role as community education partner, we collected questions from women across Australia and put the top questions to the world’s leading menopause experts in this video.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2024-10-07T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:22:19.661902+00:00",
-    "tags": [
-      "menopause",
-      "female_risk_factors"
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -214,16 +107,19 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2024-01-22T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:22:54.168300+00:00",
+    "scrape_time": "2026-05-10T04:46:04.258751+00:00",
     "tags": [
+      "cholesterol",
+      "diet",
+      "exercise",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
       "hypertension",
-      "cholesterol",
       "menopause",
+      "mental_health",
       "pregnancy",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -248,11 +144,11 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-11-03T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:06.562076+00:00",
+    "scrape_time": "2026-05-10T04:46:12.812521+00:00",
     "tags": [
+      "female_risk_factors",
       "hypertension",
-      "menopause",
-      "female_risk_factors"
+      "menopause"
     ],
     "hashtags": [],
     "engagement": {
@@ -277,15 +173,17 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-10-24T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:08.713452+00:00",
+    "scrape_time": "2026-05-10T04:46:14.080062+00:00",
     "tags": [
+      "cardiovascular",
+      "cholesterol",
+      "exercise",
+      "female_risk_factors",
       "heart_disease",
       "hypertension",
-      "cholesterol",
-      "cardiovascular",
       "menopause",
-      "pregnancy",
-      "female_risk_factors"
+      "mental_health",
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -310,10 +208,11 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-07-10T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:14.545012+00:00",
+    "scrape_time": "2026-05-10T04:46:19.575988+00:00",
     "tags": [
-      "heart_attack",
-      "female_risk_factors"
+      "exercise",
+      "female_risk_factors",
+      "heart_attack"
     ],
     "hashtags": [],
     "engagement": {
@@ -338,11 +237,11 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-07-10T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:22.553471+00:00",
+    "scrape_time": "2026-05-10T04:46:27.003359+00:00",
     "tags": [
+      "female_risk_factors",
       "heart_disease",
-      "hypertension",
-      "female_risk_factors"
+      "hypertension"
     ],
     "hashtags": [],
     "engagement": {
@@ -367,12 +266,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-07-10T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:26.650705+00:00",
+    "scrape_time": "2026-05-10T04:46:30.440909+00:00",
     "tags": [
+      "female_risk_factors",
       "hypertension",
       "menopause",
-      "pregnancy",
-      "female_risk_factors"
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -397,11 +296,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-07-10T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:32.724913+00:00",
+    "scrape_time": "2026-05-10T04:46:36.895749+00:00",
     "tags": [
+      "chest_pain",
+      "diet",
+      "female_risk_factors",
       "heart_disease",
-      "menopause",
-      "female_risk_factors"
+      "menopause"
     ],
     "hashtags": [],
     "engagement": {
@@ -426,16 +327,16 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-07-10T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:34.148429+00:00",
+    "scrape_time": "2026-05-10T04:46:39.348536+00:00",
     "tags": [
+      "cardiovascular",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
       "hypertension",
-      "cardiovascular",
       "menopause",
       "pregnancy",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -460,14 +361,15 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-06-03T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:51.902546+00:00",
+    "scrape_time": "2026-05-10T04:46:56.501564+00:00",
     "tags": [
+      "cholesterol",
+      "female_risk_factors",
       "heart_disease",
       "hypertension",
-      "cholesterol",
       "menopause",
-      "pregnancy",
-      "female_risk_factors"
+      "mental_health",
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -492,17 +394,17 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-06-01T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:23:53.062260+00:00",
+    "scrape_time": "2026-05-10T04:46:57.628403+00:00",
     "tags": [
+      "cardiovascular",
+      "chest_pain",
+      "cholesterol",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "cholesterol",
-      "chest_pain",
-      "cardiovascular",
       "menopause",
       "pregnancy",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -527,15 +429,17 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2023-03-05T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:00.574710+00:00",
+    "scrape_time": "2026-05-10T04:47:03.468361+00:00",
     "tags": [
+      "cardiovascular",
+      "diet",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "cardiovascular",
       "menopause",
+      "mental_health",
       "pregnancy",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -560,13 +464,15 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-12-15T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:15.182262+00:00",
+    "scrape_time": "2026-05-10T04:47:14.306563+00:00",
     "tags": [
-      "heart_attack",
       "arrhythmia",
+      "diet",
+      "female_risk_factors",
+      "heart_attack",
       "menopause",
-      "pregnancy",
-      "female_risk_factors"
+      "mental_health",
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -591,11 +497,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-10-27T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:21.333496+00:00",
+    "scrape_time": "2026-05-10T04:47:19.345081+00:00",
     "tags": [
       "cardiovascular",
-      "pregnancy",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease",
+      "mental_health",
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -620,11 +528,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-10-17T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:25.598798+00:00",
+    "scrape_time": "2026-05-10T04:47:22.650355+00:00",
     "tags": [
       "arrhythmia",
+      "chest_pain",
+      "female_risk_factors",
       "menopause",
-      "female_risk_factors"
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -649,10 +559,10 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-09-04T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:30.962498+00:00",
+    "scrape_time": "2026-05-10T04:47:26.838947+00:00",
     "tags": [
-      "hypertension",
-      "female_risk_factors"
+      "female_risk_factors",
+      "hypertension"
     ],
     "hashtags": [],
     "engagement": {
@@ -677,44 +587,19 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-09-04T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:33.732700+00:00",
+    "scrape_time": "2026-05-10T04:47:27.789863+00:00",
     "tags": [
+      "cardiovascular",
+      "cholesterol",
+      "exercise",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
       "hypertension",
-      "cholesterol",
-      "cardiovascular",
       "menopause",
+      "mental_health",
       "pregnancy",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_115",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/feel-good-with-more-fibre/",
-    "title": "Feel good with more fibre",
-    "content": "Fibre has plenty of health perks. As well as helping to sustain energy and reduce appetite, fibre is your bowel’s best-friend, it nourishes your ‘good’ gut bacteria, it helps heart health, and it can even reduce cancer risk.\n“Australian nutrition guidelines recommend that women eat 25g of fibre every day from different sources such as vegies, fruit, wholegrains, beans and nuts,” says Jean Hailes naturopath Sandra Villella.\nBut what are the top tips to help you to reach this target?\nBefore we launch into Sandra’s high-fibre food tweaks, there’s a key tip to keep in mind: “When adding more fibre to your diet, make small changes gradually to avoid bloating and you may need to up your water intake,” she says.\nLegumes such as lentils, chickpeas and red kidney beans help you feel more satisfied after eating. They’re packed with fibre which triggers nerves in your stomach that say “I’m full” to your brain.\nToss beans in salads and stews, add them to meat rissoles and vegie patties, or buy hummus on your next trip to the supermarket.\n“When making soups, throw in one to two tins of legumes then blend or puree them with the vegetables,” says Sandra. “Try different combinations such as cannellini beans in cauliflower soup or chickpeas in pumpkin soup.”\n“Switching out your usual food choices for more fibre-rich versions is a simple way to increase fibre intake,” says Sandra.\nSeeds are packed with fibre plus healthy minerals and omega-3 fats, so it’s worth keeping a stash on hand. Think beyond sunflower seeds and stock up on chia, pumpkin (pepita), sesame, and – one of Sandra’s top foods for women – linseeds.\nThrow them in salads, muffin mixes, your morning cereal, or overnight oats. You can also pan-fry pepita and sunflower seeds on a low heat with a dash of soy sauce, for a savoury snack.\n“Or add two to three dessertspoons of a mix of freshly ground linseeds, pepita and sunflower seeds to yoghurt and stewed or fresh fruit, or healthy smoothies,” Sandra suggests.\n“For extra spice, grind cardamom pods and cinnamon powder along with your seeds for your morning oats. Store the mix in an airtight jar in the fridge and it will stay fresh for two weeks.”\n“Plant foods are high in fibre and nutrients that protect the health of your cells,” says Sandra, so keep fibre in mind when meeting the recommended five serves of vegetables and two serves of fruit every day.\n“Include some higher-fibre options such as green peas, broccoli, corn, carrots, pears and raspberries,” Sandra recommends.\nEven a meal like spaghetti bolognese can enjoy a fibre boost if you add extra vegies or lentils to the sauce or use zoodles (spiralised zucchini) instead of pasta.",
-    "summary": "Beat hunger, boost energy, and maximise your health now and into the future with these top tips for eating more fibre.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2022-09-04T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:35.110262+00:00",
-    "tags": [
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -739,12 +624,15 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-09-04T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:36.693300+00:00",
+    "scrape_time": "2026-05-10T04:47:32.003749+00:00",
     "tags": [
+      "diet",
+      "exercise",
+      "female_risk_factors",
       "heart_disease",
       "hypertension",
       "menopause",
-      "female_risk_factors"
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -769,39 +657,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-09-04T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:38.542098+00:00",
+    "scrape_time": "2026-05-10T04:47:33.190836+00:00",
     "tags": [
+      "exercise",
+      "female_risk_factors",
       "hypertension",
-      "menopause",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_119",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/what-i-wish-id-known-about-perimenopause-and-menopause/",
-    "title": "What I wish I’d known about… perimenopause and menopause",
-    "content": "“I wish I had known about a symptom like depression which wasn’t talked about so much,” says Maria.\n“I never got hot flushes,” she says. “I got the depression side of menopause. It was a very taboo topic for ethnic women and so was a very isolating experience.\n“I couldn’t talk, I couldn’t let my emotions out,” she says. “Sometimes I couldn’t even hear my husband or my daughter speaking.”\nDuring this busy life stage, Maria also had to learn how to let some things go. “If something went wrong at home or at work, it was overwhelming for me. It felt like a very heavy burden.”\n“I was pedantic about everything, and everything had to run like clockwork,” she says. “But as I learned, life doesn’t always work like clockwork.”\nWhen Melissa began experiencing symptoms – like weight gain, joint pain, hair-loss, vaginal dryness, and acne – she was only 42 years old, so menopause wasn’t really on the agenda.\n“I saw eight doctors and it took four years to finally get a diagnosis,” she recalls. In the end, she had the arrival of hot flushes to thank for a definitive diagnosis.\n“What I’ve learned is that menopause is about hormonal change,” she says. “It’s not about age. It’s a stage in life.”\nInitially Melissa was hesitant about using medication to manage her symptoms but had a change of heart. “I didn’t listen to the conversation around MHT [menopausal hormone therapy]. I had this self-imposed pressure to do it naturally.\n“I did eventually go on MHT, but I wish I had done it earlier.”\n“I wish I’d had a doctor who was interested in menopause who could have educated me about it and provided me with options,” says Robyn, who experienced anxiety, sleep issues and joint pain during her menopause.\n“Even to have said, ‘let’s refer you to someone else’, which might have given me access to clearer information.\n“I felt shut down [by my doctor]. I felt I was whingeing… What I needed was someone to validate my experience and to explore my options.”\nNatalie wishes she’d known more about early menopause before experiencing it herself. She underwent a hysterectomy (an operation that removes the womb) to treat severe symptoms of endometriosis. The operation sent her into menopause in her early 40s.\n“Looking back now, I think I went through perimenopause but just didn’t recognise it.",
-    "summary": "The taboos around talking about menopause and perimenopause (the lead-up menopause) are finally crumbling. But we’ve still got a long way to go before all women feel prepared for the changes that arrive at midlife.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2022-09-04T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:41.340730+00:00",
-    "tags": [
-      "menopause",
-      "female_risk_factors"
+      "menopause"
     ],
     "hashtags": [],
     "engagement": {
@@ -826,11 +687,14 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-09-04T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:24:48.694893+00:00",
+    "scrape_time": "2026-05-10T04:47:43.583831+00:00",
     "tags": [
-      "heart_disease",
       "cholesterol",
-      "female_risk_factors"
+      "diet",
+      "exercise",
+      "female_risk_factors",
+      "heart_disease",
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -855,10 +719,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2022-03-21T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:25:02.389622+00:00",
+    "scrape_time": "2026-05-10T04:47:57.657687+00:00",
     "tags": [
       "cardiovascular",
-      "female_risk_factors"
+      "female_risk_factors",
+      "heart_disease",
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -883,13 +749,14 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2021-12-12T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:25:08.197523+00:00",
+    "scrape_time": "2026-05-10T04:48:03.881502+00:00",
     "tags": [
+      "cardiovascular",
+      "diet",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "cardiovascular",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -914,17 +781,18 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2021-12-12T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:25:11.443143+00:00",
+    "scrape_time": "2026-05-10T04:48:06.644425+00:00",
     "tags": [
+      "arrhythmia",
+      "cardiovascular",
+      "chest_pain",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "arrhythmia",
-      "chest_pain",
-      "cardiovascular",
       "menopause",
+      "mental_health",
       "pregnancy",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -949,40 +817,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2021-11-08T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:25:14.299402+00:00",
+    "scrape_time": "2026-05-10T04:48:09.668121+00:00",
     "tags": [
-      "stroke",
-      "hypertension",
       "cardiovascular",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_142",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/the-health-issues-we-dont-like-to-discuss-vulval-vaginal-health/",
-    "title": "The health issues we don’t like to discuss",
-    "content": "We are reminded to undergo breast, cervical and STI (sexually transmissible infection) screenings. We are encouraged to drink less alcohol, exercise more, eat a balanced diet, watch our heart health, and take care of our bones.\nBut there is one area of the body that is often forgotten or not mentioned at the doctor’s office – the vulva: home to the clitoris, the urethral opening (where your urine or wee comes out), the vaginal opening as well as the inner and outer lips (the labia).\nIt seems that when it comes to these ‘wonders down-under’, many of us are too embarrassed to talk about them, especially with our doctors. And yet the Jean Hailes vulval and vaginal health webpages are some of the most highly-viewed webpages on our website – with over 700,000 pageviews in the past year alone. This figure suggests we are seeking information about these important parts of the body, but prefer to do so anonymously or from behind a screen.\n“I think there is still a reluctance that all things genitalia are ‘women’s business’, not to be broadcast, and somehow to be ‘put up with’ because you don’t talk about them,” explains gynaecologist and Jean Hailes Medical Director Dr Elizabeth Farrell.\nThe notion that the vulva and vagina belong to the private parts of a woman’s body somehow fuels a notion that women should just learn to live with problems or pain in this area. But, as Dr Farrell warns, ignoring these issues can pose a serious risk to health and overall wellbeing.\nDr Farrell recommends for women to see their doctors and insist on an examination if they have pain, irritation, itching, bleeding, fissures (skin splitting) or lumps in the genital area.\n“A lack of diagnosis and ongoing discomfort can greatly impact the quality of life for women. If it’s constant, it can make them fearful to a point where they don’t even want to go out,” says Dr Farrell.\nThe newly updated Jean Hailes vulval and vaginal health webpages cover the common conditions and troublesome symptoms of these important body parts. Many of these conditions can be successfully treated by your doctor, but getting the right diagnosis, via an examination and appointment with your doctor, is key. Read about them below with links to discover more.\nThe warning sign that you may have this infection – caused by a change in the healthy balance of vaginal bacteria – is a watery, vaginal discharge with an unpleasant smell. “When you get that fishy smell, you immediately think BV,” says Dr Farrell.\nA woman will typically be treated with a course of antibiotics and advised to avoid sexual contact until she has finished taking the medication and the symptoms have gone. The reason for this is that BV can reoccur with sexual contact.\nVulval irritation – including itching, burning or discomfort – can affect women of all ages.\n“Sometimes it can involve a cycle of itching, scratching, skin tearing or splitting and then a secondary infection. Many women endure symptoms for years because they are too embarrassed to raise them with their doctors,” says Dr Farrell.\n“The most important thing to remember is that it’s okay to talk to your doctor about these symptoms,” says Dr Farrell. “But there is no point in even going unless the doctor examines you. You need to find a doctor who is interested in women’s health.\n“If they’ve looked at [your vulva] and are not sure [what the diagnosis is], they can always refer you on – and that is why our vulval clinic is invaluable.”\nAccording to Dr Farrell, thrush tends to be more common in women of reproductive age. But it’s important that women, especially those postmenopause, avoid self-diagnosis and simply assume that an itch automatically means they have thrush.",
-    "summary": "When something goes wrong (or doesn’t seem quite right) with our vulval or vaginal health, women often turn to information online rather than raising the issue with their doctor. That’s why we recently updated and expanded the Jean Hailes vulval and vaginal health webpages to include more health conditions, the latest treatments, and trusted advice. Below, we share the highlights from the updated information, along with a gentle reminder that when it comes to your vulval and vaginal health, self-diagnosis is no substitute for an examination and discussion with your doctor.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2021-10-12T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:25:15.508806+00:00",
-    "tags": [
-      "menopause",
-      "female_risk_factors"
+      "female_risk_factors",
+      "hypertension",
+      "mental_health",
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -1007,16 +848,19 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2021-09-08T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:25:19.125977+00:00",
+    "scrape_time": "2026-05-10T04:48:14.132504+00:00",
     "tags": [
-      "heart_attack",
-      "stroke",
-      "hypertension",
-      "cholesterol",
       "cardiovascular",
+      "chest_pain",
+      "cholesterol",
+      "female_risk_factors",
+      "heart_attack",
+      "heart_disease",
+      "hypertension",
       "menopause",
+      "mental_health",
       "pregnancy",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -1041,13 +885,14 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2021-08-25T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:25:23.771508+00:00",
+    "scrape_time": "2026-05-10T04:49:32.909614+00:00",
     "tags": [
-      "heart_disease",
-      "stroke",
       "cardiovascular",
+      "female_risk_factors",
+      "heart_disease",
       "menopause",
-      "female_risk_factors"
+      "mental_health",
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -1072,11 +917,15 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2021-02-23T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:02.607499+00:00",
+    "scrape_time": "2026-05-10T04:49:51.900121+00:00",
     "tags": [
       "cardiovascular",
-      "pregnancy",
-      "female_risk_factors"
+      "diet",
+      "exercise",
+      "female_risk_factors",
+      "heart_disease",
+      "mental_health",
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -1101,39 +950,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2021-01-11T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:12.499985+00:00",
+    "scrape_time": "2026-05-10T04:49:57.509406+00:00",
     "tags": [
       "cardiovascular",
+      "female_risk_factors",
+      "heart_disease",
       "menopause",
-      "pregnancy",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_172",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/heart-health-movement-and-motivation/",
-    "title": "Heart health: movement and motivation",
-    "content": "Now let’s get back to Tina and what keeps her fit and healthy.\nThrough her fun and supportive Melbourne cycling group, Wheel Women, Tina has made it her mission to encourage women of all ages and levels of fitness to hop on a bike. That’s why, in 2017, we invited her to become a Jean Hailes Women’s Health Week ambassador.\nThe inspiring Tina has since also become an ambassador for VicHealth’s ‘This Girl Can’ campaign, encouraging and empowering women of all ages, shapes and abilities to be active without worrying about judgement, gender stereotypes or skill level.\nBut Tina hasn’t always been into cycling, and hasn’t always been as fit and healthy as she is today.\nIn the past, Tina had been a running coach, and exercise was an important part of her life. However, after becoming a mother, a loss of physical fitness crept up on her.\n“I don’t know what happened,” she explains. “I guess, like a lot of us with kids, you eat those snack foods like chocolate in the afternoon when you’re exhausted. And it’s easier to sit around and do nothing when you’re so damn tired.”\nSeven years ago, a single event opened her eyes.\n“It came about from this real epiphany moment when I was out riding with my son and my husband on one of my son’s training rides for his school,” she says.\n“And I wondered why all these kids were going past me, and why are they are going so fast?”\n“But I realised that they weren’t going fast – I was going really slow.”\n“I’d become really unfit and I’d put on a lot of weight because I’d been sitting around doing nothing, and it was just this moment where I said to myself, ‘I’ve got to do something’.”\nTina says she doesn’t know why that particular moment clicked for her, “because I’d probably had a lot of other opportunities.” But since then, cycling has transformed her life and her health.\n“I got into a habit of that and I wasn’t really doing anything for myself,” she says. “So, it was a really nice wake-up call. I started cycling and it really changed my life completely.”\nTina says one of the most important things that helps her stay motivated is that she never views cycling as ‘exercise’.\n“It’s all about, ‘how is this going to make me feel?’,” she says",
-    "summary": "Many of us know that being physically active is one of the best ways to reduce our risk of heart disease. But how do you stay motivated and make physical activity a regular, and enjoyable, part of your life?",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2020-07-28T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:18.973859+00:00",
-    "tags": [
-      "female_risk_factors"
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -1158,13 +981,14 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2020-07-27T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:20.201336+00:00",
+    "scrape_time": "2026-05-10T04:50:04.967606+00:00",
     "tags": [
-      "cholesterol",
       "cardiovascular",
+      "cholesterol",
+      "female_risk_factors",
+      "heart_disease",
       "menopause",
-      "pregnancy",
-      "female_risk_factors"
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -1189,11 +1013,11 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2019-08-13T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:31.895096+00:00",
+    "scrape_time": "2026-05-10T04:50:15.183766+00:00",
     "tags": [
-      "hypertension",
       "cholesterol",
-      "female_risk_factors"
+      "female_risk_factors",
+      "hypertension"
     ],
     "hashtags": [],
     "engagement": {
@@ -1218,11 +1042,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2019-05-06T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:38.907761+00:00",
+    "scrape_time": "2026-05-10T04:50:21.711106+00:00",
     "tags": [
       "cardiovascular",
+      "female_risk_factors",
       "menopause",
-      "female_risk_factors"
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -1247,7 +1072,7 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2019-04-20T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:39.872392+00:00",
+    "scrape_time": "2026-05-10T04:50:22.633550+00:00",
     "tags": [
       "heart_disease",
       "menopause"
@@ -1275,13 +1100,14 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2019-04-16T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:41.201734+00:00",
+    "scrape_time": "2026-05-10T04:50:23.663919+00:00",
     "tags": [
+      "cholesterol",
+      "diet",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "cholesterol",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -1306,38 +1132,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2019-03-18T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:42.204680+00:00",
+    "scrape_time": "2026-05-10T04:50:24.945833+00:00",
     "tags": [
+      "chest_pain",
+      "female_risk_factors",
       "hypertension",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_news_194",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "factual",
-    "url": "https://www.jeanhailes.org.au/articles/five-things-you-didnt-know-about-vaginas-and-vulvas-free-health-article/",
-    "title": "Five things you didn’t know about vaginas & vulvas",
-    "content": "Even though it doesn’t sound particularly healthy, having an acidic vaginal environment is very important in keeping this part of your body in good health.\nAn acidic environment protects the vagina from infection and helps to keep the growth of bad bacteria and yeast in check.\nIf the vagina becomes too alkaline (the opposite of acidic), then unhealthy levels of these microscopic organisms can grow, increasing the risk of bacterial infections such as bacterial vaginosis (BV). The vagina becomes more alkaline naturally after menopause, therefore making it more prone to bacterial infections.\nAvoid practices that can affect the vaginal flora, such as douching, or using soaps or perfumed products.\nThe vulva (the external part) only requires gentle daily washing with warm water, while the vagina (the internal tube) is a self-cleaning organ – so, in terms of cleaning and ‘maintenance’, just leave the vagina to do its thing.\nThe clitoris is thought to be unlike any other organ, in that its only purpose is sexual pleasure. It has a rich supply of blood vessels and nerve endings, with some researchers stating it has twice as many nerve endings as a penis.\nBut even though we think of the clitoris as being small, there is much more to this body part that meets the eye.\nThe anatomy of the clitoris is much like an iceberg; we can only see the tip and there is much, much more of this body part hidden beneath the surface.\nWhile the visible tip is indeed typically quite small, beneath the vulval skin, two arms of the clitoris extend outwards. These arms (known as crura) are surprisingly long, measuring between 5-9cm in length.\nThere are also two internal bulbs which make up the rest of the clitoris, hidden beneath the skin. These bulbs extend downwards from the tip and measure between 3-7cm long.\nDon’t underestimate it; there’s a lot more to female anatomy than meets the eye. Get to know your own. Use a mirror so you can look and become familiar with your own vulva and what is normal for you. This makes it easier to detect any abnormal changes such as differences in colour or texture.\nRemember that every vulva is unique and usually not symmetrical. Rarely does a vulva look like the edited images that often appear online. Check out The Labia Library for realistic images showing just how varied vulvas can be.\nJust as each vulva is unique, so too is every vagina. In fact, scientific studies have revealed that vaginas can vary significantly in their length and general shape. (Remember, the vagina is the internal muscular tube that starts at the vulva – the external part – and goes up to the cervix, where the uterus or womb begins)\nOne study from 2006 revealed that vaginal lengths can range from 4-9.5cm, while an earlier study recorded lengths of up to 15cm.\nVaginal shape is another feature that has great variety. Using internal casts of women’s vaginas, researchers in 2003 categorised the vaginal tube into five different shapes. The different categories were cone-shaped, parallel sides, heart-shaped, slug-shaped, and pumpkin seed-shaped.",
-    "summary": "There’s a lot we don’t know about vulvas and vaginas – in fact many women don’t know the difference between the two. But these ‘female bits’ are fascinating body parts and can play big roles in not only your sexual health, but your general health too.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": "2018-11-20T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:45.659529+00:00",
-    "tags": [
-      "menopause",
-      "female_risk_factors"
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -1362,12 +1162,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2018-11-16T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:46.666877+00:00",
+    "scrape_time": "2026-05-10T04:50:29.057946+00:00",
     "tags": [
+      "female_risk_factors",
       "heart_disease",
-      "stroke",
       "menopause",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -1392,12 +1192,15 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2018-09-03T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:27:56.013659+00:00",
+    "scrape_time": "2026-05-10T04:50:38.741238+00:00",
     "tags": [
-      "hypertension",
       "cardiovascular",
-      "menopause",
-      "female_risk_factors"
+      "diet",
+      "exercise",
+      "female_risk_factors",
+      "heart_disease",
+      "hypertension",
+      "menopause"
     ],
     "hashtags": [],
     "engagement": {
@@ -1422,11 +1225,15 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2018-02-13T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:28:06.185280+00:00",
+    "scrape_time": "2026-05-10T04:50:47.169427+00:00",
     "tags": [
+      "chest_pain",
+      "diet",
+      "exercise",
+      "female_risk_factors",
       "heart_disease",
-      "pregnancy",
-      "female_risk_factors"
+      "mental_health",
+      "pregnancy"
     ],
     "hashtags": [],
     "engagement": {
@@ -1451,11 +1258,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2017-10-09T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:28:09.244402+00:00",
+    "scrape_time": "2026-05-10T04:50:49.426274+00:00",
     "tags": [
+      "diet",
+      "exercise",
+      "female_risk_factors",
       "heart_disease",
-      "menopause",
-      "female_risk_factors"
+      "menopause"
     ],
     "hashtags": [],
     "engagement": {
@@ -1480,10 +1289,14 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2016-11-08T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:28:17.746745+00:00",
+    "scrape_time": "2026-05-10T04:50:56.944391+00:00",
     "tags": [
       "cardiovascular",
-      "female_risk_factors"
+      "chest_pain",
+      "diet",
+      "female_risk_factors",
+      "heart_disease",
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -1508,11 +1321,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": "2016-06-10T00:00:00.000Z",
-    "scrape_time": "2026-05-09T07:28:21.126814+00:00",
+    "scrape_time": "2026-05-10T04:51:00.618242+00:00",
     "tags": [
+      "chest_pain",
+      "female_risk_factors",
       "heart_disease",
-      "menopause",
-      "female_risk_factors"
+      "menopause"
     ],
     "hashtags": [],
     "engagement": {
@@ -1522,34 +1336,6 @@
     },
     "media_type": "text",
     "content_type": "article",
-    "language": "en"
-  },
-  {
-    "id": "jh_story_017",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "opinion/anecdotal",
-    "url": "https://www.jeanhailes.org.au/stories/messy-hard-but-full-of-precious-moments-bev-on-midlife-and-menopause/",
-    "title": "Messy, hard, but full of precious moments – Bev on midlife and menopause",
-    "content": "I’m turning 60 this year, and looking back, it’s hard to believe just how much I’ve been through – especially during that stretch from my mid-40s onwards.\nAt the time, I was running a crèche and my body and mood were starting to change, but I had no idea why. I found myself slowly sinking into depression. Meanwhile, my husband was preparing for open heart surgery. It really was everything all at once.\nI didn’t know it at the time, but that stage marked the start of perimenopause.\nBy the time I hit 51, my periods had stopped completely. But in the lead-up, they were unpredictable, inconsistent and exhausting.\nI felt like I was stuck in this frozen haze – not sad exactly, just blank. Fogginess, forgetfulness, just this sense that I was muddling through the day.\nI was still doing everything I needed to do to get through work, but inside I felt awful. This was before I started medication for depression, back when I didn’t have a name for what I was going through, just a growing sense that something wasn’t right.\nThe one thing that made a real difference for me was talking. Once I started opening up, I realised I wasn’t alone.\nAt work, other women started sharing their stories too and suddenly we were all in it together.\nThat solidarity – just knowing you’re not the only one feeling foggy, flat or overwhelmed – made the world of difference.\nHealth professionals have helped me too, at least most of the time. I’ll admit, my experience with the health system has been mixed, but I’ve learned how important it is to speak up and advocate for myself. If I want to know about my bone health, I ask about it. If I want to explore another path, I push for that too.\nI had an appointment with a younger doctor recently and was pleasantly surprised. They didn’t pretend to know it all. They listened, took me seriously and referred me to the right specialists. That kind of openness and willingness to collaborate made everything easier.\nThe secret is to not take yourself too seriously and to get a good network of support around you.”\nIn fact, there have been many moments that have filled me with joy during my menopause journey. I had a big 50th birthday party and was delighted that over 50 friends came to celebrate. I had wonderful holidays to New Zealand, New Caledonia and Tasmania. The biggest joy though has been seeing my daughters grow into amazing people.\nMenopause and everything that comes with it stirs up all kinds of things – physically, emotionally and mentally.\nIt can feel overwhelming if you’re trying to make sense of it on your own. I’ve realised the secret is to not take yourself too seriously and to get a good network of support around you.",
-    "summary": "When Bev entered perimenopause, there was already a lot going on – with her health and life in general. It was a rough ride but, the childcare worker says there were plenty of bright bits.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:01.374347+00:00",
-    "tags": [
-      "menopause",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "post",
     "language": "en"
   },
   {
@@ -1565,11 +1351,12 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:11.211489+00:00",
+    "scrape_time": "2026-05-10T04:51:45.105255+00:00",
     "tags": [
+      "female_risk_factors",
       "heart_disease",
       "menopause",
-      "female_risk_factors"
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -1594,10 +1381,11 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:13.466805+00:00",
+    "scrape_time": "2026-05-10T04:51:47.251894+00:00",
     "tags": [
-      "heart_disease",
-      "female_risk_factors"
+      "chest_pain",
+      "female_risk_factors",
+      "heart_disease"
     ],
     "hashtags": [],
     "engagement": {
@@ -1622,123 +1410,17 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:20.453222+00:00",
+    "scrape_time": "2026-05-10T04:51:53.363112+00:00",
     "tags": [
+      "cardiovascular",
+      "chest_pain",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "cardiovascular",
       "menopause",
+      "mental_health",
       "pregnancy",
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "post",
-    "language": "en"
-  },
-  {
-    "id": "jh_story_034",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "opinion/anecdotal",
-    "url": "https://www.jeanhailes.org.au/stories/a-healing/",
-    "title": "What this mum wants young girls to know about their vulvas",
-    "content": "Content warning: The following story includes subject matter that readers may find upsetting. It covers the topics of cancer and death.\nWhen Kayla Newland was told that her vulval cancer had spread to other parts of her body, her shock quickly gave way to resolve. She decided that every day was a gift and that she would get on with the business of living. She stayed true to that almost until the day she died in January last year. She was 23 years old.\nHer mother, Kirra, struggles to give a voice to her loss. There is no language for grief. As she navigates a world without her only daughter, she must confront the constant reminders of how much she has lost. The only way to make sense of what happened is to talk about her daughter’s story in the hope that it might save another young woman’s life.\n“The change I would like is to have schools educate young girls to know that they have a vulva, labia and a clitoris,” she says. “They should be given mirrors, so they understand what they look like and learn how to articulate [explain] when something is wrong.\n“We have generations of girls to come that we can help and that’s what we need to focus on. We need them to recognise these parts of the body and to understand what looks normal and what doesn’t.”\nFrom the beginning, Kayla struggled with health issues. She was just 11 years old when she was diagnosed with lichen sclerosus – a chronic condition that makes patches of skin around the vulva or anus look white and thickened.\nDevastatingly, the doctor did not explain that lichen sclerosus is linked to an increased risk of vulval cancer, especially if left untreated.\n“With cancer, it’s a time game. You can’t muck around. I feel that Kayla was let down by the medical profession and that’s hard for me.”\n“She should have been using a topical steroid for her whole life whereas we were told to use it only when there was a flare up.”\nHer life was punctuated by flare ups, but she coped. She was working in public relations and had moved in with her childhood sweetheart. They planned to marry in March 2023.\nHer journey to a diagnosis of vulval cancer was torturous, says Kirra.\nOne gynaecologist believed she had a cyst. Only when the pain persisted came the suggestion to do a biopsy – where a small piece of tissue is removed for examination. But it was Christmas Eve and, still believing there was nothing to worry about, Kayla put it off to enjoy the holiday with her family.\nBy the time she had the procedure, the ‘cyst’ had grown to the size of a five cents piece. The biopsy revealed cancer of the vulva. In February 2022, Kayla underwent surgery that removed parts of her clitoris and vulva on the left side. The cancer’s spread to her lymph nodes meant she needed to undergo radiation and chemotherapy for six weeks. Sadly, she was fighting a losing battle.\nFriends decided to organise an early wedding for her. “I don’t think she was feeling too well but she sure looked beautiful,” recalls Kirra.\n“She was light and breezy and so happy to be getting married.",
-    "summary": "A mother makes sense of her daughter’s death by urging young women to better understand the health of their vulvas.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:21.772994+00:00",
-    "tags": [
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "post",
-    "language": "en"
-  },
-  {
-    "id": "jh_story_037",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "opinion/anecdotal",
-    "url": "https://www.jeanhailes.org.au/stories/it-started-with-an-idea/",
-    "title": "It started with an idea",
-    "content": "Courtney Elliott knows a bit about mental health. For years she has struggled with anxiety, depression and even battled suicide ideation. She suffered post-partum depression after the births of each of her two sons. The going was tough.\nBut there has always been a fierce strength inside this 32-year-old South Australian that has kept her moving forward. She found healing at home, in connecting with like-minded women, but most especially in the simple act of giving.\nShe raised an impressive $9,000 for Jean Hailes for Women’s Health because she had found the organisation’s resources helpful when she was looking for information on mental health.\n“I wanted to do something I was passionate about,” she says. “And I wanted to finish my maternity leave by doing something meaningful for the wider community, to give women a space where they could tell their stories about mental health.”\nShe decided to host a charity dinner for 106 women in Adelaide. Six women, including Courtney, spoke about a range of health issues – mental health, IVF loss and surrogacy, chronic pain, as well as one woman’s struggle with type 1 diabetes that nearly cost her eyesight.\nThe event was originally to be held during Jean Hailes Women’s Health Week in the first week of September, but logistics delayed it until 23 September.\nIn addition to the $110 cover fee to attend the dinner, the event raised money through an online silent auction ($2,500) as well as through sponsors from local businesses.\n“It was a huge shock to see how much the event raised,” says Courtney. “It was also very heartening.”\nOpening her own heart has helped Courtney to cope with her bouts of poor mental health. It began with sharing tips from a teacher’s perspective about children’s feelings on an Instagram feed and evolved over time into sharing her own struggles with mental health.\n“I think it gave me courage to be able to be open about it,” she says. “And a lot of women follow me because I am so open about it.”",
-    "summary": "How one woman used her struggles with mental health to support the wider community of women.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:25.075237+00:00",
-    "tags": [
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "post",
-    "language": "en"
-  },
-  {
-    "id": "jh_story_045",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "opinion/anecdotal",
-    "url": "https://www.jeanhailes.org.au/stories/life-as-a-young-caregiver/",
-    "title": "Life as a young caregiver",
-    "content": "When Madeleine Buchner’s baby brother was diagnosed with multiple serious health conditions, the nine-year-old girl had no idea how it would shape, even define her life.\n“I grew up in the shadow of illness,” she recalls. “I felt loved but overlooked. I felt my parents cared more about my brother. I felt he was the favourite child. He was in and out of hospital, so I spent a lot of time with my grandparents.\n“I often pretended to be sick because I thought that was the way to get my parent’s attention. After the fourth or fifth time of going to the nurse’s station at school, they realised I was faking it.”\nMadeleine’s story is one that may be familiar to other young caregivers. It’s a unique community that few outside it will fully understand. It’s estimated that one in 10 young people (up to the age of 24) in Australia are carers. Each will look after a parent, a brother, sister, or a grandparent with a chronic illness, a disability, a drug, or alcohol addiction.\n“It’s just your family, it’s just what you do,” says Madeleine by way of explaining the role of carer. “You don’t realise that you are doing something out of the ordinary until you realise you are different.\n“Everyone used to tell me that I was such a wonderful kid because I did extra things to help my family. Taking on extra responsibilities was never a choice for me. I got a job when I was young to contribute to family finances. We struggled with medical bills. I think I missed out on so much socially and in other ways because I was helping out with my brother, Charlie.”\nWhen Madeleine was 14 years old, her mother was diagnosed with breast cancer, placing additional stress and pressure on the family. Her schoolwork suffered and she began to suffer from a debilitating anxiety that she still carries.\n“As young carers, we are a forgotten cohort,” she says. “We tend to advocate for the sick person rather than get support for ourselves. We need to fill our own cup before we can fill anyone else’s.”\nThat belief was one of the drivers behind Little Dreamers , the organisation she co-founded 14 years ago to support young carers aged four to 25. “Some of the risk factors we see for young carers are educational and financial disadvantage,” she explains.\n“Fifty per cent of families with young carers live below the poverty line in Australia.” Many have to leave school, she says. “Only 4% of those who are the main carers above 15 years old are still at school. There’s also a significant rate of unemployment among young and adult carers and very significant rates of loneliness and isolation.\n“When we first started our organisation, our tag line was, ‘what is life without a dream?’ Young carers who take on caring roles don’t necessarily have room for a dream.\n“My advice to them is to take five minutes during the day and night to do something that makes their heart happy. If you can bookend your day by doing something that feeds your soul, it’s a good way to build in care for yourself during a busy day.\n“The advice I would give is around the need for young people to build a sense of identity for themselves outside of their caring roles. We see many who don’t know who they are and how the future might look outside of that caring role.”\nAnd now, as a 30-year-old woman, what advice might she offer her nine-year-old self?\n“I would tell her that she is very special and very loved, that life does get easier but before it does, you will need to access support that is for you.”",
-    "summary": "Growing up in the shadow of illness, this young woman shares the personal impacts of taking care of her brother and mother and gives her advice to others who find themselves in similar situations.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:35.671731+00:00",
-    "tags": [
-      "female_risk_factors"
-    ],
-    "hashtags": [],
-    "engagement": {
-      "likes": null,
-      "comments": null,
-      "shares": null
-    },
-    "media_type": "text",
-    "content_type": "post",
-    "language": "en"
-  },
-  {
-    "id": "jh_story_052",
-    "source": "Jean Hailes",
-    "source_category": "website",
-    "source_type": "organisation",
-    "source_classification": "opinion/anecdotal",
-    "url": "https://www.jeanhailes.org.au/stories/a-beautiful-mind/",
-    "title": "A beautiful mind",
-    "content": "These are the words written by an ancient Chinese philosopher, Lao Tzu. I remember this philosophy from when I was a naïve nineteen-year-old. Although I have forever been a person passionately in love with poetry, I was blind to the true depths this passage carried. So, I held onto Tzu’s wisdom, because maybe I would make sense of it one day.\nThis opinion piece is dedicated wholeheartedly as a love letter to my future mind. Being young, Bla(c)k and a woman in this society can be crippling at times. But I am so glad that when the Ancestors made me, they crafted me into an Indigenous woman. How unfair to the rest of the world that they were allowed to instil so much power and strength only into my bones. Thank you, Ancestors, for gifting me with this beautiful mind. My body and I are so honoured to coexist with what I now consider, my deepest love and companion.\nOh, how I have longed to be at peace with you. In fact, the first time I experienced war I thought the whole world was asleep, but us .\nWe would be on the cusps of contemplating death or survival. Trapped between the folds of existing or expiring. I would avoid dipping my hands into your sacred thoughts just to avoid the internal conflict brewing uncontrollably inside of us. I have spent so much time creating different versions of you that were far from the truth. I questioned you, because of your age. I tried to resist your unbiased self-reflection and criticisms, because I doubted your lack of life experience. I even tried to rebel against your intelligence because I doubted your sensitive and feminine traits. Admittedly, occupying this body and sharing loneliness with you has once been my deadliest kryptonite and saddest version of reality. I have always wondered why I engaged in this psychological turmoil with you. Why did I ever doubt your ability to be extraordinary?\nI have come to realise that my body was never completely at home while you have been somewhere else fighting the darkest battle of our life, alone. But oh, how foolish to not have seen you as a companion and life-long lover from the start. How foolish to believe that good mental hygiene had a finish line and not something we had to work on every. single. day. together as a team. For so long I was searching for an external love. I thought good mental health practices involved material possessions. You know, a partnership, the occasional face mask, retail therapy or even coffee with a friend. But now, as a young woman in my mid-twenties, the wisdom of Chinese philosopher, Lao Tzu has taught me that it means SO much more than that.\nGood mental health is coming home to yourself and hearing your mind whisper, ‘finally, solitude!’ I now know that joy reveals itself after the occasional period of stillness with oneself. Nobody can do what we do, because it is our mind that holds the code to a calm universe. As long as we are still on the inside, nothing in this lifetime could ever harm us. I am so glad you finally came home. I have always needed you here. I want to speak into existence an unspoken Treaty that has been shaped and shielded by the sacred thoughts of our Elders.\nI was blind to your greatness. After all, you have been the magic that has sustained this journey of life all along. I have finally found my real love. And that real love is being at peace with you. I promise to always prioritise you and to keep you company during your loneliest hours. Wherever you are, I promise to meet you there with complete sincerity and commitment. And when you experience chaos from within, I hope you choose to stay and fight for yourself… because you really are worth both the war and the peace.\nSecond image credit: @mini_ashleigh_photography",
-    "summary": "As a proud Wiradjuri woman and lawyer, Taylah Gray has faced many challenges in her young life.",
-    "author": "Jean Hailes",
-    "author_type": "organisation",
-    "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:43.579752+00:00",
-    "tags": [
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
@@ -1763,12 +1445,13 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:46.857479+00:00",
+    "scrape_time": "2026-05-10T04:52:18.842057+00:00",
     "tags": [
-      "heart_attack",
       "arrhythmia",
+      "female_risk_factors",
+      "heart_attack",
       "menopause",
-      "female_risk_factors"
+      "mental_health"
     ],
     "hashtags": [],
     "engagement": {
@@ -1793,13 +1476,14 @@
     "author": "Jean Hailes",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-09T07:29:49.114135+00:00",
+    "scrape_time": "2026-05-10T04:52:21.489579+00:00",
     "tags": [
+      "arrhythmia",
+      "cardiovascular",
+      "female_risk_factors",
       "heart_attack",
       "heart_disease",
-      "stroke",
-      "cardiovascular",
-      "female_risk_factors"
+      "stroke"
     ],
     "hashtags": [],
     "engagement": {
