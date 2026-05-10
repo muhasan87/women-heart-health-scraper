@@ -17,6 +17,8 @@ from common import (
     clean_paragraph_list,
     extract_summary_from_paragraphs,
     normalise_text,
+    extract_tags,
+    save_stats,
     save_json,
     now_iso,
     CHART_DIR,
@@ -301,6 +303,9 @@ def build_record(driver, stub: dict, item_id: str):
         content.split("\n"),
         title
     ) if content else title
+    
+    content_for_tags = f"{title or ''} {content or ''}"
+    tags = extract_tags(content_for_tags)
 
     return {
         "id": item_id,
@@ -316,7 +321,7 @@ def build_record(driver, stub: dict, item_id: str):
         "author_type": "individual",
         "publish_time": publish_time or None,
         "scrape_time": now_iso(),
-        "tags": [],
+        "tags": tags,
         "hashtags": [],
         "mentions": [],
         "engagement": {
@@ -340,6 +345,12 @@ def main():
             print("No threads found")
             return
         records = []
+        
+        stats = {
+            "general_health": 0,
+            "heart_health": 0,
+            "women_heart_health": 0,
+        }
 
         general_count = 0
         heart_count = 0
@@ -368,12 +379,15 @@ def main():
 
             if topic == "general_health":
                 general_count += 1
+                stats["general_health"] += 1
 
             elif topic == "heart_health":
                 heart_count += 1
+                stats["heart_health"] += 1
 
             elif topic == "women_heart_health":
                 women_heart_count += 1
+                stats["women_heart_health"] += 1
                 records.append(record)
 
                 print(
@@ -386,6 +400,15 @@ def main():
         if records:
 
             save_json(records, "healthboards.json")
+            
+            save_stats(
+                {
+                    "source": "HealthBoards",
+                    "total_examined": len(stubs),
+                    "by_topic": stats,
+                },
+                "healthboards_stats.json",
+            )
 
             print(
                 f"\nSaved {len(records)} records "
@@ -402,11 +425,13 @@ def main():
             + women_heart_count
         )
 
+        total = len(stubs)
+
         print("\nScraping Summary:")
         print(f"Total examined: {total}")
-        print(f"General health: {general_count}")
-        print(f"Heart health: {heart_count}")
-        print(f"Women's heart health: {women_heart_count}")
+        print(f"General health: {stats['general_health']}")
+        print(f"Heart health: {stats['heart_health']}")
+        print(f"Women's heart health: {stats['women_heart_health']}")
 
         # chart
         labels = [
@@ -416,9 +441,9 @@ def main():
         ]
 
         values = [
-            general_count,
-            heart_count,
-            women_heart_count
+            stats["general_health"],
+            stats["heart_health"],
+            stats["women_heart_health"]
         ]
 
         plt.figure()
