@@ -14,27 +14,41 @@
     "diet": 12,
     "exercise": 11,
     "heart_attack": 4,
-    "chest_pain": 4,
+    "chest_pain": 6,
     "mental_health": 40,
+    "female_risk_factors": 9,
     "hypertension": 12,
     "pregnancy": 1,
-    "female_risk_factors": 8,
     "menopause": 37,
     "cholesterol": 38
   },
   "by_sentiment": {
-    "positive": 50,
-    "neutral": 193,
-    "negative": 57
+    "positive": 51,
+    "neutral": 190,
+    "negative": 59
   },
   "by_classification": {
     "factual": 300,
     "opinion/anecdotal": 0,
     "mixed": 0
   },
+  "women_subset": {
+    "count": 3,
+    "by_tags": {
+      "cholesterol": 3,
+      "female_risk_factors": 2,
+      "diet": 1,
+      "menopause": 1
+    },
+    "by_sentiment": {
+      "positive": 0,
+      "neutral": 3,
+      "negative": 0
+    }
+  },
   "date_range": {
     "earliest": "2025-03-23T19:09:26.000Z",
-    "latest": "2026-05-10T07:05:23.000Z"
+    "latest": "2026-05-10T08:21:03.000Z"
   },
   "by_section": {
     "Heart Failure Support": {
