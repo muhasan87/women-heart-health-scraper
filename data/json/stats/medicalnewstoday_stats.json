@@ -32,6 +32,30 @@
     "opinion/anecdotal": 0,
     "mixed": 0
   },
+  "women_subset": {
+    "count": 31,
+    "by_tags": {
+      "cholesterol": 10,
+      "diet": 16,
+      "female_risk_factors": 29,
+      "heart_disease": 19,
+      "hypertension": 15,
+      "cardiovascular": 10,
+      "exercise": 11,
+      "heart_attack": 11,
+      "mental_health": 12,
+      "stroke": 12,
+      "arrhythmia": 4,
+      "menopause": 5,
+      "pregnancy": 5,
+      "chest_pain": 3
+    },
+    "by_sentiment": {
+      "positive": 1,
+      "neutral": 7,
+      "negative": 23
+    }
+  },
   "date_range": {
     "earliest": "2017-01-11T16:00:00.000Z",
     "latest": "2026-04-22T11:30:00.000Z"

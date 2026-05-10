@@ -32,6 +32,27 @@
     "opinion/anecdotal": 0,
     "mixed": 0
   },
+  "women_subset": {
+    "count": 6,
+    "by_tags": {
+      "cardiovascular": 3,
+      "cholesterol": 1,
+      "female_risk_factors": 6,
+      "heart_attack": 2,
+      "heart_disease": 1,
+      "hypertension": 3,
+      "menopause": 1,
+      "stroke": 2,
+      "mental_health": 3,
+      "pregnancy": 4,
+      "arrhythmia": 1
+    },
+    "by_sentiment": {
+      "positive": 2,
+      "neutral": 2,
+      "negative": 2
+    }
+  },
   "date_range": {
     "earliest": null,
     "latest": null

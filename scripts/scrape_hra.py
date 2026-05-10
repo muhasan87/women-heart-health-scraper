@@ -315,7 +315,7 @@ def main() -> None:
     else:
         print("\nNo women's heart health articles found.")
 
-    save_stats(stats, "healthresearch.json")
+    save_stats(stats, "heartresearch_stats.json")
     
     print("\nScraping Summary:")
     for section_name, counts in stats["by_section"].items():

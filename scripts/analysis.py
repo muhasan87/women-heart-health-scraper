@@ -4,6 +4,7 @@ from collections import defaultdict, Counter
 from datetime import datetime
 
 import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
 import numpy as np
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +37,9 @@ def aggregate(all_stats):
     classification_totals = defaultdict(int)
     topic_matrix = defaultdict(lambda: defaultdict(int))
     sentiment_matrix = defaultdict(lambda: defaultdict(int))
+    women_tag_totals = defaultdict(int)
+    women_sentiment_totals = defaultdict(int)
+    women_total = 0
     date_ranges = []
 
     for entry in all_stats:
@@ -44,6 +48,8 @@ def aggregate(all_stats):
         total_examined += source_total
         source_totals[source] += source_total
         by_topic = entry.get("by_topic", {})
+        women_subset = entry.get("women_subset", {})
+        women_total += women_subset.get("count", 0)
 
         #total
         for topic, count in by_topic.items():
@@ -72,6 +78,13 @@ def aggregate(all_stats):
         for cls, count in by_classification.items():
             classification_totals[cls] += count
 
+        #women
+        for tag, count in women_subset.get("by_tags", {}).items():
+            women_tag_totals[tag] += count
+        
+        for sentiment, count in women_subset.get("by_sentiment", {}).items():
+            women_sentiment_totals[sentiment] += count
+        
         #date range
         date_range = entry.get("date_range", {})
         earliest = date_range.get("earliest")
@@ -92,6 +105,9 @@ def aggregate(all_stats):
         "classification_totals": classification_totals,
         "topic_matrix": topic_matrix,
         "sentiment_matrix": sentiment_matrix,
+        "women_total": women_total,
+        "women_tag_totals": women_tag_totals,
+        "women_sentiment_totals": women_sentiment_totals,
         "date_ranges": date_ranges,
     }
 
@@ -273,7 +289,40 @@ def print_summary(results):
         f"Women's heart health proportion: "
         f"{women_pct:.1f}%"
     )
+    
+    print_section("WOMEN'S HEART HEALTH TAGS")
+    women_tag_totals = results["women_tag_totals"]
+    women_tag_sum = sum(
+        women_tag_totals.values()
+    )
+    for tag, count in sorted(
+        women_tag_totals.items(),
+        key=lambda x: x[1],
+        reverse=True,
+    ):
+        pct = (
+            count / women_tag_sum * 100
+            if women_tag_sum else 0
+        )
+        print(f"{tag}: {count} ({pct:.1f}%)")
 
+    print_section("WOMEN'S HEART HEALTH SENTIMENT")
+    women_sentiment_totals = results[
+        "women_sentiment_totals"
+    ]
+    women_sentiment_sum = sum(
+        women_sentiment_totals.values()
+    )
+    for sentiment, count in sorted(
+        women_sentiment_totals.items(),
+        key=lambda x: x[1],
+        reverse=True,
+    ):
+        pct = (
+            count / women_sentiment_sum * 100
+            if women_sentiment_sum else 0
+        )
+        print(f"{sentiment}: {count} ({pct:.1f}%)")
 
 #charts
 def create_topic_chart(topic_totals):
@@ -327,7 +376,7 @@ def create_tag_chart(tag_totals):
         tag_totals.items(),
         key=lambda x: x[1],
         reverse=True,
-    )[:15]
+    )
 
     labels = [x[0] for x in sorted_tags]
     values = [x[1] for x in sorted_tags]
@@ -345,6 +394,36 @@ def create_tag_chart(tag_totals):
 
     print(f"Saved chart: {path}")
 
+def create_women_tag_chart(women_tag_totals):
+
+    sorted_tags = sorted(
+        women_tag_totals.items(),
+        key=lambda x: x[1],
+        reverse=True,
+    )[:15]
+
+    if not sorted_tags:
+        return
+
+    labels = [x[0] for x in sorted_tags]
+    values = [x[1] for x in sorted_tags]
+
+    plt.figure(figsize=(10, 6))
+    plt.barh(labels, values)
+
+    plt.gca().invert_yaxis()
+
+    plt.title("Women's Heart Health Tags")
+    plt.xlabel("Count")
+
+    plt.tight_layout()
+
+    path = CHART_DIR / "women_tags.png"
+
+    plt.savefig(path)
+    plt.close()
+
+    print(f"Saved chart: {path}")
 
 def create_sentiment_chart(sentiment_totals):
     labels = list(sentiment_totals.keys())
@@ -367,6 +446,43 @@ def create_sentiment_chart(sentiment_totals):
 
     print(f"Saved chart: {path}")
 
+def create_women_sentiment_chart(
+    women_sentiment_totals
+):
+
+    labels = list(
+        women_sentiment_totals.keys()
+    )
+
+    values = list(
+        women_sentiment_totals.values()
+    )
+
+    if sum(values) == 0:
+        return
+
+    plt.figure(figsize=(6, 6))
+
+    plt.pie(
+        values,
+        labels=labels,
+        autopct="%1.1f%%",
+    )
+
+    plt.title(
+        "Women's Heart Health Sentiment"
+    )
+
+    path = (
+        CHART_DIR /
+        "women_sentiment_distribution.png"
+    )
+
+    plt.savefig(path)
+    plt.close()
+
+    print(f"Saved chart: {path}")
+
 
 def create_classification_chart(classification_totals):
     labels = list(classification_totals.keys())
@@ -381,6 +497,170 @@ def create_classification_chart(classification_totals):
     plt.ylabel("Count")
     plt.tight_layout()
     path = CHART_DIR / "source_classification.png"
+
+    plt.savefig(path)
+    plt.close()
+
+    print(f"Saved chart: {path}")
+
+def create_women_tag_heatmap(all_stats):
+    sources = []
+    tag_set = set()
+    source_tag_data = {}
+    for entry in all_stats:
+
+        source = entry.get(
+            "source",
+            "Unknown"
+        )
+        women_subset = entry.get(
+            "women_subset",
+            {}
+        )
+        tags = women_subset.get(
+            "by_tags",
+            {}
+        )
+        if not tags:
+            continue
+        sources.append(source)
+        source_tag_data[source] = tags
+
+        for tag in tags:
+            tag_set.add(tag)
+
+    if not source_tag_data:
+        return
+
+    top_tags = sorted(
+        tag_set
+    )[:12]
+    matrix = []
+    
+    for source in sources:
+        row = []
+        for tag in top_tags:
+            row.append(
+                source_tag_data[source].get(
+                    tag,
+                    0
+                )
+            )
+        matrix.append(row)
+    matrix = np.array(matrix)
+    plt.figure(figsize=(12, 7))
+    plt.imshow(
+        matrix,
+        aspect="auto",
+        cmap="Reds"
+    )
+
+    plt.colorbar(label="Count")
+    plt.xticks(
+        range(len(top_tags)),
+        top_tags,
+        rotation=45,
+        ha="right"
+    )
+
+    plt.yticks(
+        range(len(sources)),
+        sources
+    )
+
+    plt.title(
+        "Source × Women's Heart Health Tags"
+    )
+
+    plt.tight_layout()
+
+    path = (
+        CHART_DIR /
+        "women_tag_heatmap.png"
+    )
+
+    plt.savefig(path)
+    plt.close()
+
+    print(f"Saved chart: {path}")
+
+def create_sentiment_tag_heatmap(
+    women_tag_totals,
+    women_sentiment_totals
+):
+
+    sentiments = list(
+        women_sentiment_totals.keys()
+    )
+
+    top_tags = [
+        tag for tag, _ in sorted(
+            women_tag_totals.items(),
+            key=lambda x: x[1],
+            reverse=True,
+        )[:10]
+    ]
+
+    if not sentiments or not top_tags:
+        return
+
+    matrix = []
+
+    for sentiment in sentiments:
+
+        sentiment_total = (
+            women_sentiment_totals[sentiment]
+        )
+
+        row = []
+
+        for tag in top_tags:
+
+            tag_total = women_tag_totals[tag]
+
+            value = min(
+                tag_total,
+                sentiment_total
+            )
+
+            row.append(value)
+
+        matrix.append(row)
+
+    matrix = np.array(matrix)
+
+    plt.figure(figsize=(10, 5))
+
+    plt.imshow(
+        matrix,
+        aspect="auto",
+        cmap="Purples"
+    )
+
+    plt.colorbar(label="Relative Strength")
+
+    plt.xticks(
+        range(len(top_tags)),
+        top_tags,
+        rotation=45,
+        ha="right"
+    )
+
+    plt.yticks(
+        range(len(sentiments)),
+        sentiments
+    )
+
+    plt.title(
+        "Sentiment × Women's Heart Health Tags"
+    )
+
+    plt.tight_layout()
+
+    path = (
+        CHART_DIR /
+        "women_sentiment_tag_heatmap.png"
+    )
 
     plt.savefig(path)
     plt.close()
@@ -415,6 +695,23 @@ def main():
 
     create_classification_chart(
         results["classification_totals"]
+    )
+    
+    create_women_tag_chart(
+        results["women_tag_totals"]
+    )
+
+    create_women_sentiment_chart(
+        results["women_sentiment_totals"]
+    )
+
+    create_women_tag_heatmap(
+        all_stats
+    )
+
+    create_sentiment_tag_heatmap(
+        results["women_tag_totals"],
+        results["women_sentiment_totals"]
     )
 
     print("\nAnalysis complete.")

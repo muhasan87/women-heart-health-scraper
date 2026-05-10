@@ -32,6 +32,26 @@
     "opinion/anecdotal": 0,
     "mixed": 0
   },
+  "women_subset": {
+    "count": 4,
+    "by_tags": {
+      "chest_pain": 3,
+      "female_risk_factors": 4,
+      "heart_attack": 4,
+      "heart_disease": 4,
+      "hypertension": 2,
+      "menopause": 2,
+      "stroke": 3,
+      "cardiovascular": 3,
+      "exercise": 1,
+      "arrhythmia": 2
+    },
+    "by_sentiment": {
+      "positive": 0,
+      "neutral": 0,
+      "negative": 4
+    }
+  },
   "date_range": {
     "earliest": "2018-05-31T12:05:32+00:00",
     "latest": "2026-02-12T03:56:13+00:00"

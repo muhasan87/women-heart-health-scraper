@@ -1,6 +1,6 @@
 [
   {
-    "id": "reddit_wh_011",
+    "id": "reddit_wh_017",
     "source": "Reddit",
     "source_category": "forum",
     "source_type": "community",
@@ -12,7 +12,7 @@
     "author": "Daisy_Gastly",
     "author_type": "individual",
     "publish_time": "2026-05-10T01:27:17+00:00",
-    "scrape_time": "2026-05-10T06:45:17.881054+00:00",
+    "scrape_time": "2026-05-10T09:35:51.337587+00:00",
     "tags": [
       "arrhythmia"
     ],
@@ -27,7 +27,7 @@
     "language": "en"
   },
   {
-    "id": "reddit_wh_036",
+    "id": "reddit_wh_042",
     "source": "Reddit",
     "source_category": "forum",
     "source_type": "community",
@@ -39,7 +39,7 @@
     "author": "Wide-Ice-6247",
     "author_type": "individual",
     "publish_time": "2026-05-09T14:53:35+00:00",
-    "scrape_time": "2026-05-10T06:46:04.774579+00:00",
+    "scrape_time": "2026-05-10T09:36:36.179094+00:00",
     "tags": [
       "hypertension"
     ],
@@ -54,7 +54,7 @@
     "language": "en"
   },
   {
-    "id": "reddit_wh_060",
+    "id": "reddit_wh_066",
     "source": "Reddit",
     "source_category": "forum",
     "source_type": "community",
@@ -66,8 +66,36 @@
     "author": "Solid_Cup7994",
     "author_type": "individual",
     "publish_time": "2026-05-09T02:21:09+00:00",
-    "scrape_time": "2026-05-10T06:46:53.009517+00:00",
+    "scrape_time": "2026-05-10T09:37:20.477111+00:00",
     "tags": [
+      "hypertension"
+    ],
+    "hashtags": [],
+    "engagement": {
+      "likes": null,
+      "comments": null,
+      "shares": null
+    },
+    "media_type": "text",
+    "content_type": "post",
+    "language": "en"
+  },
+  {
+    "id": "reddit_wh_298",
+    "source": "Reddit",
+    "source_category": "forum",
+    "source_type": "community",
+    "source_classification": "opinion/anecdotal",
+    "url": "https://old.reddit.com/r/WomensHealth/comments/1t36biz/orgasm_head_pain/",
+    "title": "Orgasm Head Pain",
+    "content": "Im 19F and I have been masturbating almost every day for about a year or two but until 4 days ago Ive been having pains whenever I get close to orgasming and its really freaking me out\nIt started as I came once and I got a random sharp pain in the back of my neck on the left side but I thought maybe I just overextended my head\nThe next day I came and I get such a bad headache that ive never felt before that started at that back of my neck then travels to like my temples and my hairline and it lingers for awhile maybe a 6/10 on the pain scale\nIt scared me but I decided to sleep it off and I woke up to the pain kinda being gone but my head and back of neck felt sore and it hasnt really been the same since\nIve tried to come again and now I experience this pain each time and its making me sad a bit\nI dont have the best sleep schedule along with my hydration could be a bit better (usually 2 cups of water a day, i forget easily) so im not sure if thats a factor or not.\nI have liquid IVs ive been trying to implement and see if it helps its just so weird ive never experienced anything like this\nI dont have a history with migranes, no medications im on and nothing I can note thats changed in my diet\nI took my blood pressure after and it was also normal im just worried and dont know where to go from here. Im worried that this is just going to be my sex life from now on 😿",
+    "summary": "Im 19F and I have been masturbating almost every day for about a year or two but until 4 days ago Ive been having pains whenever I get close to orgasming and its really freaking me out",
+    "author": "Zestyclose_Dog_8019",
+    "author_type": "individual",
+    "publish_time": "2026-05-04T03:32:44+00:00",
+    "scrape_time": "2026-05-10T09:39:30.731179+00:00",
+    "tags": [
+      "diet",
       "hypertension"
     ],
     "hashtags": [],

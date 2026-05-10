@@ -421,6 +421,16 @@ def create_stats(source_name: str) -> dict:
             "mixed": 0
         },
         
+        "women_subset": {
+            "count": 0,
+            "by_tags": {},
+            "by_sentiment": {
+                "positive": 0,
+                "neutral": 0,
+                "negative": 0
+            }
+        },
+        
         "date_range": {
             "earliest": None,
             "latest": None
@@ -473,7 +483,18 @@ def update_stats(
     if source_classification:
         stats["by_classification"][source_classification] += 1
     
-    # date range
+    # filter by womens heart health
+    if topic == "women_heart_health":
+        stats["women_subset"]["count"] +=1
+        for tag in tags:
+            stats["women_subset"]["by_tags"][tag] = (
+                stats["women_subset"]["by_tags"].get(tag, 0) + 1
+            )
+        if sentiment:
+            stats["women_subset"]["by_sentiment"][
+                sentiment
+            ] += 1
+    
     # date range
     if publish_time:
         earliest = stats["date_range"]["earliest"]
