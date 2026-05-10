@@ -217,7 +217,7 @@ def main() -> None:
             publish_time=article["publish_time"]
         )
 
-        if topic == "women_heart":
+        if topic == "women_heart_health":
             records.append(article)
 
     if records:
