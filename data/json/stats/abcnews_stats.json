@@ -1,0 +1,38 @@
+{
+  "source": "ABC News",
+  "total_examined": 255,
+  "by_topic": {
+    "general_health": 243,
+    "heart_health": 8,
+    "women_heart_health": 4
+  },
+  "by_tags": {
+    "female_risk_factors": 52,
+    "mental_health": 35,
+    "pregnancy": 10,
+    "cardiovascular": 3,
+    "chest_pain": 7,
+    "diet": 4,
+    "exercise": 8,
+    "menopause": 2,
+    "stroke": 4,
+    "hypertension": 2,
+    "cholesterol": 3,
+    "arrhythmia": 1,
+    "heart_disease": 2
+  },
+  "by_sentiment": {
+    "positive": 69,
+    "neutral": 102,
+    "negative": 84
+  },
+  "by_classification": {
+    "factual": 255,
+    "opinion/anecdotal": 0,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": "2026-03-10T09:13:53.000Z",
+    "latest": "2026-05-10T02:00:42.000Z"
+  }
+}

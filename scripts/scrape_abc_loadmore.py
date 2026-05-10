@@ -24,14 +24,19 @@ from common import (
     extract_title_generic,
     extract_tags,
     get_soup,
+    save_stats,
     save_json,
+    create_stats,
+    add_section,
+    analyse_sentiment,
+    update_stats,
     now_iso,
     CHART_DIR,
 )
 
 BASE_URL = "https://www.abc.net.au/news/health"
 
-MAX_LOAD_MORE_ROUNDS = 10
+MAX_LOAD_MORE_ROUNDS = 15
 MAX_ARTICLES = 300
 
 ABCTEST_CHART_DIR = CHART_DIR / "abc_charts"
@@ -186,18 +191,8 @@ def main() -> None:
         return
 
     records = []
-
-    stats = {
-        "general": 0,
-        "heart": 0,
-        "women_heart": 0,
-    }
-
-    topic_map = {
-        "general_health": "general",
-        "heart_health": "heart",
-        "women_heart_health": "women_heart",
-    }
+    stats = create_stats("ABC News")
+    topics = ["general_health", "heart_health", "women_heart_health"]
 
     for index, link in enumerate(links[:MAX_ARTICLES], start=1):
         print(f"\nChecking article {index}: {link}")
@@ -208,11 +203,19 @@ def main() -> None:
             print(f"Error reading article: {error}")
             continue
 
-        topic_raw = classify_topic(article["title"] or "", article["content"] or "")
-        topic = topic_map.get(topic_raw)
-
-        if topic:
-            stats[topic] += 1
+        #topic_raw = classify_topic(article["title"] or "", article["content"] or "")
+        #topic = topic_map.get(topic_raw)
+        topic = classify_topic(article["title"] or "", article["content"] or "")
+        tags = extract_tags(f"{article['title'] or ''} {article['content'] or ''}")
+        sentiment = analyse_sentiment(article["content"] or "")
+        update_stats(
+            stats,
+            topic=topic,
+            tags=tags,
+            sentiment=sentiment,
+            source_classification=article["source_classification"],
+            publish_time=article["publish_time"]
+        )
 
         if topic == "women_heart":
             records.append(article)
@@ -221,28 +224,30 @@ def main() -> None:
         save_json(records, "abc_news.json")
         print(f"\nSaved {len(records)} women heart health articles to abc_news.json")
 
+    save_stats(stats, "abcnews_stats.json")
+    
     print("\nScraping Summary:")
-    print(f"Total saved: {len(records)}")
+    total = sum(stats["by_topic"].values())
+    if total > 0:
+        for topic, count in stats["by_topic"].items():
+            pct = (count / total) * 100
+            print(f"{topic}: {count} ({pct:.1f}%)")
+    
+    #print(f"Total saved: {len(records)}")
 
-    total = sum(stats.values())
+    labels = ["General Health", "Heart Health", "Women's Heart Health"]
+    values = [stats["by_topic"][t] for t in topics]
+    #total = sum(stats.values())
 
-    for k, v in stats.items():
-        pct = (v / total) * 100 if total else 0
-        print(f"{k.replace('_', ' ').title()}: {v} ({pct:.1f}%)")
-
-    labels = ["general_health", "heart_health", "women_heart_health"]
-    values = [
-        stats["general"],
-        stats["heart"],
-        stats["women_heart"],
-    ]
-
+    #for k, v in stats.items():
+        #pct = (v / total) * 100 if total else 0
+        #print(f"{k.replace('_', ' ').title()}: {v} ({pct:.1f}%)")
     plt.figure()
     plt.bar(labels, values)
-    plt.title("ABC News Health Article Distribution")
-    plt.xlabel("Category")
+    plt.xticks(["General Health", "Heart Health", "Women's Heart Health"])
+    plt.title("ABC News Health Topic Distribution")
+    plt.xlabel("Topic")
     plt.ylabel("Number of Articles")
-    plt.xticks(rotation=20)
     plt.tight_layout()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
@@ -252,6 +257,13 @@ def main() -> None:
     plt.close()
 
     print(f"Chart saved to: {chart_path}")
+    
+    total_all = stats["total_examined"]
+    overall_womens_heart = stats["by_topic"]["women_heart_health"]
+    
+    print("\n=== Overall Coverage ===")
+    print(f"Total articles: {total_all}")
+    print(f"Women's heart health: {overall_womens_heart} ({(overall_womens_heart/total_all)*100:.1f}%)")
 
 
 if __name__ == "__main__":
