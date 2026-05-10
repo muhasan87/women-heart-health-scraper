@@ -1,0 +1,56 @@
+{
+  "source": "Medical News Today",
+  "total_examined": 236,
+  "by_topic": {
+    "general_health": 106,
+    "heart_health": 99,
+    "women_heart_health": 31
+  },
+  "by_tags": {
+    "diet": 59,
+    "female_risk_factors": 97,
+    "mental_health": 61,
+    "heart_attack": 57,
+    "hypertension": 63,
+    "cholesterol": 38,
+    "heart_disease": 63,
+    "cardiovascular": 57,
+    "exercise": 44,
+    "stroke": 43,
+    "chest_pain": 25,
+    "arrhythmia": 22,
+    "menopause": 25,
+    "pregnancy": 27
+  },
+  "by_sentiment": {
+    "positive": 42,
+    "neutral": 55,
+    "negative": 139
+  },
+  "by_classification": {
+    "factual": 236,
+    "opinion/anecdotal": 0,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": "2017-01-11T16:00:00.000Z",
+    "latest": "2026-04-22T11:30:00.000Z"
+  },
+  "by_section": {
+    "cardiovascular_health": {
+      "general_health": 14,
+      "heart_health": 61,
+      "women_heart_health": 12
+    },
+    "womens_health": {
+      "general_health": 77,
+      "heart_health": 5,
+      "women_heart_health": 13
+    },
+    "heart_disease": {
+      "general_health": 15,
+      "heart_health": 33,
+      "women_heart_health": 6
+    }
+  }
+}
