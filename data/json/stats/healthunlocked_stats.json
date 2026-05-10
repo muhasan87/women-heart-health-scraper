@@ -1,0 +1,66 @@
+{
+  "source": "Health Unlocked",
+  "total_examined": 300,
+  "by_topic": {
+    "general_health": 205,
+    "heart_health": 92,
+    "women_heart_health": 3
+  },
+  "by_tags": {
+    "arrhythmia": 48,
+    "heart_disease": 3,
+    "stroke": 3,
+    "cardiovascular": 19,
+    "diet": 12,
+    "exercise": 11,
+    "heart_attack": 4,
+    "chest_pain": 4,
+    "mental_health": 40,
+    "hypertension": 12,
+    "pregnancy": 1,
+    "female_risk_factors": 8,
+    "menopause": 37,
+    "cholesterol": 38
+  },
+  "by_sentiment": {
+    "positive": 50,
+    "neutral": 193,
+    "negative": 57
+  },
+  "by_classification": {
+    "factual": 300,
+    "opinion/anecdotal": 0,
+    "mixed": 0
+  },
+  "date_range": {
+    "earliest": "2025-03-23T19:09:26.000Z",
+    "latest": "2026-05-10T07:05:23.000Z"
+  },
+  "by_section": {
+    "Heart Failure Support": {
+      "general_health": 18,
+      "heart_health": 42,
+      "women_heart_health": 0
+    },
+    "Atrial Fibrillation Support": {
+      "general_health": 50,
+      "heart_health": 10,
+      "women_heart_health": 0
+    },
+    "Women's Health": {
+      "general_health": 54,
+      "heart_health": 6,
+      "women_heart_health": 0
+    },
+    "Menopause and Perimenopause Support": {
+      "general_health": 60,
+      "heart_health": 0,
+      "women_heart_health": 0
+    },
+    "Cholesterol Support": {
+      "general_health": 23,
+      "heart_health": 34,
+      "women_heart_health": 3
+    }
+  }
+}

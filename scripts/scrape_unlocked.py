@@ -3,6 +3,7 @@ import re
 import os
 import matplotlib.pyplot as plt
 from datetime import datetime
+import numpy as np
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -16,7 +17,13 @@ from common import (
     extract_summary_from_paragraphs,
     normalise_text,
     save_json,
+    save_stats,
     now_iso,
+    extract_tags,
+    create_stats,
+    add_section,
+    analyse_sentiment,
+    update_stats,
     CHART_DIR,
 )
 
@@ -27,32 +34,36 @@ COMMUNITIES = [
         "name": "Heart Failure Support",
         "url": "https://healthunlocked.com/arrhythmia-alliance-heart-failure",
         "id_prefix": "hu_hf",
+        "source_classification": "factual",
     },
     {
         "name": "Atrial Fibrillation Support",
         "url": "https://healthunlocked.com/afassociation",
         "id_prefix": "hu_afs",
+        "source_classification": "factual",
     },
     {
         "name": "Women's Health",
         "url": "https://healthunlocked.com/womenshealth",
         "id_prefix": "hu_wh",
+        "source_classification": "factual",
     },
     {
         "name": "Menopause and Perimenopause Support",
         "url": "https://healthunlocked.com/menopause-perimenopause-support",
         "id_prefix": "hu_mps",
+        "source_classification": "factual",
     },
     {
         "name": "Cholesterol Support",
         "url": "https://healthunlocked.com/cholesterol-support",
         "id_prefix": "hu_cs",
+        "source_classification": "factual",
     }
-    
 ]
 
 MAX_SCROLLS = 6
-MAX_POSTS_PER_COMMUNITY = 100
+MAX_POSTS_PER_COMMUNITY = 60
 
 JUNK_PHRASES = [
     "we use cookies",
@@ -103,7 +114,7 @@ def load_all_posts(driver: webdriver.Chrome, url: str) -> None:
             )
         )
     except TimeoutException:
-        print("  Timed out waiting for post links — page may require login")
+        print("  Timed out waiting for post links")
         return
 
     for i in range(MAX_SCROLLS):
@@ -118,29 +129,26 @@ def load_all_posts(driver: webdriver.Chrome, url: str) -> None:
                 )
             )
             driver.execute_script("arguments[0].click();", button)
-            print("    Clicked 'See more posts'")
             time.sleep(2)
         except TimeoutException:
-            print("    No more 'See more posts' button")
             break
 
 
 def collect_links(driver: webdriver.Chrome) -> list[str]:
     links = []
-    elements = driver.find_elements(
-        By.XPATH, "//a[@data-sentry-component='PostLink']"
-    )
+    elements = driver.find_elements(By.XPATH, "//a[@data-sentry-component='PostLink']")
+
     for el in elements:
         href = el.get_attribute("href") or ""
         if re.search(r"/posts/\d+/", href) and href not in links:
             links.append(href)
+
     return links
 
 
-def extract_post(driver: webdriver.Chrome, url: str) -> tuple[str, str, str, str | None, str | None]:
+def extract_post(driver: webdriver.Chrome, url: str):
     driver.get(url)
-
-    wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 5)
 
     title = ""
     try:
@@ -149,7 +157,6 @@ def extract_post(driver: webdriver.Chrome, url: str) -> tuple[str, str, str, str
         )
         title = normalise_text(el.text)
     except TimeoutException:
-
         title = url.rstrip("/").split("/")[-1].replace("-", " ").title()
 
     paragraphs = []
@@ -157,7 +164,6 @@ def extract_post(driver: webdriver.Chrome, url: str) -> tuple[str, str, str, str
         body = driver.find_element(By.CSS_SELECTOR, ".js-post-body")
         paragraphs = [p.text.strip() for p in body.find_elements(By.TAG_NAME, "p")]
     except NoSuchElementException:
-
         paragraphs = [p.text.strip() for p in driver.find_elements(By.TAG_NAME, "p")]
 
     cleaned = clean_paragraph_list(paragraphs, junk_phrases=JUNK_PHRASES, min_length=30)
@@ -167,7 +173,7 @@ def extract_post(driver: webdriver.Chrome, url: str) -> tuple[str, str, str, str
     publish_time = None
     try:
         time_el = driver.find_element(By.CSS_SELECTOR, "[data-testid='date-time']")
-        publish_time = time_el.get_attribute("datetime") or normalise_text(time_el.text) or None
+        publish_time = time_el.get_attribute("datetime") or normalise_text(time_el.text)
     except NoSuchElementException:
         pass
 
@@ -175,7 +181,7 @@ def extract_post(driver: webdriver.Chrome, url: str) -> tuple[str, str, str, str
     try:
         el = driver.find_element(By.CSS_SELECTOR, "button.author")
         candidate = normalise_text(el.text)
-        if candidate and candidate.lower() not in ("join or log in", "log in", "join"):
+        if candidate.lower() not in ("join or log in", "log in", "join"):
             author = candidate
     except NoSuchElementException:
         pass
@@ -187,10 +193,14 @@ def main() -> None:
     driver = get_driver()
 
     records = []
-    general_count = 0
-    heart_count = 0
-    women_heart_count = 0
-    total_examined = 0
+    stats = create_stats("Health Unlocked")
+    add_section(stats, "Heart Failure Support")
+    add_section(stats, "Atrial Fibrillation Support")
+    add_section(stats, "Women's Health")
+    add_section(stats, "Menopause and Perimenopause Support")
+    add_section(stats, "Cholesterol Support")
+    
+    topics = ["general_health", "heart_health", "women_heart_health"]
 
     try:
         for community in COMMUNITIES:
@@ -201,27 +211,31 @@ def main() -> None:
             print(f"  Found {len(links)} post links")
 
             for index, link in enumerate(links[:MAX_POSTS_PER_COMMUNITY], start=1):
-                total_examined += 1
-                print(f"\nChecking post {index}: {link}")
+                #total_examined += 1
 
                 try:
                     title, content, summary, publish_time, author = extract_post(driver, link)
                 except Exception as error:
-                    print(f"  Error reading post: {error}")
+                    print(f"  Error: {error}")
                     continue
 
-                print("  Title:", title)
-
+                section_name = community["name"]
                 topic = classify_topic(title or "", content or "")
-
-                if topic == "general_health":
-                    general_count += 1
-                elif topic == "heart_health":
-                    heart_count += 1
-                elif topic == "women_heart_health":
-                    women_heart_count += 1
-
-                    record = {
+                tags = extract_tags(f"{title or ''} {content or ''}")
+                sentiment = analyse_sentiment(content or "")
+                update_stats(
+                    stats,
+                    topic=topic,
+                    tags=tags,
+                    sentiment=sentiment,
+                    source_classification=community["source_classification"],
+                    section=section_name,
+                    publish_time=publish_time
+                )
+                if topic == "women_heart_health":
+                    #text_for_tags = f"{title or ''} {content or ''}"
+                    #tags = extract_tags(text_for_tags)
+                    records.append({
                         "id": f"{community['id_prefix']}_{index:03d}",
                         "source": "HealthUnlocked",
                         "source_category": "forum",
@@ -232,55 +246,69 @@ def main() -> None:
                         "content": content,
                         "summary": summary,
                         "author": author,
-                        "author_type": "individual" if author else None,
                         "publish_time": publish_time,
                         "scrape_time": now_iso(),
-                        "tags": [],
+                        "tags": tags,
                         "hashtags": [],
-                        "engagement": {
-                            "likes": None,
-                            "comments": None,
-                            "shares": None,
-                        },
+                        "engagement": {"likes": None, "comments": None, "shares": None},
                         "media_type": "text",
                         "content_type": "post",
                         "language": "en",
-                    }
-
-                    records.append(record)
+                    })
 
     finally:
         driver.quit()
 
     if records:
         save_json(records, "healthunlocked.json")
-        print(f"\nSaved {len(records)} posts to healthunlocked.json")
-    else:
-        print("\nNo women's heart health posts found.")
+        print(f"\nSaved {len(records)} posts")
+
+    save_stats(stats, "healthunlocked_stats.json")
 
     print("\nScraping Summary:")
-    print(f"Total examined: {total_examined}")
-    print(f"General health: {general_count}")
-    print(f"Heart health: {heart_count}")
-    print(f"Women's heart health: {women_heart_count}")
+    for section_name, counts in stats["by_section"].items():
+        total = sum(counts.values())
+        if total == 0:
+            continue
 
-    labels = ["general_health", "heart_health", "women_heart_health"]
-    values = [general_count, heart_count, women_heart_count]
+        print(f"\n{section_name.upper()}")
+        for k, v in counts.items():
+            pct = (v / total) * 100
+            print(f"  {k}: {v} ({pct:.1f}%)")
 
+    heartf_vals = [stats["by_section"]["Heart Failure Support"][t] for t in topics]
+    atrial_vals = [stats["by_section"]["Atrial Fibrillation Support"][t] for t in topics]
+    womens_vals = [stats["by_section"]["Women's Health"][t] for t in topics]
+    menopause_vals = [stats["by_section"]["Menopause and Perimenopause Support"][t] for t in topics]
+    cholesterol_vals = [stats["by_section"]["Cholesterol Support"][t] for t in topics]
+
+    x = np.arange(len(topics))
     plt.figure()
-    plt.bar(labels, values)
-    plt.title("HealthUnlocked Post Summary")
-    plt.xlabel("Category")
-    plt.ylabel("Number of Posts")
-    plt.xticks(rotation=20)
+    plt.bar(x, heartf_vals, label="Heart Failure Support")
+    plt.bar(x, atrial_vals, label="Atrial Fibrillation Support")
+    plt.bar(x, womens_vals, label="Women's Health")
+    plt.bar(x, menopause_vals, label="Menopause and Perimenopause Support")
+    plt.bar(x, cholesterol_vals, label="Cholesterol Support")
+    
+    plt.xticks(x, ["General Health", "Heart Health", "Women's Heart Health"])
+    plt.title("HealthUnlocked Topic Distribution")
+    plt.xlabel("Topic")
+    plt.ylabel("Posts")
     plt.tight_layout()
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M")
-    chart_path = CHART_DIR / f"healthunlocked_summary_{timestamp}.png"
+    ts = datetime.now().strftime("%Y%m%d_%H%M")
+    chart_path = CHART_DIR / f"healthunlocked_summary_{ts}.png"
     plt.savefig(chart_path)
     plt.close()
+
     print(f"Chart saved to: {chart_path}")
 
+    total_all = stats["total_examined"]
+    overall_womens_heart = stats["by_topic"]["women_heart_health"]
+
+    print("\n=== Overall Coverage ===")
+    print(f"Total articles: {total_all}")
+    print(f"Women's heart health: {overall_womens_heart} ({(overall_womens_heart/total_all)*100:.1f}%)")
 
 if __name__ == "__main__":
     main()
