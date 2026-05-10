@@ -20,6 +20,12 @@ from common import (
     normalise_text,
     save_json,
     now_iso,
+    extract_tags,
+    save_stats,
+    create_stats,
+    add_section,
+    analyse_sentiment,
+    update_stats,
     CHART_DIR,
 )
 
@@ -254,9 +260,9 @@ def build_article_record(article_url: str, item_id: str) -> dict:
         paragraphs = content.split("\n")
         summary = extract_summary_from_paragraphs(paragraphs, title or "")
 
-    return { #order needs to be rearranged i think
+    return { 
         "id": item_id,
-        "source": "Women's Health",
+        "source": "Women's Health Mag",
         "source_category": "news",
         "source_type": "media",
         "source_classification": "mixed",
@@ -290,9 +296,8 @@ def main() -> None:
         return
 
     records = []
-    general_count = 0
-    heart_count = 0
-    women_heart_count = 0
+    stats = create_stats("Womens Health Mag")
+    topics = ["general_health", "heart_health", "women_heart_health"]
 
     for index, link in enumerate(links[:MAX_ARTICLES], start=1):
         print(f"\nChecking article {index}: {link}")
@@ -306,36 +311,44 @@ def main() -> None:
         print(f"  Title: {article['title']}")
 
         topic = classify_topic(article["title"] or "", article["content"] or "")
+        tags = extract_tags(f"{article['title'] or ''} {article['content'] or ''}")
+        sentiment = analyse_sentiment(article["content"] or "")
+        update_stats(
+            stats,
+            topic=topic,
+            tags=tags,
+            sentiment=sentiment,
+            source_classification=article["source_classification"],
+            publish_time=article["publish_time"]
+        )
 
-        if topic == "general_health":
-            general_count += 1
-        elif topic == "heart_health":
-            heart_count += 1
-        elif topic == "women_heart_health":
-            women_heart_count += 1
+        if topic == "women_heart_health":
             records.append(article)
-
+            
     if records:
         save_json(records, "womenshealth.json")
         print(f"\nSaved {len(records)} articles to womenshealth.json")
     else:
         print("\nNo women's heart health articles found.")
+    
+    save_stats(stats, "womenshealth_stats.json")
 
     print("\nScraping Summary:")
-    print(f"Total examined: {general_count + heart_count + women_heart_count}")
-    print(f"General health: {general_count}")
-    print(f"Heart health: {heart_count}")
-    print(f"Women's heart health: {women_heart_count}")
+    total = sum(stats["by_topic"].values())
+    if total > 0:
+        for topic, count in stats["by_topic"].items():
+            pct = (count / total) * 100
+            print(f"{topic}: {count} ({pct:.1f}%)")
 
-    labels = ["general_health", "heart_health", "women_heart_health"]
-    values = [general_count, heart_count, women_heart_count]
+    labels = ["General Health", "Heart Health", "Women's Heart Health"]
+    values = [stats["by_topic"][t] for t in topics]
 
     plt.figure()
     plt.bar(labels, values)
-    plt.title("Women's Health Article Summary")
-    plt.xlabel("Category")
+    plt.xticks(["General Health", "Heart Health", "Women's Heart Health"])
+    plt.title("Women's Health Mag Topic Distribution")
+    plt.xlabel("Topic")
     plt.ylabel("Number of Articles")
-    plt.xticks(rotation=20)
     plt.tight_layout()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M")
@@ -344,6 +357,12 @@ def main() -> None:
     plt.close()
     print(f"Chart saved to: {chart_path}")
 
+    total_all = stats["total_examined"]
+    overall_womens_heart = stats["by_topic"]["women_heart_health"]
+    
+    print("\n=== Overall Coverage ===")
+    print(f"Total articles: {total_all}")
+    print(f"Women's heart health: {overall_womens_heart} ({(overall_womens_heart/total_all)*100:.1f}%)")
 
 if __name__ == "__main__":
     main()

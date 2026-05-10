@@ -1,0 +1,38 @@
+{
+  "source": "Womens Health Mag",
+  "total_examined": 69,
+  "by_topic": {
+    "general_health": 56,
+    "heart_health": 6,
+    "women_heart_health": 7
+  },
+  "by_tags": {
+    "cardiovascular": 9,
+    "mental_health": 27,
+    "female_risk_factors": 43,
+    "menopause": 11,
+    "diet": 28,
+    "exercise": 17,
+    "hypertension": 8,
+    "chest_pain": 7,
+    "pregnancy": 10,
+    "heart_disease": 2,
+    "heart_attack": 1,
+    "stroke": 3,
+    "cholesterol": 1
+  },
+  "by_sentiment": {
+    "positive": 26,
+    "neutral": 20,
+    "negative": 23
+  },
+  "by_classification": {
+    "factual": 0,
+    "opinion/anecdotal": 0,
+    "mixed": 69
+  },
+  "date_range": {
+    "earliest": "2025-09-18T07:00:00.000Z",
+    "latest": "2026-05-08T12:00:00.000Z"
+  }
+}
