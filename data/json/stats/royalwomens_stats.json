@@ -23,9 +23,9 @@
     "exercise": 1
   },
   "by_sentiment": {
-    "positive": 52,
-    "neutral": 15,
-    "negative": 12
+    "positive": 49,
+    "neutral": 19,
+    "negative": 11
   },
   "by_classification": {
     "factual": 79,

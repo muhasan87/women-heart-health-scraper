@@ -12,7 +12,7 @@
     "author": "The Royal Women's Hospital",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-10T23:05:22.595003+00:00",
+    "scrape_time": "2026-05-12T06:20:09.792714+00:00",
     "tags": [
       "cardiovascular",
       "cholesterol",
@@ -47,7 +47,7 @@
     "author": "The Royal Women's Hospital",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-10T23:05:22.875751+00:00",
+    "scrape_time": "2026-05-12T06:20:11.010358+00:00",
     "tags": [
       "cardiovascular",
       "female_risk_factors",
@@ -66,7 +66,7 @@
     "language": "en"
   },
   {
-    "id": "rwh_034",
+    "id": "rwh_035",
     "source": "Royal Women's Hospital",
     "source_category": "institutional",
     "source_type": "hospital",
@@ -78,7 +78,7 @@
     "author": "The Royal Women's Hospital",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-10T23:05:45.055040+00:00",
+    "scrape_time": "2026-05-12T06:20:34.429181+00:00",
     "tags": [
       "female_risk_factors",
       "stroke"
@@ -95,7 +95,7 @@
     "language": "en"
   },
   {
-    "id": "rwh_047",
+    "id": "rwh_048",
     "source": "Royal Women's Hospital",
     "source_category": "institutional",
     "source_type": "hospital",
@@ -107,7 +107,7 @@
     "author": "The Royal Women's Hospital",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-10T23:05:55.402851+00:00",
+    "scrape_time": "2026-05-12T06:20:51.746140+00:00",
     "tags": [
       "cardiovascular",
       "female_risk_factors",
@@ -126,7 +126,7 @@
     "language": "en"
   },
   {
-    "id": "rwh_051",
+    "id": "rwh_052",
     "source": "Royal Women's Hospital",
     "source_category": "institutional",
     "source_type": "hospital",
@@ -138,7 +138,7 @@
     "author": "The Royal Women's Hospital",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-10T23:05:59.186081+00:00",
+    "scrape_time": "2026-05-12T06:20:55.397115+00:00",
     "tags": [
       "arrhythmia",
       "female_risk_factors",
@@ -158,7 +158,7 @@
     "language": "en"
   },
   {
-    "id": "rwh_061",
+    "id": "rwh_062",
     "source": "Royal Women's Hospital",
     "source_category": "institutional",
     "source_type": "hospital",
@@ -170,7 +170,7 @@
     "author": "The Royal Women's Hospital",
     "author_type": "organisation",
     "publish_time": null,
-    "scrape_time": "2026-05-10T23:06:10.986673+00:00",
+    "scrape_time": "2026-05-12T06:21:07.221346+00:00",
     "tags": [
       "female_risk_factors",
       "hypertension",

@@ -328,13 +328,131 @@ def extract_tags(text: str) -> list[str]:
 
     return sorted(set(tags))
 
-POSITIVE_WORDS = {"support", "improve", "healthy", "recovery", "prevention"
-                  "awareness", "survive", "treatment", "hope", "education"}
+#POSITIVE_WORDS = {"support", "improve", "healthy", "recovery", "prevention", "awareness", "survive", "treatment", "hope", "education"}
 
-NEGATIVE_WORDS = {"death", "risk", "disease", "attack", "failure", "stroke",
-                  "crisis", "anxiety", "depression", "pain"}
+#NEGATIVE_WORDS = {"death", "risk", "disease", "attack", "failure", "stroke", "crisis", "anxiety", "depression", "pain"}
+
+POSITIVE_WORDS = {
+    # outcomes
+    "recovery", "recovered", "survive", "survived", "survivor", "remission",
+    "healed", "improved", "improving", "improvement", "responding",
+    # care/access
+    "treatment", "treated", "therapy", "support", "supported", "care",
+    "management", "managed", "controlled",
+    # prevention & awareness
+    "prevention", "preventable", "awareness", "education", "screening",
+    "early detection", "diagnosed early",
+    # empowerment/action
+    "hope", "hopeful", "encourage", "encouragement", "empower", "advocate",
+    "healthy", "wellness", "wellbeing", "lifestyle", "exercise", "active",
+    # research progress
+    "breakthrough", "advance", "progress", "effective", "benefit",
+    "protective", "reduce risk", "lower risk",
+}
+
+NEGATIVE_WORDS = {
+    # mortality
+    "death", "died", "dying", "fatal", "fatality", "mortality", "killed",
+    # severe outcomes
+    "failure", "attack", "crisis", "emergency", "collapse", "rupture",
+    "stroke", "infarction", "arrest",
+    # disease burden
+    "disease", "disorder", "condition", "chronic", "severe", "serious",
+    "debilitating", "disability", "disabled",
+    # risk/danger
+    "risk", "danger", "dangerous", "threat", "alarming", "warning",
+    "worrying", "concern", "concerning",
+    # symptoms
+    "pain", "ache", "discomfort", "breathless", "exhaustion", "fatigue",
+    # mental health burden
+    "anxiety", "anxious", "depression", "depressed", "fear", "scared",
+    "stress", "distress", "suffer", "suffering",
+    # systemic failures
+    "misdiagnosed", "missed", "ignored", "dismissed", "underdiagnosed",
+    "undertreated", "gap", "disparity", "inequality", "barrier",
+    "lack", "limited", "inadequate",
+}
+
+NEUTRAL_MEDICAL_TERMS = {
+    "disease", "condition", "disorder", "risk", "chronic", "pain",
+    "fatigue", "stroke", "attack",
+}
+
+NEGATION_WORDS = {
+    "not", "no", "never", "without", "neither", "nor",
+    "barely", "hardly", "rarely", "unlikely",
+}
+NEGATION_WINDOW = 4  # words to look ahead after a negation trigger
+
+HIGH_WEIGHT_POSITIVE = {
+    "breakthrough", "survivor", "remission", "early detection",
+    "reduce risk", "lower risk", "effective",
+}
+HIGH_WEIGHT_NEGATIVE = {
+    "death", "fatal", "fatality", "mortality", "misdiagnosed",
+    "missed", "dismissed", "underdiagnosed", "disparity",
+}
+
+
+def _tokenise(text: str) -> list[str]:
+    return re.findall(r"\b\w+\b", text.lower())
+
+
+def _check_phrases(text: str, phrase_set: set[str]) -> int:
+    count = 0
+    for phrase in phrase_set:
+        if " " in phrase and phrase in text:
+            count += 1
+    return count
+
 
 def analyse_sentiment(text: str) -> str:
+    text_lower = text.lower()
+    tokens = _tokenise(text_lower)
+    n = len(tokens)
+
+    positive_score = 0.0
+    negative_score = 0.0
+
+    for i, token in enumerate(tokens):
+        window_start = max(0, i - NEGATION_WINDOW)
+        negated = any(
+            tokens[j] in NEGATION_WORDS
+            for j in range(window_start, i)
+        )
+
+        if token in POSITIVE_WORDS:
+            weight = 2.0 if token in HIGH_WEIGHT_POSITIVE else 1.0
+            if negated:
+                negative_score += weight
+            else:
+                positive_score += weight
+
+        elif token in NEGATIVE_WORDS:
+
+            if token in NEUTRAL_MEDICAL_TERMS:
+                weight = 0.5
+            elif token in HIGH_WEIGHT_NEGATIVE:
+                weight = 2.0
+            else:
+                weight = 1.0
+
+            if negated:
+                positive_score += weight
+            else:
+                negative_score += weight
+
+    positive_score += _check_phrases(text_lower, HIGH_WEIGHT_POSITIVE) * 2
+    negative_score += _check_phrases(text_lower, HIGH_WEIGHT_NEGATIVE) * 2
+
+    margin = 1.5
+    if positive_score - negative_score >= margin:
+        return "positive"
+    if negative_score - positive_score >= margin:
+        return "negative"
+    return "neutral"
+
+#def analyse_sentiment(text: str) -> str:
     text = text.lower()
     positive = sum(word in text for word in POSITIVE_WORDS)
     negative = sum(word in text for word in NEGATIVE_WORDS)

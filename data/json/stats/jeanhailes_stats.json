@@ -23,9 +23,9 @@
     "arrhythmia": 6
   },
   "by_sentiment": {
-    "positive": 121,
-    "neutral": 74,
-    "negative": 90
+    "positive": 128,
+    "neutral": 76,
+    "negative": 81
   },
   "by_classification": {
     "factual": 225,
@@ -43,8 +43,8 @@
     },
     "by_sentiment": {
       "positive": 0,
-      "neutral": 0,
-      "negative": 3
+      "neutral": 2,
+      "negative": 1
     }
   },
   "women_subset": {
@@ -66,9 +66,9 @@
       "arrhythmia": 5
     },
     "by_sentiment": {
-      "positive": 5,
+      "positive": 19,
       "neutral": 7,
-      "negative": 35
+      "negative": 21
     }
   },
   "date_range": {

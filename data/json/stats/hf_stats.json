@@ -22,9 +22,9 @@
     "arrhythmia": 6
   },
   "by_sentiment": {
-    "positive": 37,
-    "neutral": 26,
-    "negative": 55
+    "positive": 63,
+    "neutral": 21,
+    "negative": 34
   },
   "by_classification": {
     "factual": 118,
@@ -47,9 +47,9 @@
       "arrhythmia": 6
     },
     "by_sentiment": {
-      "positive": 24,
-      "neutral": 26,
-      "negative": 48
+      "positive": 53,
+      "neutral": 17,
+      "negative": 28
     }
   },
   "women_subset": {
@@ -69,9 +69,9 @@
       "diet": 1
     },
     "by_sentiment": {
-      "positive": 9,
-      "neutral": 0,
-      "negative": 7
+      "positive": 6,
+      "neutral": 4,
+      "negative": 6
     }
   },
   "date_range": {

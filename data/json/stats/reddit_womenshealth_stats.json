@@ -1,31 +1,29 @@
 {
   "source": "Reddit r/WomensHealth",
-  "total_examined": 88,
+  "total_examined": 122,
   "by_topic": {
-    "general_health": 85,
+    "general_health": 118,
     "heart_health": 0,
-    "women_heart_health": 3
+    "women_heart_health": 4
   },
   "by_tags": {
-    "mental_health": 15,
-    "female_risk_factors": 15,
-    "pregnancy": 6,
-    "chest_pain": 7,
+    "mental_health": 23,
+    "pregnancy": 15,
+    "female_risk_factors": 19,
+    "diet": 4,
+    "exercise": 2,
     "cholesterol": 2,
-    "hypertension": 2,
-    "arrhythmia": 1,
-    "exercise": 4,
-    "menopause": 2,
-    "diet": 1
+    "chest_pain": 4,
+    "hypertension": 1
   },
   "by_sentiment": {
-    "positive": 7,
-    "neutral": 49,
-    "negative": 32
+    "positive": 3,
+    "neutral": 91,
+    "negative": 28
   },
   "by_classification": {
     "factual": 0,
-    "opinion/anecdotal": 88,
+    "opinion/anecdotal": 122,
     "mixed": 0
   },
   "heart_subset": {
@@ -38,19 +36,21 @@
     }
   },
   "women_subset": {
-    "count": 3,
+    "count": 4,
     "by_tags": {
-      "hypertension": 2,
-      "arrhythmia": 1
+      "cholesterol": 1,
+      "female_risk_factors": 1,
+      "hypertension": 1,
+      "pregnancy": 1
     },
     "by_sentiment": {
       "positive": 0,
-      "neutral": 2,
+      "neutral": 3,
       "negative": 1
     }
   },
   "date_range": {
-    "earliest": "2026-05-08T23:50:28+00:00",
-    "latest": "2026-05-10T22:53:42+00:00"
+    "earliest": "2026-05-06T01:24:21+00:00",
+    "latest": "2026-05-12T05:09:23+00:00"
   }
 }

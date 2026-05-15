@@ -6,6 +6,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import numpy as np
+from scipy.stats import chi2_contingency
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATS_DIR = BASE_DIR / "data" / "json" / "stats"
@@ -1049,6 +1050,353 @@ def create_women_tag_heatmap(all_stats):
 
     print(f"Saved chart: {path}")
 
+def create_source_topic_percentage_chart(
+    topic_matrix,
+    source_totals
+):
+    sources = list(topic_matrix.keys())
+    topics = [
+        "general_health",
+        "heart_health",
+        "women_heart_health"
+    ]
+    data = []
+    for topic in topics:
+        row = []
+        for source in sources:
+            total = source_totals[source]
+            value = (
+                topic_matrix[source].get(
+                    topic,
+                    0) / total * 100
+                if total
+                else 0
+            )
+            row.append(value)
+        data.append(row)
+    data = np.array(data)
+    plt.figure(figsize=(12,6))
+    bottom = np.zeros(len(sources))
+    for i, topic in enumerate(topics):
+        plt.bar(
+            sources,
+            data[i],
+            bottom=bottom,
+            label=topic
+        )
+        bottom += data[i]
+    plt.xticks(rotation=45)
+    plt.ylabel("% of source")
+    plt.title(
+        "100% Source Topic Distribution"
+    )
+    plt.legend()
+    plt.tight_layout()
+    path = (
+        CHART_DIR /
+        "source_topic_percent.png"
+    )
+    plt.savefig(path)
+    plt.close()
+    print(f"Saved: {path}")
+
+def print_women_representation(results):
+
+    heart = results[
+        "topic_totals"
+    ].get(
+        "heart_health",
+        0
+    )
+
+    women = results[
+        "topic_totals"
+    ].get(
+        "women_heart_health",
+        0
+    )
+
+    total = heart + women
+
+    print_section(
+        "WOMEN REPRESENTATION"
+    )
+
+    if total == 0:
+        print("No heart records")
+        return
+
+    ratio = women/total*100
+
+    print(
+        f"Women's representation: "
+        f"{ratio:.2f}%"
+    )
+
+def print_source_comparison(
+    topic_matrix
+):
+
+    print_section(
+        "SOURCE COMPARISON TABLE"
+    )
+
+    header = (
+        f"{'Source':25}"
+        f"{'General':>10}"
+        f"{'Heart':>10}"
+        f"{'Women':>10}"
+    )
+
+    print(header)
+    print("-"*60)
+
+    for source, topics in topic_matrix.items():
+
+        print(
+            f"{source[:25]:25}"
+            f"{topics.get('general_health',0):10}"
+            f"{topics.get('heart_health',0):10}"
+            f"{topics.get('women_heart_health',0):10}"
+        )
+
+def print_tag_ratios(
+    heart_tags,
+    women_tags
+):
+
+    print_section(
+        "TAG RATIOS"
+    )
+
+    all_tags = (
+        set(heart_tags)
+        |
+        set(women_tags)
+    )
+
+    for tag in sorted(all_tags):
+
+        h = heart_tags.get(
+            tag,
+            0
+        )
+
+        w = women_tags.get(
+            tag,
+            0
+        )
+
+        ratio = (
+            w/h
+            if h > 0
+            else 0
+        )
+
+        print(
+            f"{tag}: "
+            f"{ratio:.2f}"
+        )
+
+def create_diverging_tag_chart(
+    heart_tags,
+    women_tags
+):
+
+    tags = list(
+        set(heart_tags)
+        |
+        set(women_tags)
+    )
+
+    values=[]
+
+    for tag in tags:
+
+        w = women_tags.get(
+            tag,
+            0
+        )
+
+        h = heart_tags.get(
+            tag,
+            0
+        )
+
+        values.append(
+            w-h
+        )
+
+    plt.figure(
+        figsize=(12,6)
+    )
+
+    plt.barh(
+        tags,
+        values
+    )
+
+    plt.axvline(0)
+
+    plt.title(
+        "Women vs Heart Tag Difference"
+    )
+
+    plt.tight_layout()
+
+    path=(
+        CHART_DIR/
+        "diverging_tags.png"
+    )
+
+    plt.savefig(path)
+
+    plt.close()
+
+    print(f"Saved: {path}")
+
+def print_source_credibility():
+
+    credibility = {
+
+        "NIH":5,
+        "MayoClinic":5,
+        "WHO":5,
+
+        "Reddit":1,
+        "Twitter":1,
+
+        "News":3,
+        "Blogs":2
+    }
+
+    print_section(
+        "SOURCE CREDIBILITY"
+    )
+
+    for source, score in credibility.items():
+
+        print(
+            f"{source}: "
+            f"{score}/5"
+        )
+
+def create_coverage_funnel(
+    results
+):
+
+    total = results[
+        "total_examined"
+    ]
+
+    heart = (
+        results[
+            "topic_totals"
+        ].get(
+            "heart_health",
+            0
+        )
+    )
+
+    women = (
+        results[
+            "topic_totals"
+        ].get(
+            "women_heart_health",
+            0
+        )
+    )
+
+    values = [
+        total,
+        heart,
+        women
+    ]
+
+    labels = [
+        "All",
+        "Heart",
+        "Women"
+    ]
+
+    plt.figure(
+        figsize=(8,5)
+    )
+
+    plt.bar(
+        labels,
+        values
+    )
+
+    plt.title(
+        "Coverage Funnel"
+    )
+
+    path = (
+        CHART_DIR/
+        "coverage_funnel.png"
+    )
+
+    plt.savefig(path)
+
+    plt.close()
+
+    print(f"Saved: {path}")
+
+def chi_square_topic_test(
+    topic_matrix
+):
+
+    table=[]
+
+    for source,topics in topic_matrix.items():
+
+        row=[
+
+            topics.get(
+                "heart_health",
+                0
+            ),
+
+            topics.get(
+                "women_heart_health",
+                0
+            )
+        ]
+
+        table.append(row)
+
+    if len(table)<2:
+        return
+
+    chi2,p,_,_=chi2_contingency(
+        table
+    )
+
+    print_section(
+        "CHI-SQUARE TEST"
+    )
+
+    print(
+        f"Chi2={chi2:.2f}"
+    )
+
+    print(
+        f"p={p:.5f}"
+    )
+
+    if p<0.05:
+
+        print(
+            "Significant difference detected"
+        )
+
+    else:
+
+        print(
+            "No significant difference"
+        )
+
 def main():
     all_stats = load_files()
 
@@ -1108,6 +1456,39 @@ def main():
 
     create_women_tag_heatmap(
         all_stats
+    )
+    
+    create_source_topic_percentage_chart(
+    results["topic_matrix"],
+    results["source_totals"]
+)
+
+    print_women_representation(
+        results
+    )
+
+    print_source_comparison(
+        results["topic_matrix"]
+    )
+
+    print_tag_ratios(
+        results["heart_tag_totals"],
+        results["women_tag_totals"]
+    )
+
+    create_diverging_tag_chart(
+        results["heart_tag_totals"],
+        results["women_tag_totals"]
+    )
+
+    print_source_credibility()
+
+    create_coverage_funnel(
+        results
+    )
+
+    chi_square_topic_test(
+        results["topic_matrix"]
     )
 
     print("\nAnalysis complete.")

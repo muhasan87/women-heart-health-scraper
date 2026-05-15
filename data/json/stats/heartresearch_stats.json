@@ -23,9 +23,9 @@
     "pregnancy": 2
   },
   "by_sentiment": {
-    "positive": 3,
-    "neutral": 31,
-    "negative": 11
+    "positive": 6,
+    "neutral": 33,
+    "negative": 6
   },
   "by_classification": {
     "factual": 45,
@@ -48,9 +48,9 @@
       "arrhythmia": 3
     },
     "by_sentiment": {
-      "positive": 3,
-      "neutral": 16,
-      "negative": 7
+      "positive": 6,
+      "neutral": 18,
+      "negative": 2
     }
   },
   "women_subset": {

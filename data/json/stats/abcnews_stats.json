@@ -1,50 +1,49 @@
 {
   "source": "ABC News",
-  "total_examined": 255,
+  "total_examined": 257,
   "by_topic": {
-    "general_health": 243,
-    "heart_health": 8,
+    "general_health": 246,
+    "heart_health": 7,
     "women_heart_health": 4
   },
   "by_tags": {
-    "female_risk_factors": 51,
+    "female_risk_factors": 53,
+    "pregnancy": 13,
     "mental_health": 36,
-    "pregnancy": 10,
-    "cardiovascular": 3,
     "chest_pain": 7,
     "diet": 4,
     "exercise": 8,
+    "cardiovascular": 3,
     "menopause": 2,
     "stroke": 4,
     "hypertension": 2,
     "cholesterol": 3,
     "arrhythmia": 1,
-    "heart_disease": 2
+    "heart_disease": 1
   },
   "by_sentiment": {
-    "positive": 69,
-    "neutral": 103,
-    "negative": 83
+    "positive": 44,
+    "neutral": 114,
+    "negative": 99
   },
   "by_classification": {
-    "factual": 255,
+    "factual": 257,
     "opinion/anecdotal": 0,
     "mixed": 0
   },
   "heart_subset": {
-    "count": 8,
+    "count": 7,
     "by_tags": {
       "cardiovascular": 3,
       "chest_pain": 2,
       "stroke": 3,
       "cholesterol": 1,
-      "arrhythmia": 1,
-      "heart_disease": 1
+      "arrhythmia": 1
     },
     "by_sentiment": {
       "positive": 1,
       "neutral": 1,
-      "negative": 6
+      "negative": 5
     }
   },
   "women_subset": {
@@ -60,13 +59,13 @@
       "heart_disease": 1
     },
     "by_sentiment": {
-      "positive": 0,
-      "neutral": 2,
+      "positive": 1,
+      "neutral": 1,
       "negative": 2
     }
   },
   "date_range": {
-    "earliest": "2026-03-12T06:31:58.000Z",
-    "latest": "2026-05-10T19:41:04.000Z"
+    "earliest": "2026-03-17T09:38:08.000Z",
+    "latest": "2026-05-12T05:59:00.000Z"
   }
 }

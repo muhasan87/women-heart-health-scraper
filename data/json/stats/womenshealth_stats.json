@@ -3,28 +3,27 @@
   "total_examined": 69,
   "by_topic": {
     "general_health": 57,
-    "heart_health": 5,
-    "women_heart_health": 7
+    "heart_health": 6,
+    "women_heart_health": 6
   },
   "by_tags": {
-    "cardiovascular": 9,
+    "female_risk_factors": 44,
+    "pregnancy": 15,
+    "menopause": 11,
     "mental_health": 26,
-    "female_risk_factors": 41,
-    "menopause": 9,
-    "diet": 27,
-    "exercise": 16,
-    "hypertension": 7,
+    "diet": 28,
+    "exercise": 17,
     "chest_pain": 7,
-    "pregnancy": 10,
+    "cardiovascular": 8,
+    "hypertension": 7,
     "heart_disease": 2,
     "heart_attack": 1,
-    "stroke": 2,
-    "cholesterol": 1
+    "stroke": 2
   },
   "by_sentiment": {
-    "positive": 26,
-    "neutral": 23,
-    "negative": 20
+    "positive": 28,
+    "neutral": 18,
+    "negative": 23
   },
   "by_classification": {
     "factual": 0,
@@ -32,45 +31,46 @@
     "mixed": 69
   },
   "heart_subset": {
-    "count": 5,
+    "count": 6,
     "by_tags": {
       "cardiovascular": 4,
+      "hypertension": 3,
       "mental_health": 2,
-      "hypertension": 2,
       "heart_disease": 1,
       "chest_pain": 1,
-      "exercise": 1
+      "exercise": 2,
+      "diet": 1,
+      "stroke": 1
     },
     "by_sentiment": {
-      "positive": 0,
-      "neutral": 1,
-      "negative": 4
+      "positive": 1,
+      "neutral": 2,
+      "negative": 3
     }
   },
   "women_subset": {
-    "count": 7,
+    "count": 6,
     "by_tags": {
-      "cardiovascular": 5,
+      "cardiovascular": 4,
       "chest_pain": 2,
       "exercise": 3,
-      "female_risk_factors": 6,
-      "hypertension": 5,
-      "mental_health": 4,
+      "female_risk_factors": 5,
+      "hypertension": 4,
+      "mental_health": 3,
       "diet": 2,
       "pregnancy": 3,
       "heart_attack": 1,
       "heart_disease": 1,
-      "stroke": 2,
-      "cholesterol": 1
+      "stroke": 1
     },
     "by_sentiment": {
-      "positive": 3,
-      "neutral": 2,
+      "positive": 4,
+      "neutral": 0,
       "negative": 2
     }
   },
   "date_range": {
     "earliest": "2025-09-18T07:00:00.000Z",
-    "latest": "2026-05-08T12:00:00.000Z"
+    "latest": "2026-05-11T13:00:00.000Z"
   }
 }

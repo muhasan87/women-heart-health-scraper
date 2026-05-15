@@ -189,7 +189,6 @@ def extract_date(soup: BeautifulSoup) -> str:
     if not raw:
         return ""
 
-    # Try known Jean Hailes date formats: "April 21 2026", "21 April 2026"
     for fmt in ("%B %d %Y", "%d %B %Y", "%B %d, %Y"):
         try:
             dt = datetime.strptime(raw, fmt)
@@ -319,6 +318,7 @@ def build_article_record(
 def main() -> None:
     records = []
     stats = create_stats("Jean Hailes")
+    ###
     add_section(stats, "news")
     add_section(stats, "stories")
     ####

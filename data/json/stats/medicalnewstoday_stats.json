@@ -23,9 +23,9 @@
     "pregnancy": 27
   },
   "by_sentiment": {
-    "positive": 42,
-    "neutral": 55,
-    "negative": 139
+    "positive": 65,
+    "neutral": 50,
+    "negative": 121
   },
   "by_classification": {
     "factual": 236,
@@ -50,9 +50,9 @@
       "menopause": 1
     },
     "by_sentiment": {
-      "positive": 9,
-      "neutral": 14,
-      "negative": 76
+      "positive": 23,
+      "neutral": 17,
+      "negative": 59
     }
   },
   "women_subset": {
@@ -74,9 +74,9 @@
       "chest_pain": 3
     },
     "by_sentiment": {
-      "positive": 1,
+      "positive": 7,
       "neutral": 7,
-      "negative": 23
+      "negative": 17
     }
   },
   "date_range": {
