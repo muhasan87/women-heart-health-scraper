@@ -741,11 +741,9 @@ def create_sentiment_tag_heatmap(
     women_tag_totals,
     women_sentiment_totals
 ):
-
     sentiments = list(
         women_sentiment_totals.keys()
     )
-
     top_tags = [
         tag for tag, _ in sorted(
             women_tag_totals.items(),
@@ -753,52 +751,38 @@ def create_sentiment_tag_heatmap(
             reverse=True,
         )[:10]
     ]
-
     if not sentiments or not top_tags:
         return
 
     matrix = []
-
     for sentiment in sentiments:
-
         sentiment_total = (
             women_sentiment_totals[sentiment]
         )
-
         row = []
-
         for tag in top_tags:
-
             tag_total = women_tag_totals[tag]
-
             value = min(
                 tag_total,
                 sentiment_total
             )
 
             row.append(value)
-
         matrix.append(row)
-
     matrix = np.array(matrix)
-
     plt.figure(figsize=(10, 5))
-
     plt.imshow(
         matrix,
         aspect="auto",
         cmap="Purples"
     )
-
     plt.colorbar(label="Relative Strength")
-
     plt.xticks(
         range(len(top_tags)),
         top_tags,
         rotation=45,
         ha="right"
     )
-
     plt.yticks(
         range(len(sentiments)),
         sentiments
@@ -1100,6 +1084,151 @@ def create_source_topic_percentage_chart(
     plt.close()
     print(f"Saved: {path}")
 
+def create_sentiment_by_source_chart(sentiment_matrix, source_totals):
+    sources = list(sentiment_matrix.keys())
+    sentiments = ["positive", "neutral", "negative"]
+    colors = ["#4CAF50", "#90A4AE", "#E57373"]
+
+    proportions = {s: [] for s in sentiments}
+
+    for source in sources:
+        total = sum(sentiment_matrix[source].values())
+        for sentiment in sentiments:
+            count = sentiment_matrix[source].get(sentiment, 0)
+            proportions[sentiment].append(
+                (count / total * 100) if total else 0
+            )
+
+    x = np.arange(len(sources))
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    bottom = np.zeros(len(sources))
+    for sentiment, color in zip(sentiments, colors):
+        values = np.array(proportions[sentiment])
+        ax.bar(x, values, bottom=bottom, label=sentiment.title(), color=color)
+        for i, (v, b) in enumerate(zip(values, bottom)):
+            if v > 5:
+                ax.text(
+                    i, b + v / 2, f"{v:.0f}%",
+                    ha="center", va="center",
+                    fontsize=8, color="white", fontweight="bold"
+                )
+        bottom += values
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(sources, rotation=30, ha="right")
+    ax.set_ylabel("Percentage of Articles")
+    ax.set_title("Sentiment Distribution by Source (100% Stacked)")
+    ax.set_ylim(0, 100)
+    ax.legend(loc="upper right")
+    plt.tight_layout()
+
+    path = CHART_DIR / "sentiment_by_source.png"
+    plt.savefig(path)
+    plt.close()
+    print(f"Saved chart: {path}")
+
+def create_whh_cardiovascular_ratio_chart(topic_matrix):
+    sources = []
+    ratios = []
+
+    for source, topics in topic_matrix.items():
+        hh = topics.get("heart_health", 0)
+        whh = topics.get("women_heart_health", 0)
+        total_cardio = hh + whh
+        if total_cardio == 0:
+            continue
+        ratio = (whh / total_cardio) * 100
+        sources.append(source)
+        ratios.append(ratio)
+
+    paired = sorted(zip(ratios, sources), reverse=True)
+    ratios, sources = zip(*paired)
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars = ax.barh(sources, ratios, color="#E57373")
+
+    for bar, ratio in zip(bars, ratios):
+        ax.text(
+            bar.get_width() + 0.5, bar.get_y() + bar.get_height() / 2,
+            f"{ratio:.1f}%",
+            va="center", fontsize=9
+        )
+
+    ax.axvline(x=26.8, color="black", linestyle="--", linewidth=1,
+               label="Dataset average (26.8%)")
+    ax.set_xlabel("WHH as % of Cardiovascular Content")
+    ax.set_title("Women's Heart Health as Share of Cardiovascular Content by Source")
+    ax.set_xlim(0, 110)
+    ax.legend()
+    plt.tight_layout()
+
+    path = CHART_DIR / "whh_cardiovascular_ratio.png"
+    plt.savefig(path)
+    plt.close()
+    print(f"Saved chart: {path}")
+
+SOURCE_GROUPS = {
+    "Institutional": [
+        "Jean Hailes",
+        "Heart Foundation",
+        "Royal Womens Hospital",
+        "Heart Research Australia",
+    ],
+    "News & Media": [
+        "ABC News",
+        "Medical News Today",
+        "Womens Health Mag",
+    ],
+    "Community": [
+        "Health Unlocked",
+        "Reddit r/WomensHealth",
+    ],
+}
+
+def print_source_type_comparison(topic_matrix, sentiment_matrix, source_totals):
+    print_section("SOURCE TYPE AGGREGATED COMPARISON")
+
+    header = (
+        f"{'Type':15}"
+        f"{'Articles':>10}"
+        f"{'WHH % Total':>13}"
+        f"{'WHH % Cardio':>14}"
+        f"{'Positive':>10}"
+        f"{'Neutral':>10}"
+        f"{'Negative':>10}"
+    )
+    print(header)
+    print("-" * 80)
+
+    for group_name, group_sources in SOURCE_GROUPS.items():
+        total = sum(source_totals.get(s, 0) for s in group_sources)
+        hh = sum(topic_matrix[s].get("heart_health", 0) for s in group_sources)
+        whh = sum(topic_matrix[s].get("women_heart_health", 0) for s in group_sources)
+        cardio = hh + whh
+
+        whh_pct_total = (whh / total * 100) if total else 0
+        whh_pct_cardio = (whh / cardio * 100) if cardio else 0
+
+        pos = sum(sentiment_matrix[s].get("positive", 0) for s in group_sources)
+        neu = sum(sentiment_matrix[s].get("neutral", 0) for s in group_sources)
+        neg = sum(sentiment_matrix[s].get("negative", 0) for s in group_sources)
+        sent_total = pos + neu + neg
+
+        pos_pct = (pos / sent_total * 100) if sent_total else 0
+        neu_pct = (neu / sent_total * 100) if sent_total else 0
+        neg_pct = (neg / sent_total * 100) if sent_total else 0
+
+        print(
+            f"{group_name:15}"
+            f"{total:>10}"
+            f"{whh_pct_total:>12.1f}%"
+            f"{whh_pct_cardio:>13.1f}%"
+            f"{pos_pct:>9.1f}%"
+            f"{neu_pct:>9.1f}%"
+            f"{neg_pct:>9.1f}%"
+        )
+
 def print_women_representation(results):
 
     heart = results[
@@ -1284,11 +1413,9 @@ def print_source_credibility():
 def create_coverage_funnel(
     results
 ):
-
     total = results[
         "total_examined"
     ]
-
     heart = (
         results[
             "topic_totals"
@@ -1297,7 +1424,6 @@ def create_coverage_funnel(
             0
         )
     )
-
     women = (
         results[
             "topic_totals"
@@ -1306,13 +1432,11 @@ def create_coverage_funnel(
             0
         )
     )
-
     values = [
         total,
         heart,
         women
     ]
-
     labels = [
         "All",
         "Heart",
@@ -1422,6 +1546,11 @@ def main():
     create_sentiment_chart(
         results["sentiment_totals"]
     )
+    
+    create_sentiment_by_source_chart(
+        results["sentiment_matrix"],
+        results["source_totals"]
+    )
 
     create_classification_chart(
         results["classification_totals"]
@@ -1468,6 +1597,16 @@ def main():
     )
 
     print_source_comparison(
+        results["topic_matrix"]
+    )
+    
+    print_source_type_comparison(
+        results["topic_matrix"],
+        results["sentiment_matrix"],
+        results["source_totals"]
+    )
+
+    create_whh_cardiovascular_ratio_chart(
         results["topic_matrix"]
     )
 
